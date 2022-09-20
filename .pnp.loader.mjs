@@ -179,7 +179,8 @@ async function load$1(urlString, context, defaultLoad) {
     return defaultLoad(urlString, context, defaultLoad);
   return {
     format,
-    source: await fs.promises.readFile(filePath, `utf8`)
+    source: await fs.promises.readFile(filePath, `utf8`),
+    shortCircuit: true
   };
 }
 
@@ -231,7 +232,8 @@ async function resolve$1(originalSpecifier, context, defaultResolver) {
   if (!parentURL)
     setEntrypointPath(fileURLToPath(resultURL));
   return {
-    url: resultURL.href
+    url: resultURL.href,
+    shortCircuit: true
   };
 }
 
