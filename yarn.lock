@@ -278,7 +278,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.18.9":
+"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.0":
   version: 7.19.0
   resolution: "@babel/runtime@npm:7.19.0"
   dependencies:
@@ -607,6 +607,22 @@ __metadata:
     "@types/react":
       optional: true
   checksum: bc351fee5f73f3f1074e0b6300b6007868c986c9cbc756d0f2cabf5a6f9a4e4f9052c2e6af96a7dc3a1dae0485c883e57f978519b8c6b0bce0ce25aaa35a4b15
+  languageName: node
+  linkType: hard
+
+"@mui/icons-material@npm:^5.10.3":
+  version: 5.10.6
+  resolution: "@mui/icons-material@npm:5.10.6"
+  dependencies:
+    "@babel/runtime": ^7.19.0
+  peerDependencies:
+    "@mui/material": ^5.0.0
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: c8577b5252d08c3b067c4119aae0b774ab6fb782d56d6e394ed26e1cfbaeca8634ac9ab455b9709415106d906d134f0fee23e2254b120de4ef246ca959b22de8
   languageName: node
   linkType: hard
 
@@ -2712,6 +2728,7 @@ __metadata:
   dependencies:
     "@emotion/react": ^11.9.3
     "@emotion/styled": ^11.9.3
+    "@mui/icons-material": ^5.10.3
     "@mui/material": ^5.9.1
     "@types/eslint": ^7.28.1
     "@types/react": ^18.0.20
