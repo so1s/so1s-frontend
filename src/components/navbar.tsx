@@ -1,12 +1,20 @@
+import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
+import currentPage from '../atoms/current-page';
 import routes from '../constants/routes';
 
 const NavBar: React.FC = () => {
+    const [, setPage] = useAtom(currentPage);
     return (
-        <nav className="w-[16vw] min-h-[100vh] bg-white divide-y divide-[#e5e7eb] ">
+        <nav className="w-[15vw] min-h-[93.5vh] bg-white divide-y divide-[#e5e7eb] ">
             {routes.map((e) => {
                 return (
-                    <div key={e.name} className="h-20 flex flex-grow">
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+                    <div
+                        key={e.name}
+                        className="h-20 flex flex-grow"
+                        onClick={() => setPage(e)}
+                    >
                         <Link
                             replace
                             to={e.uri}
