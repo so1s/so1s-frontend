@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes as ReactRoutes, Route } from 'react-router-dom';
 import routes from '../constants/routes';
+import Header from './header';
+import Navbar from './navbar';
 
 const Router: React.FC = () => {
     return (
@@ -12,7 +14,7 @@ const Router: React.FC = () => {
                         <div className="w-full min-h-full flex">
                             <div className="flex-1 flex-col">
                                 <Header />
-                                <div className="flex-row flex-shrink">
+                                <div className="flex flex-row flex-shrink">
                                     <Navbar />
                                     <Page />
                                 </div>
