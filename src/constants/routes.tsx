@@ -6,7 +6,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SpeedIcon from '@mui/icons-material/Speed';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import MemoryIcon from '@mui/icons-material/Memory';
-import Index from '../components';
+import Index from '../pages';
 import IRouterDatum from '../interfaces/router';
 
 const routes: IRouterDatum[] = [

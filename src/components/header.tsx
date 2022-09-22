@@ -8,7 +8,7 @@ const Header: React.FC = () => {
 
     return (
         <header className="sticky top-0 w-full flex justify-between">
-            <div className="flex-grow h-18 flex justify-between px-5 py-2 bg-primary text-white">
+            <div className="flex-grow h-18 w-full flex justify-between px-5 py-2 bg-primary text-white">
                 <img src={Logo} className="my-auto h-8" alt="So1s Logo" />
                 <div className="font-serif text-2xl">
                     {page?.name ?? 'Home'}

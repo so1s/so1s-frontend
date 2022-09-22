@@ -16,7 +16,9 @@ const Router: React.FC = () => {
                                 <Header />
                                 <div className="flex flex-row flex-shrink">
                                     <Navbar />
-                                    <Page />
+                                    <div className="flex-1">
+                                        <Page />
+                                    </div>
                                 </div>
                             </div>
                         </div>
