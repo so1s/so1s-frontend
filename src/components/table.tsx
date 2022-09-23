@@ -12,12 +12,7 @@ import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
 import currentPage from '../atoms/current-page';
-
-export interface IListTableProps {
-    headEl: Array<String>;
-    bodyEl: Array<Array<any>>;
-    isAddUpdateCol: boolean;
-}
+import IListTableProps from '../interfaces/components/table';
 
 const ListTable: React.FC<IListTableProps> = ({
     headEl,

@@ -1,5 +1,6 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ListTable, { IListTableProps } from '../components/table';
+import ListTable from '../components/table';
+import IListTableProps from '../interfaces/components/table';
 
 const Index: React.FC = () => {
     const ListTableProps: IListTableProps = {
