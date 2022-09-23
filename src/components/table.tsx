@@ -10,7 +10,7 @@ import {
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
-import { useAtom } from 'jotai/core/useAtom';
+import { useAtom } from 'jotai';
 import currentPage from '../atoms/current-page';
 
 export interface IListTableProps {
@@ -24,7 +24,7 @@ const ListTable: React.FC<IListTableProps> = ({
     bodyEl,
     isAddUpdateCol,
 }) => {
-    const [pageInfo, setPageInfo] = useAtom(currentPage);
+    const [pageInfo] = useAtom(currentPage);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
 
