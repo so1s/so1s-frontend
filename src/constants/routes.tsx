@@ -8,13 +8,14 @@ import NotificationImportantIcon from '@mui/icons-material/NotificationImportant
 import MemoryIcon from '@mui/icons-material/Memory';
 import Index from '../pages';
 import IRouterDatum from '../interfaces/router';
+import Home from '../pages/home';
 
 const routes: IRouterDatum[] = [
     {
         uri: '/',
         name: 'Home',
         icon: <HomeIcon fontSize="large" />,
-        page: Index,
+        page: Home,
         authOnly: false,
     },
     {
