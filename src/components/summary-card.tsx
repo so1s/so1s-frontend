@@ -21,7 +21,7 @@ const SummaryCard: React.FC<ISummaryCardProps> = ({
                             {icon}
                             <div className="text-xs">
                                 <div> {item.title} </div>
-                                <div> {item.status} </div>
+                                <div> {item.content} </div>
                             </div>
                         </div>
                     );
