@@ -7,7 +7,8 @@ import {
     Table,
     TablePagination,
 } from '@mui/material';
-import UpgradeIcon from '@mui/icons-material/Upgrade';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import DownloadIcon from '@mui/icons-material/Download';
 import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
@@ -74,12 +75,17 @@ const ListTable: React.FC<IListTableProps> = ({
                                         );
                                     })}
                                     {isAddUpdateCol ? (
-                                        <TableCell>
+                                        <TableCell align="center">
                                             <Link
                                                 to={`${pageInfo?.uri}/update`}
                                             >
-                                                <UpgradeIcon />
-                                            </Link>{' '}
+                                                <FileUploadIcon />
+                                            </Link>
+                                            <Link
+                                                to={`${pageInfo?.uri}/update`}
+                                            >
+                                                <DownloadIcon />
+                                            </Link>
                                         </TableCell>
                                     ) : (
                                         ''
