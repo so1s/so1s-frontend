@@ -1,6 +1,7 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useRef } from 'react';
 import ActionCard from '../components/action-card';
+import { DetailCard } from '../components/detail-card';
 import Input from '../components/input';
 import ListTable from '../components/table';
 import IListTableProps from '../interfaces/components/table';
@@ -42,9 +43,18 @@ const Index: React.FC = () => {
                 headEl={ListTableProps.headEl}
                 isAddUpdateCol={ListTableProps.isAddUpdateCol}
             />
-            <ActionCard title="Models" mode="MODIFICATION" onClick={api}>
+            <ActionCard title="Models" mode="UPDATE" onClick={api}>
                 <Input title="hello" inputRef={inputT} />
             </ActionCard>
+
+            <DetailCard
+                title="Model Details"
+                tabs={['OVERVIEW', 'LOGS', 'YAML']}
+            >
+                <div>hi</div>
+                <div>hi2</div>
+                <div>hi3</div>
+            </DetailCard>
         </div>
     );
 };
