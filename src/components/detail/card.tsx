@@ -5,7 +5,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
     IDetailCardProps,
     ITabPanelProps,
-} from '../interfaces/components/detail-card';
+} from '../../interfaces/components/detail-card';
 
 const TabPanel: React.FC<ITabPanelProps> = ({ children, index, value }) => {
     return (

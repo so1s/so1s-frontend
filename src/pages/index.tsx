@@ -1,8 +1,9 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useRef } from 'react';
 import ActionCard from '../components/action-card';
-import { DetailCard } from '../components/detail-card';
+import { DetailCard } from '../components/detail/card';
 import Input from '../components/input';
+import OverViewTab from '../components/detail/overview-tab';
 import ListTable from '../components/table';
 import IListTableProps from '../interfaces/components/table';
 
@@ -51,7 +52,23 @@ const Index: React.FC = () => {
                 title="Model Details"
                 tabs={['OVERVIEW', 'LOGS', 'YAML']}
             >
-                <div>hi</div>
+                <OverViewTab
+                    headEl={[
+                        'Name',
+                        'Status',
+                        'File',
+                        'Library',
+                        'Input Shape',
+                        'Input Dtype',
+                    ]}
+                >
+                    <div>sss</div>
+                    <div>sss</div>
+                    <div>hi2</div>
+                    <div>hi3</div>
+                    <div>hi2</div>
+                    <div>hi3</div>
+                </OverViewTab>
                 <div>hi2</div>
                 <div>hi3</div>
             </DetailCard>
