@@ -6,7 +6,7 @@ import routes from '../constants/routes';
 const NavBar: React.FC = () => {
     const [, setPage] = useAtom(currentPage);
     return (
-        <nav className="fixed w-[15vw] min-h-[93.5vh] bg-white divide-y divide-[#e5e7eb] ">
+        <nav className="fixed w-[15vw] min-h-[93.5vh] bg-white divide-y divide-[#e5e7eb] z-10 ">
             {routes.map((e) => {
                 return (
                     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
