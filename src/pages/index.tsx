@@ -51,6 +51,9 @@ const Index: React.FC = () => {
             <DetailCard
                 title="Model Details"
                 tabs={['OVERVIEW', 'LOGS', 'YAML']}
+                deleteHandler={() => {
+                    console.log('delete detail');
+                }}
             >
                 <OverViewTab
                     headEl={[

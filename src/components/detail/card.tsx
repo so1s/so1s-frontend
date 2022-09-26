@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Paper, Tab, Tabs } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useNavigate } from 'react-router-dom';
 import {
     IDetailCardProps,
     ITabPanelProps,
@@ -24,8 +25,10 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
     title,
     tabs,
     children,
+    deleteHandler,
 }) => {
     const [value, setValue] = useState(0);
+    const navigate = useNavigate();
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -35,12 +38,15 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
             <div className="flex justify-between">
                 <div className="flex font-serif text-2xl text-body mx-5 py-5">
                     <div className="my-auto mr-3">
-                        <KeyboardBackspaceIcon fontSize="large" />
+                        <KeyboardBackspaceIcon
+                            fontSize="large"
+                            onClick={() => navigate(-1)}
+                        />
                     </div>
                     <div>{title}</div>
                 </div>
                 <div className="my-auto mx-5">
-                    <DeleteIcon fontSize="large" />
+                    <DeleteIcon fontSize="large" onClick={deleteHandler} />
                 </div>
             </div>
 

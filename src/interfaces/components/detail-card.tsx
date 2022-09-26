@@ -4,6 +4,7 @@ export interface IDetailCardProps {
     title: string;
     tabs: string[];
     children: ReactNode[];
+    deleteHandler?: React.MouseEventHandler<SVGSVGElement> | undefined;
 }
 
 export interface ITabPanelProps {
