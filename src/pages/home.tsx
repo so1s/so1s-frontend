@@ -1,23 +1,25 @@
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import SpeedIcon from '@mui/icons-material/Speed';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import getDeployments from '../api/deployments';
 import getModels from '../api/models';
 import getABTests from '../api/tests';
 import SummaryCard from '../components/summary-card';
-import { IDeploymentFindResponse } from '../interfaces/deployments';
-import { IModelFindResponse } from '../interfaces/models';
-import { IABTestReadResponse } from '../interfaces/tests';
-import { Summary } from '../types/components/summary-card';
+import { IDeploymentFindResponse } from '../interfaces/pages/deployments';
+import { IModelFindResponse } from '../interfaces/pages/models';
+import { IABTestReadResponse } from '../interfaces/pages/tests';
+import ISummaries from '../interfaces/pages/home';
 
 const Home: React.FC = () => {
-    const [modelSummary, setModelSummary] = useState<Summary[]>([]);
-    const [deploySummary, setDeploySummary] = useState<Summary[]>([]);
-    const [testSummary, setTestSummary] = useState<Summary[]>([]);
+    const [summaries, setSummaries] = useState<ISummaries>({
+        model: [],
+        deploy: [],
+        test: [],
+    });
 
-    useEffect(() => {
-        const getModelData = async () => {
+    const getModelData = useMemo(
+        () => async () => {
             const response: IModelFindResponse[] = await getModels();
 
             const result = response.map((item) => {
@@ -27,14 +29,13 @@ const Home: React.FC = () => {
                 };
             });
 
-            setModelSummary(result);
-        };
+            return result;
+        },
+        []
+    );
 
-        getModelData();
-    }, []);
-
-    useEffect(() => {
-        const getDeployData = async () => {
+    const getDeployData = useMemo(
+        () => async () => {
             const response: IDeploymentFindResponse[] = await getDeployments();
 
             const result = response.map((item) => {
@@ -44,14 +45,13 @@ const Home: React.FC = () => {
                 };
             });
 
-            setDeploySummary(result);
-        };
+            return result;
+        },
+        []
+    );
 
-        getDeployData();
-    }, []);
-
-    useEffect(() => {
-        const getTestData = async () => {
+    const getTestData = useMemo(
+        () => async () => {
             const response: IABTestReadResponse[] = await getABTests();
 
             const result = response.map((item) => {
@@ -61,31 +61,46 @@ const Home: React.FC = () => {
                 };
             });
 
-            setTestSummary(result);
-        };
+            return result;
+        },
+        []
+    );
 
-        getTestData();
+    useEffect(() => {
+        (async () => {
+            const [modelData, deployData, testData] = await Promise.all([
+                getModelData(),
+                getDeployData(),
+                getTestData(),
+            ]);
+
+            setSummaries({
+                model: modelData,
+                deploy: deployData,
+                test: testData,
+            });
+        })();
     }, []);
 
     return (
         <div className="flex flex-row justify-around">
             <SummaryCard
                 title="Model Summary"
-                summaryList={modelSummary}
+                summaryList={summaries?.model ?? []}
                 icon={
                     <ModelTrainingIcon fontSize="medium" className="my-auto" />
                 }
             />
             <SummaryCard
                 title="Deployment Summary"
-                summaryList={deploySummary}
+                summaryList={summaries?.deploy ?? []}
                 icon={
                     <RocketLaunchIcon fontSize="medium" className="my-auto" />
                 }
             />
             <SummaryCard
                 title="A/B Test Summary"
-                summaryList={testSummary}
+                summaryList={summaries?.test ?? []}
                 icon={<SpeedIcon fontSize="medium" className="my-auto" />}
             />
         </div>

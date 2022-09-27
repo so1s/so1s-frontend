@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseURL } from '../../constants';
-import { IModelFindResponse } from '../../interfaces/models';
+import { IModelFindResponse } from '../../interfaces/pages/models';
 
 export const getModels = async () => {
     const response = await axios.get(`${baseURL}/api/v1/models`);

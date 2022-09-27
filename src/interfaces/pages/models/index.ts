@@ -1,4 +1,4 @@
-import { Status } from '../../types';
+import { Status } from '../../../types';
 
 export interface IModelFindResponse {
     age: string;
