@@ -6,6 +6,7 @@ import Input from '../components/input';
 import OverViewTab from '../components/detail/overview-tab';
 import ListTable from '../components/table';
 import IListTableProps from '../interfaces/components/table';
+import YAMLTAB from '../components/detail/yaml-tab';
 
 const Index: React.FC = () => {
     const ListTableProps: IListTableProps = {
@@ -36,6 +37,23 @@ const Index: React.FC = () => {
     const api = () => {
         console.log(inputT.current?.value);
     };
+
+    const value = `apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: backend-namespace-labeler
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "2"
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: hyper-sa
+    namespace: {{ .Release.Namespace  }}`;
 
     return (
         <div>
@@ -72,8 +90,8 @@ const Index: React.FC = () => {
                     <div>hi2</div>
                     <div>hi3</div>
                 </OverViewTab>
-                <div>hi2</div>
                 <div>hi3</div>
+                <YAMLTAB value={value} />
             </DetailCard>
         </div>
     );
