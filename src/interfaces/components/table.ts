@@ -1,5 +1,5 @@
 export default interface IListTableProps {
-    headEl: Array<String>;
-    bodyEl: Array<Array<any>>;
+    headEl: string[];
+    bodyEl: any[][];
     isAddUpdateCol: boolean;
 }

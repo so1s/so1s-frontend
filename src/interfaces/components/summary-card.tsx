@@ -2,6 +2,6 @@ import { Summary } from '../../types/components/summary-card';
 
 export interface ISummaryCardProps {
     title: string;
-    summaryList: Array<Summary>;
+    summaryList: Summary[];
     icon: JSX.Element;
 }
