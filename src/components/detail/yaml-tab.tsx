@@ -12,6 +12,7 @@ const YAMLTAB: React.FC<IYAMLTABProps> = ({ value }) => {
                 value={value}
                 options={{
                     theme: 'hc-black',
+                    readOnly: true,
                 }}
             />
         </div>
