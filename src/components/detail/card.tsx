@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     IDetailCardProps,
     ITabPanelProps,
-} from '../../interfaces/components/detail-card';
+} from '../../interfaces/components/detail';
 
 const TabPanel: React.FC<ITabPanelProps> = ({ children, index, value }) => {
     return (

@@ -1,8 +1,5 @@
 import MonacoEditor from '@uiw/react-monacoeditor';
-
-interface IYAMLTABProps {
-    value: string;
-}
+import { IYAMLTABProps } from '../../interfaces/components/detail';
 
 const YAMLTAB: React.FC<IYAMLTABProps> = ({ value }) => {
     return (

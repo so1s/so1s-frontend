@@ -12,3 +12,12 @@ export interface ITabPanelProps {
     index: number;
     value: number;
 }
+
+export interface IOverViewTab {
+    headEl: string[];
+    children: ReactNode[];
+}
+
+export interface IYAMLTABProps {
+    value: string;
+}
