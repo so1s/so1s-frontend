@@ -278,7 +278,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.0":
+"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.0":
   version: 7.19.0
   resolution: "@babel/runtime@npm:7.19.0"
   dependencies:
@@ -1055,6 +1055,19 @@ __metadata:
     "@typescript-eslint/types": 5.38.0
     eslint-visitor-keys: ^3.3.0
   checksum: cc3d0c6eb0c9a20a25d66b640d759cb1b52f8df485f16d948218d63d798b5c0672ef298f5dae5e5327ec021c0f8369d1da5d26b9c16a245a20fa44a9365956bc
+  languageName: node
+  linkType: hard
+
+"@uiw/react-monacoeditor@npm:^3.5.7":
+  version: 3.5.7
+  resolution: "@uiw/react-monacoeditor@npm:3.5.7"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+    monaco-editor: ^0.34.0
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: ecdd094ec71768bb0ee84817a5e1ecb295a3a74b1781a45bf6216f8883631414c00f50937c69e2f3bd07f6ac9d2f571225cfe16f7ee549e9b1f2d0aa6672452e
   languageName: node
   linkType: hard
 
@@ -2735,6 +2748,7 @@ __metadata:
     "@types/react-dom": ^18.0.6
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
+    "@uiw/react-monacoeditor": ^3.5.7
     "@vitejs/plugin-react": ^2.0.0
     autoprefixer: ^10.4.7
     axios: ^0.27.2
@@ -3737,6 +3751,13 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
+  languageName: node
+  linkType: hard
+
+"monaco-editor@npm:^0.34.0":
+  version: 0.34.0
+  resolution: "monaco-editor@npm:0.34.0"
+  checksum: 10a28c1fe07268a23106ec9b743339af603e00c3ce646de72bf74f77e3d44065536f1a11f1a86ed459dfd9cb891261e6c7974377fc511eb65f354d6ddc89275b
   languageName: node
   linkType: hard
 

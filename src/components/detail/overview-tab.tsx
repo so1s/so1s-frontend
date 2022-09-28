@@ -1,10 +1,5 @@
 import { Table, TableCell, TableRow } from '@mui/material';
-import { ReactNode } from 'react';
-
-interface IOverViewTab {
-    headEl: string[];
-    children: ReactNode[];
-}
+import { IOverViewTab } from '../../interfaces/components/detail';
 
 const OverViewTab: React.FC<IOverViewTab> = ({ headEl, children }) => {
     return (

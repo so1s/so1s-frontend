@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     IDetailCardProps,
     ITabPanelProps,
-} from '../../interfaces/components/detail-card';
+} from '../../interfaces/components/detail';
 
 const TabPanel: React.FC<ITabPanelProps> = ({ children, index, value }) => {
     return (
@@ -37,7 +37,7 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
         <Paper className="min-w-fit mx-10 my-10">
             <div className="flex justify-between">
                 <div className="flex font-serif text-2xl text-body mx-5 py-5">
-                    <div className="my-auto mr-3">
+                    <div className="my-auto mr-3 hover:cursor-pointer">
                         <KeyboardBackspaceIcon
                             fontSize="large"
                             onClick={() => navigate(-1)}
@@ -45,7 +45,7 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
                     </div>
                     <div>{title}</div>
                 </div>
-                <div className="my-auto mx-5">
+                <div className="my-auto mx-5 hover:cursor-pointer">
                     <DeleteIcon fontSize="large" onClick={deleteHandler} />
                 </div>
             </div>

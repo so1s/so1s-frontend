@@ -21,6 +21,7 @@
         "@emotion/styled": "^11.9.3",
         "@mui/icons-material": "^5.10.3",
         "@mui/material": "^5.9.1",
+        "@uiw/react-monacoeditor": "^3.5.7",
         "autoprefixer": "^10.4.7",
         "axios": "^0.27.2",
         "jotai": "^1.7.5",

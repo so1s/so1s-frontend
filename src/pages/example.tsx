@@ -1,11 +1,13 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ActionCard from '../components/action-card';
 import { DetailCard } from '../components/detail/card';
 import Input from '../components/input';
 import OverViewTab from '../components/detail/overview-tab';
 import ListTable from '../components/table';
 import IListTableProps from '../interfaces/components/table';
+import YAMLTAB from '../components/detail/yaml-tab';
+import { getModelYaml } from '../api/models';
 
 const Index: React.FC = () => {
     const ListTableProps: IListTableProps = {
@@ -36,6 +38,21 @@ const Index: React.FC = () => {
     const api = () => {
         console.log(inputT.current?.value);
     };
+
+    const [yaml, setYaml] = useState('');
+    const getModelYAML = useMemo(
+        () => async () => {
+            return getModelYaml({ modelId: 2, version: 'v1' });
+        },
+        []
+    );
+
+    useEffect(() => {
+        (async () => {
+            const result = await getModelYAML();
+            setYaml(result.yaml);
+        })();
+    }, []);
 
     return (
         <div>
@@ -72,8 +89,8 @@ const Index: React.FC = () => {
                     <div>hi2</div>
                     <div>hi3</div>
                 </OverViewTab>
-                <div>hi2</div>
                 <div>hi3</div>
+                <YAMLTAB value={yaml} />
             </DetailCard>
         </div>
     );

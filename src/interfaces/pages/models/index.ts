@@ -7,3 +7,12 @@ export interface IModelFindResponse {
     version: string;
     library: string;
 }
+
+export interface IModelYAMLFindRequest {
+    modelId: string | number;
+    version: string | number;
+}
+
+export interface IModelYAMLFindResponse {
+    yaml: string;
+}
