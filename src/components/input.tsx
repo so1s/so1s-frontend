@@ -3,6 +3,7 @@ import IInputProps from '../interfaces/components/input';
 
 const Input: React.FC<IInputProps> = ({
     title,
+    type,
     placholder,
     helperText,
     required,
@@ -17,6 +18,7 @@ const Input: React.FC<IInputProps> = ({
             <div className="text-large text-label py-1">{title}</div>
             <TextField
                 variant="outlined"
+                type={type ?? ''}
                 fullWidth={!fullWidth}
                 placeholder={placholder}
                 helperText={helperText}
