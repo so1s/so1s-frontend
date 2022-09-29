@@ -63,8 +63,8 @@ const Login: React.FC = () => {
                 <Input title="Password" type="password" inputRef={passwordRef}></Input>
                 <Button variant="contained" onClick={login}>Sign In</Button>
             </div>
-        </Paper >
-    </div >
+        </Paper>
+    </div>
 
 }
 
