@@ -9,6 +9,7 @@ import MemoryIcon from '@mui/icons-material/Memory';
 import Index from '../pages/example';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
+import Login from '../pages/login';
 
 const routes: IRouterDatum[] = [
     {
@@ -17,6 +18,14 @@ const routes: IRouterDatum[] = [
         icon: <HomeIcon fontSize="large" />,
         page: Home,
         authOnly: false,
+    },
+    {
+        uri: '/login',
+        name: 'Login',
+        icon: <></>,
+        page: Login,
+        authOnly: false,
+        hidden: true,
     },
     {
         uri: '/models',
