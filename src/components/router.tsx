@@ -11,12 +11,12 @@ const Router: React.FC = () => {
                     const Page = e.page;
 
                     const Element = (
-                        <div className="w-full min-h-full flex">
-                            <div className="flex-1 flex-col">
+                        <div className="w-screen h-screen flex flex-grow overflow-y-hidden">
+                            <div className="flex-1 flex-col flex-grow">
                                 <Header />
-                                <div className="flex flex-row">
-                                    <Navbar />
-                                    <div className="flex-1 ml-[15vw] my-10 min-w-fit">
+                                <div className="flex h-full flex-row">
+                                    {!e.hidden && <Navbar />}
+                                    <div className="flex flex-col flex-1 h-[95vh] pt-10 overflow-y-scroll">
                                         <Page />
                                     </div>
                                 </div>
