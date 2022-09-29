@@ -10,6 +10,7 @@ import Index from '../pages/example';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
+import Logout from '../pages/logout';
 
 const routes: IRouterDatum[] = [
     {
@@ -24,6 +25,14 @@ const routes: IRouterDatum[] = [
         name: 'Login',
         icon: <></>,
         page: Login,
+        authOnly: false,
+        hidden: true,
+    },
+    {
+        uri: '/logout',
+        name: 'Logout',
+        icon: <></>,
+        page: Logout,
         authOnly: false,
         hidden: true,
     },

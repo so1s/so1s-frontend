@@ -1,10 +1,13 @@
 import LogoutIcon from '@mui/icons-material/Logout';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useAtom } from 'jotai';
 import Logo from '../assets/So1s.png';
 import currentPage from '../atoms/current-page';
+import { accessTokenWithPersistence } from '../atoms/token';
 
 const Header: React.FC = () => {
     const [page] = useAtom(currentPage);
+    const [accessToken] = useAtom(accessTokenWithPersistence);
 
     return (
         <header className="sticky top-0 w-full flex justify-between z-30">
@@ -13,7 +16,9 @@ const Header: React.FC = () => {
                 <div className="font-serif text-2xl">
                     {page?.name ?? 'Home'}
                 </div>
-                <a href="/login"> <LogoutIcon className="my-auto" fontSize="large" /></a>
+                {!accessToken ?
+                    <a href="/login"><LogoutIcon className="my-auto" fontSize="large" /></a> :
+                    <a href="/logout"> <ExitToAppIcon className="my-auto" fontSize="large" /></a>}
             </div>
         </header>
     );
