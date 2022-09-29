@@ -6,8 +6,11 @@ import routes from '../constants/routes';
 const NavBar: React.FC = () => {
     const [, setPage] = useAtom(currentPage);
     return (
-        <nav className="fixed w-[15vw] min-h-[93.5vh] bg-white divide-y divide-[#e5e7eb] z-10 ">
+        <nav className="w-[15vw] h-[95vh] bg-white divide-y divide-[#e5e7eb]">
             {routes.map((e) => {
+                if (e.hidden) {
+                    return null;
+                }
                 return (
                     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                     <div
@@ -25,7 +28,7 @@ const NavBar: React.FC = () => {
                         </Link>
                     </div>
                 );
-            })}
+            }).filter(e => !!e)}
         </nav>
     );
 };
