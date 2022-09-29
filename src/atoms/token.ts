@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-export const accessToken = atom(localStorage.getItem('accessToken') ?? 'foo')
+export const accessToken = atom(localStorage.getItem('accessToken'))
 
 export const accessTokenWithPersistence = atom(
     (get) => get(accessToken),
