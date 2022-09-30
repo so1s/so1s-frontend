@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import ActionCard from '../components/action-card';

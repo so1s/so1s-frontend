@@ -1,9 +1,8 @@
-import { useAtom } from "jotai";
-import { accessToken as accessTokenAtom, accessTokenWithPersistence } from "../atoms/token";
-import axios from 'axios'
-import { baseURL } from "../constants";
-import { useEffect, useRef } from "react";
-
+import { useAtom } from 'jotai';
+import axios from 'axios';
+import { useEffect, useRef } from 'react';
+import { accessTokenWithPersistence } from '../atoms/token';
+import { baseURL } from '../constants';
 
 export const axiosInstance = axios.create({ baseURL });
 
@@ -13,18 +12,18 @@ const useAuth = () => {
 
     useEffect(() => {
         axiosInstance.interceptors.request.use(
-            config => {
+            (config) => {
                 config.headers = config.headers ?? {};
-                config.headers['Authorization'] = `Bearer ${accessToken}`;
+                config.headers.Authorization = `Bearer ${accessToken}`;
                 return config;
             },
-            error => {
+            (error) => {
                 return Promise.reject(error);
             }
         );
     }, [accessToken]);
 
     return [axiosRef];
-}
+};
 
 export default useAuth;

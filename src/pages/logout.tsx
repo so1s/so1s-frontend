@@ -1,7 +1,7 @@
-import { useAtom } from "jotai";
-import { useEffect } from "react";
-import { accessTokenWithPersistence } from "../atoms/token";
-import useAuth from "../hooks/useAuth";
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
+import { accessTokenWithPersistence } from '../atoms/token';
+import useAuth from '../hooks/useAuth';
 
 const Logout: React.FC = () => {
     const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
@@ -9,10 +9,11 @@ const Logout: React.FC = () => {
 
     useEffect(() => {
         setAccessToken('');
-        location.href = "/";
+        // eslint-disable-next-line no-restricted-globals
+        location.href = '/';
     }, []);
 
-    return <></>
-}
+    return <></>;
+};
 
 export default Logout;

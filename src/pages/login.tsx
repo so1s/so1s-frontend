@@ -1,12 +1,12 @@
-import { Button, Divider, Paper, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
-import useAuth from "../hooks/useAuth";
+import { Button, Paper, Typography } from '@mui/material';
+import { useEffect, useRef } from 'react';
 import LockIcon from '@mui/icons-material/Lock';
-import Input from "../components/input";
-import signIn from "../api/auth";
-import { ISignInResponse } from "../interfaces/pages/auth";
-import { accessTokenWithPersistence } from "../atoms/token";
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
+import useAuth from '../hooks/useAuth';
+import Input from '../components/input';
+import signIn from '../api/auth';
+import { ISignInResponse } from '../interfaces/pages/auth';
+import { accessTokenWithPersistence } from '../atoms/token';
 
 const Login: React.FC = () => {
     const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
@@ -14,13 +14,13 @@ const Login: React.FC = () => {
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-
     useEffect(() => {
-        console.log({ accessToken })
+        console.log({ accessToken });
         if (!accessToken) {
             return;
         }
-        location.href = "/";
+        // eslint-disable-next-line no-restricted-globals
+        location.href = '/';
     }, [accessToken]);
 
     const login = async () => {
@@ -48,24 +48,38 @@ const Login: React.FC = () => {
         console.log('로그인에 성공했습니다.');
 
         setAccessToken(tokenResponse?.token ?? '');
-    }
+    };
 
-
-    return <div className="flex flex-row mx-auto my-auto">
-        <Paper className="w-[40rem] flex-row py-10">
-            <div className="w-[30rem] mx-auto my-auto flex flex-col justify-center space-y-4">
-                <div className="mx-auto">
-                    <LockIcon fontSize="large" sx={{ backgroundColor: '#9C27B0', color: '#000000', padding: '0.5rem' }}></LockIcon>
-
+    return (
+        <div className="flex flex-row mx-auto my-auto">
+            <Paper className="w-[40rem] flex-row py-10">
+                <div className="w-[30rem] mx-auto my-auto flex flex-col justify-center space-y-4">
+                    <div className="mx-auto">
+                        <LockIcon
+                            fontSize="large"
+                            sx={{
+                                backgroundColor: '#9C27B0',
+                                color: '#000000',
+                                padding: '0.5rem',
+                            }}
+                        />
+                    </div>
+                    <Typography align="center" variant="h6">
+                        Sign in
+                    </Typography>
+                    <Input title="Username" inputRef={usernameRef} />
+                    <Input
+                        title="Password"
+                        type="password"
+                        inputRef={passwordRef}
+                    />
+                    <Button variant="contained" onClick={login}>
+                        Sign In
+                    </Button>
                 </div>
-                <Typography align="center" variant="h6">Sign in</Typography>
-                <Input title="Username" inputRef={usernameRef}></Input>
-                <Input title="Password" type="password" inputRef={passwordRef}></Input>
-                <Button variant="contained" onClick={login}>Sign In</Button>
-            </div>
-        </Paper>
-    </div>
-
-}
+            </Paper>
+        </div>
+    );
+};
 
 export default Login;
