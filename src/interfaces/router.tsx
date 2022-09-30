@@ -7,4 +7,5 @@ export default interface IRouterDatum {
     page: React.FC;
     authOnly?: boolean;
     for?: User[];
+    hidden?: boolean;
 }
