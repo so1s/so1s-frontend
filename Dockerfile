@@ -1,6 +1,6 @@
 # Original Code from https://dev.to/aws-builders/containerize-react-app-with-docker-for-production-572b
 
-FROM node:latest as build
+FROM node:18-alpine as build
 WORKDIR /app
 COPY . /app
 # https://github.com/yarnpkg/berry/issues/4629
