@@ -22,12 +22,19 @@ jobs:
           registry: ghcr.io
           username: so1s
           password: ${{ secrets.GH_TOKEN }}
-      - name: Conditional value for GitHub Action
+      - name: Find-and-replace strings
+        uses: mad9000/actions-find-and-replace-string@2
+        id: replace_version
+        with:
+          source: ${{ github.ref_name }}
+          find: 'release/'
+          replace: ''
+      - name: Check Release
         uses: haya14busa/action-cond@v1.0.0
-        id: checkRelease
+        id: version
         with:
           cond: ${{ startsWith(github.ref_name, 'release')  }}
-          if_true: ${{ join(github.ref_name, '/')[1] }}
+          if_true: ${{ steps.replace_version.outputs.value }}
           if_false: "latest"
       - name: Build and push
         uses: docker/build-push-action@v2
@@ -38,4 +45,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/so1s/frontend:${{ steps.checkRelease.outputs.value }}
+            ghcr.io/so1s/frontend:${{ steps.version.outputs.value }}
