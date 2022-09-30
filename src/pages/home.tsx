@@ -10,6 +10,7 @@ import { IDeploymentFindResponse } from '../interfaces/pages/deployments';
 import { IModelFindResponse } from '../interfaces/pages/models';
 import { IABTestReadResponse } from '../interfaces/pages/tests';
 import ISummaries from '../interfaces/pages/home';
+import useAuth from '../hooks/useAuth';
 
 const Home: React.FC = () => {
     const [summaries, setSummaries] = useState<ISummaries>({
@@ -17,6 +18,8 @@ const Home: React.FC = () => {
         deploy: [],
         test: [],
     });
+
+    useAuth();
 
     const getModelData = useMemo(
         () => async () => {
