@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute } from 'react';
 
 export default interface IInputProps {
     title: string;

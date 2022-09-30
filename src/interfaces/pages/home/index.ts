@@ -1,4 +1,4 @@
-import { Summary } from '../types/components/summary-card';
+import { Summary } from '../../../types/components/summary-card';
 
 export default interface ISummaries {
     model: Summary[];
