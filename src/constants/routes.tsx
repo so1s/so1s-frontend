@@ -11,6 +11,7 @@ import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
 import Logout from '../pages/logout';
+import Models from '../pages/models';
 
 const routes: IRouterDatum[] = [
     {
@@ -41,7 +42,7 @@ const routes: IRouterDatum[] = [
         name: 'Models',
         icon: <ModelTrainingIcon fontSize="large" />,
         authOnly: true,
-        page: Index,
+        page: Models,
         for: ['Owner', 'Admin', 'User'],
     },
     {
