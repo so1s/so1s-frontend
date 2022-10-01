@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { BrowserRouter, Routes as ReactRoutes, Route } from 'react-router-dom';
 import { accessTokenWithPersistence } from '../atoms/token';
 import routes from '../constants/routes';
-import { WithAuth } from '../hocs/withAuth';
+import { WithAuth } from '../hocs/with-auth';
 import LoginRedirect from '../pages/login-redirect';
 import Header from './header';
 import Navbar from './navbar';
