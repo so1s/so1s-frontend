@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { baseURL } from '../../constants';
 import { axiosInstance } from '../../hooks/useAuth';
 import { IDeploymentFindResponse } from '../../interfaces/pages/deployments';
