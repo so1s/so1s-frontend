@@ -12,6 +12,8 @@ import Home from '../pages/home';
 import Login from '../pages/login';
 import Logout from '../pages/logout';
 import Models from '../pages/models';
+import CreateModel from '../pages/models/create';
+import UpdateModel from '../pages/models/update';
 
 const routes: IRouterDatum[] = [
     {
@@ -43,6 +45,24 @@ const routes: IRouterDatum[] = [
         icon: <ModelTrainingIcon fontSize="large" />,
         authOnly: true,
         page: Models,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/create',
+        name: 'Model Create',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: CreateModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/update/:modelName',
+        name: 'Model Update',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: UpdateModel,
         for: ['Owner', 'Admin', 'User'],
     },
     {

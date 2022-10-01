@@ -1,12 +1,14 @@
 /* eslint-disable react/jsx-key */
-import { useEffect, useRef, useState } from 'react';
+import { useAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
 import getModels from '../../api/models';
+import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
 import { IModelDatum } from '../../interfaces/pages/models';
 import { convertStatusToIcon } from '../../utils/pages/models';
 
 const Models: React.FC = () => {
-    const [models, setModels] = useState<IModelDatum[]>([]);
+    const [models, setModels] = useAtom(modelsAtom);
 
     useEffect(() => {
         (async () => {
@@ -22,7 +24,7 @@ const Models: React.FC = () => {
                 )
             );
         })();
-    });
+    }, []);
 
     const inputT = useRef<HTMLInputElement>(null);
 
