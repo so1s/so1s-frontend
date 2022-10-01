@@ -2,7 +2,6 @@ import { Button, Paper, Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import LockIcon from '@mui/icons-material/Lock';
 import { useAtom } from 'jotai';
-import useAuth from '../hooks/useAuth';
 import Input from '../components/input';
 import signIn from '../api/auth';
 import { ISignInResponse } from '../interfaces/pages/auth';
@@ -10,7 +9,6 @@ import { accessTokenWithPersistence } from '../atoms/token';
 
 const Login: React.FC = () => {
     const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
-    useAuth();
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
