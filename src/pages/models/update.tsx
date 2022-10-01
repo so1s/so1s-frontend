@@ -26,7 +26,6 @@ const UpdateModel: React.FC = () => {
     const [library, setLibrary] = useState(libraries[0]);
     const [file, setFile] = useState<File | null>(null);
     const modelNameRef = useRef(null);
-    const modelFilesRef = useRef(null);
     const inputShapeRef = useRef(null);
     const inputDataTypeRef = useRef(null);
     const outputShapeRef = useRef(null);
