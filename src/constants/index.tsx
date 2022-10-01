@@ -9,7 +9,7 @@ const getBackendUrl = () => {
         return 'https://www.so1s.io';
     }
 
-    return `${hostname}:8080`;
+    return `http://${hostname}:8080`;
 };
 
 export const baseURL = getBackendUrl();
