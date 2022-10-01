@@ -7,7 +7,7 @@ import {
     Table,
     TablePagination,
 } from '@mui/material';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
+import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
@@ -15,25 +15,38 @@ import { useAtom } from 'jotai';
 import currentPage from '../atoms/current-page';
 import IListTableProps from '../interfaces/components/table';
 
-const ListTable: React.FC<IListTableProps> = ({
-    headEl,
-    bodyEl,
-    isAddUpdateCol,
-}) => {
+export const ListTable = <T extends {}>({
+    items,
+    editable,
+    downloadable,
+}: IListTableProps<T>) => {
     const [pageInfo] = useAtom(currentPage);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
 
-    const handleChangePage = useCallback((event: unknown, newPage: number) => {
-        setPage(newPage);
-    }, []);
+    const heads = items.length
+        ? Object.keys(items[0]).map(
+              (key) => key[0].toUpperCase() + key.slice(1)
+          )
+        : [];
+    const bodies = items.map((e) => Object.values(e)) as unknown as any[][];
+
+    const handleChangePage = useCallback(
+        (
+            event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+            newPage: number
+        ) => {
+            setPage(newPage);
+        },
+        [setPage]
+    );
 
     const handleChangeRowsPerPage = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             setRowsPerPage(parseInt(event.target.value, 10));
             setPage(0);
         },
-        []
+        [setRowsPerPage, setPage]
     );
 
     return (
@@ -51,52 +64,51 @@ const ListTable: React.FC<IListTableProps> = ({
             <Table>
                 <TableHead>
                     <TableRow>
-                        {headEl.map((item, idx) => {
+                        {heads.map((item, idx) => {
                             return (
                                 <TableCell key={idx} align="center">
                                     <div className="text-lg">{item}</div>
                                 </TableCell>
                             );
                         })}
-                        {isAddUpdateCol ? <TableCell /> : ''}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {bodyEl
+                    {bodies
                         .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                         .map((row, idx) => {
                             return (
                                 <TableRow key={idx}>
-                                    {row.map((item, idx) => {
+                                    {row.map((item: any, idx) => {
                                         return (
                                             <TableCell key={idx} align="center">
                                                 {item}
                                             </TableCell>
                                         );
                                     })}
-                                    {isAddUpdateCol ? (
-                                        <TableCell align="center">
+                                    <TableCell align="center">
+                                        {editable ? (
                                             <Link
                                                 to={`${pageInfo?.uri}/update`}
                                             >
-                                                <FileUploadIcon />
+                                                <EditIcon />
                                             </Link>
+                                        ) : null}
+                                        {downloadable ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/update`}
+                                                to={`${pageInfo?.uri}/download`}
                                             >
                                                 <DownloadIcon />
                                             </Link>
-                                        </TableCell>
-                                    ) : (
-                                        ''
-                                    )}
+                                        ) : null}
+                                    </TableCell>
                                 </TableRow>
                             );
                         })}
                 </TableBody>
             </Table>
             <TablePagination
-                count={bodyEl.length}
+                count={bodies.length}
                 rowsPerPageOptions={[5, 10, 25, 50]}
                 rowsPerPage={rowsPerPage}
                 page={page}

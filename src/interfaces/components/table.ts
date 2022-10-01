@@ -1,5 +1,5 @@
-export default interface IListTableProps {
-    headEl: string[];
-    bodyEl: any[][];
-    isAddUpdateCol: boolean;
+export default interface IListTableProps<T extends {}> {
+    items: T[];
+    editable: boolean;
+    downloadable: boolean;
 }

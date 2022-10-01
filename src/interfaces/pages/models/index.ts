@@ -16,3 +16,11 @@ export interface IModelYAMLFindRequest {
 export interface IModelYAMLFindResponse {
     yaml: string;
 }
+
+export interface IModelDatum {
+    age: string;
+    name: string;
+    status: JSX.Element;
+    version: string;
+    library: string;
+}
