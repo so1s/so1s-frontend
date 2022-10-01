@@ -2,6 +2,7 @@ import { Button, Paper, Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import LockIcon from '@mui/icons-material/Lock';
 import { useAtom } from 'jotai';
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/input';
 import signIn from '../api/auth';
 import { ISignInResponse } from '../interfaces/pages/auth';
@@ -14,14 +15,16 @@ const Login: React.FC = () => {
     const passwordRef = useRef<HTMLInputElement>(null);
 
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log({ accessToken });
         if (!accessToken) {
             return;
         }
-        // eslint-disable-next-line no-restricted-globals
-        location.href = '/';
+        navigate('/', {
+            replace: true,
+        });
     }, [accessToken]);
 
     const login = async () => {
