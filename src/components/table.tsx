@@ -14,6 +14,7 @@ import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
 import currentPage from '../atoms/current-page';
 import IListTableProps from '../interfaces/components/table';
+import { hasOwnProperty } from '../utils';
 
 export const ListTable = <T extends {}>({
     items,
@@ -77,6 +78,16 @@ export const ListTable = <T extends {}>({
                     {bodies
                         .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                         .map((row, idx) => {
+                            let name = '';
+
+                            const item = items[idx];
+
+                            if (hasOwnProperty(item, 'name')) {
+                                name = item.name as string;
+                            }
+
+                            const nameWithSlash = name ? `/${name}` : '';
+
                             return (
                                 <TableRow key={idx}>
                                     {row.map((item: any, idx) => {
@@ -89,14 +100,14 @@ export const ListTable = <T extends {}>({
                                     <TableCell align="center">
                                         {editable ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/update`}
+                                                to={`${pageInfo?.uri}/update${nameWithSlash}`}
                                             >
                                                 <EditIcon />
                                             </Link>
                                         ) : null}
                                         {downloadable ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/download`}
+                                                to={`${pageInfo?.uri}/download${nameWithSlash}`}
                                             >
                                                 <DownloadIcon />
                                             </Link>
