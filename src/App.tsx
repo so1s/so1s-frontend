@@ -1,5 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import Router from './components/router';
+import { WithAuth } from './hocs/with-auth';
+import { WithSnackbar } from './hocs/with-snackbar';
 
 const theme = createTheme({
     palette: {
@@ -15,7 +17,11 @@ const theme = createTheme({
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
-            <Router />
+            <WithAuth>
+                <WithSnackbar>
+                    <Router />
+                </WithSnackbar>
+            </WithAuth>
         </ThemeProvider>
     );
 };
