@@ -16,6 +16,7 @@ const Models: React.FC = () => {
                     (datum) =>
                         ({
                             ...datum,
+                            age: new Date(datum.age).toLocaleString(),
                             status: convertStatusToIcon(datum.status),
                         } as IModelDatum)
                 )
