@@ -16,7 +16,7 @@ const ActionCard: React.FC<IActionCardProps> = ({
             <div className="flex flex-row-reverse mx-5 py-5">
                 <Button variant="contained" onClick={onClick}>
                     {' '}
-                    {mode === 'UPDATE' ? 'Update' : 'Create'}{' '}
+                    {mode}{' '}
                 </Button>
             </div>
         </Paper>
