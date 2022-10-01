@@ -5,7 +5,11 @@ const getBackendUrl = () => {
         return 'http://localhost:8080';
     }
 
-    return 'https://www.so1s.io';
+    if (hostname.includes('so1s')) {
+        return 'https://www.so1s.io';
+    }
+
+    return `${hostname}:8080`;
 };
 
 export const baseURL = getBackendUrl();
