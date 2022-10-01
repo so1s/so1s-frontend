@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import { useAtom } from 'jotai';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import getModels from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
@@ -25,12 +25,6 @@ const Models: React.FC = () => {
             );
         })();
     }, []);
-
-    const inputT = useRef<HTMLInputElement>(null);
-
-    const api = () => {
-        console.log(inputT.current?.value);
-    };
 
     return (
         <div>
