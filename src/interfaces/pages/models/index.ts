@@ -9,19 +9,6 @@ export interface IModelFindResponse {
     library: string;
 }
 
-export interface IModelDetailResponse {
-    age: string;
-    name: string;
-    status: Status;
-    version: string;
-    library: string;
-    url: string;
-    inputShape: string;
-    inputDtype: string;
-    outputShape: string;
-    outputDtype: string;
-}
-
 export interface IModelDeleteResponse {
     success: boolean;
     message: string;
