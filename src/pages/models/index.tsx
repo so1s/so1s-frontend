@@ -1,29 +1,11 @@
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
-import getModels from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
-import { IModelDatum } from '../../interfaces/pages/models';
-import { convertStatusToIcon } from '../../utils/pages/models';
+import { useModelData } from '../../hooks/useModelData';
 
 const Models: React.FC = () => {
     const [models, setModels] = useAtom(modelsAtom);
-
-    useEffect(() => {
-        (async () => {
-            const data = await getModels();
-            setModels(
-                data.map(
-                    (datum) =>
-                        ({
-                            ...datum,
-                            age: new Date(datum.age).toLocaleString(),
-                            status: convertStatusToIcon(datum.status),
-                        } as IModelDatum)
-                )
-            );
-        })();
-    }, []);
+    useModelData();
 
     return (
         <div>
@@ -32,7 +14,6 @@ const Models: React.FC = () => {
                 items={models}
                 hasDetail
                 editable
-                downloadable
                 deletable
             />
         </div>

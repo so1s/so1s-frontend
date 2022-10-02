@@ -5,12 +5,15 @@ import { useParams } from 'react-router-dom';
 import { getModelMetadataById } from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
+import { useModelData } from '../../hooks/useModelData';
 import { IModelMetadatum } from '../../interfaces/pages/models';
 import { convertStatusToIcon } from '../../utils/pages/models';
 
 const ModelDetail: React.FC = () => {
     const [models] = useAtom(modelsAtom);
     const [modelMetadata, setModelMetadata] = useState<IModelMetadatum[]>([]);
+
+    useModelData();
 
     const params = useParams();
 
@@ -36,7 +39,7 @@ const ModelDetail: React.FC = () => {
                 )
             );
         })();
-    }, []);
+    }, [model]);
 
     return (
         <div>
@@ -46,7 +49,6 @@ const ModelDetail: React.FC = () => {
                 items={modelMetadata}
                 hasDetail
                 editable
-                downloadable
                 deletable
             />
         </div>
