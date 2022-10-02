@@ -18,6 +18,7 @@ import { hasOwnProperty } from '../utils';
 
 export const ListTable = <T extends {}>({
     title,
+    entity,
     items,
     hasDetail,
     editable,
@@ -63,7 +64,7 @@ export const ListTable = <T extends {}>({
                     className="text-primary hover:cursor-pointer"
                 >
                     {' '}
-                    + New {title}{' '}
+                    + New {entity ?? title}{' '}
                 </Link>
             </div>
             <Table>
