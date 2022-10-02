@@ -15,6 +15,7 @@ import Models from '../pages/models';
 import CreateModel from '../pages/models/create';
 import UpdateModel from '../pages/models/update';
 import DeleteModel from '../pages/models/delete';
+import ModelDetail from '../pages/models/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -46,6 +47,15 @@ const routes: IRouterDatum[] = [
         icon: <ModelTrainingIcon fontSize="large" />,
         authOnly: true,
         page: Models,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/:modelName',
+        name: 'Model Detail',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: ModelDetail,
         for: ['Owner', 'Admin', 'User'],
     },
     {
