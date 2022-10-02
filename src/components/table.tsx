@@ -88,6 +88,8 @@ export const ListTable = <T extends {}>({
 
                             if (hasOwnProperty(item, 'name')) {
                                 name = item.name as string;
+                            } else if (hasOwnProperty(item, 'version')) {
+                                name = item.version as string;
                             }
 
                             const nameWithSlash = name ? `/${name}` : '';
