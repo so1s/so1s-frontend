@@ -6,7 +6,7 @@ import Input from '../components/input';
 import OverViewTab from '../components/detail/overview-tab';
 import ListTable from '../components/table';
 import IListTableProps from '../interfaces/components/table';
-import YAMLTAB from '../components/detail/yaml-tab';
+import YamlTab from '../components/detail/yaml-tab';
 import { getModelYaml } from '../api/models';
 import { IModelDatum } from '../interfaces/pages/models';
 
@@ -96,7 +96,7 @@ const Index: React.FC = () => {
                     <div>hi3</div>
                 </OverViewTab>
                 <div>hi3</div>
-                <YAMLTAB value={yaml} />
+                <YamlTab value={yaml} />
             </DetailCard>
         </div>
     );
