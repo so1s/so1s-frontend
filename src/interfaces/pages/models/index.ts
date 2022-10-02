@@ -1,6 +1,7 @@
 import { Status } from '../../../types';
 
 export interface IModelFindResponse {
+    id: number;
     age: string;
     name: string;
     status: Status;
@@ -8,13 +9,22 @@ export interface IModelFindResponse {
     library: string;
 }
 
-export interface IModelDetailResponse extends IModelFindResponse {
-    url: string;
+export interface IModelDetailResponse {
+    age: string;
+    name: string;
+    status: Status;
+    version: string;
     library: string;
+    url: string;
     inputShape: string;
     inputDtype: string;
     outputShape: string;
     outputDtype: string;
+}
+
+export interface IModelDeleteResponse {
+    success: boolean;
+    message: string;
 }
 
 export interface IModelMetadataFindResponse {
@@ -44,6 +54,7 @@ export interface ICreateModelMetadataRequest {
 }
 
 export interface IModelDatum {
+    id: number;
     age: string;
     name: string;
     status: JSX.Element;

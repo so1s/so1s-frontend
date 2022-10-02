@@ -14,6 +14,7 @@ import Logout from '../pages/logout';
 import Models from '../pages/models';
 import CreateModel from '../pages/models/create';
 import UpdateModel from '../pages/models/update';
+import DeleteModel from '../pages/models/delete';
 
 const routes: IRouterDatum[] = [
     {
@@ -58,11 +59,20 @@ const routes: IRouterDatum[] = [
     },
     {
         uri: '/models/update/:modelName',
-        name: 'Model Update',
+        name: 'Create Model Metadata',
         icon: <></>,
         authOnly: true,
         hidden: true,
         page: UpdateModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/delete/:modelName',
+        name: 'Model Delete',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: DeleteModel,
         for: ['Owner', 'Admin', 'User'],
     },
     {

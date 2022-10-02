@@ -2,6 +2,7 @@ import { baseURL } from '../../constants';
 import { axiosInstance } from '../../hooks/useAuth';
 import {
     ICreateModelMetadataRequest,
+    IModelDeleteResponse,
     IModelFindResponse,
     IModelMetadataFindResponse,
     IModelYAMLFindRequest,
@@ -46,6 +47,14 @@ export const createModelMetadata = async (
     );
 
     return response.data as IModelMetadataFindResponse[];
+};
+
+export const deleteModel = async (id: number) => {
+    const response = await axiosInstance.delete(
+        `${baseURL}/api/v1/models/${id}`
+    );
+
+    return response.data as IModelDeleteResponse;
 };
 
 export default getModels;
