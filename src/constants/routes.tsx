@@ -16,6 +16,7 @@ import CreateModel from '../pages/models/create';
 import UpdateModel from '../pages/models/update';
 import DeleteModel from '../pages/models/delete';
 import ModelDetail from '../pages/models/detail';
+import { DeleteModelMetadata } from '../pages/model-metadata/delete';
 
 const routes: IRouterDatum[] = [
     {
@@ -83,6 +84,15 @@ const routes: IRouterDatum[] = [
         authOnly: true,
         hidden: true,
         page: DeleteModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/:modelName/delete/:version',
+        name: 'Model Metadata Delete',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: DeleteModelMetadata,
         for: ['Owner', 'Admin', 'User'],
     },
     {

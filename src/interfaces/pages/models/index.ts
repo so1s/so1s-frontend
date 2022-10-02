@@ -1,3 +1,4 @@
+import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
 
 export interface IModelFindResponse {
@@ -9,10 +10,9 @@ export interface IModelFindResponse {
     library: string;
 }
 
-export interface IModelDeleteResponse {
-    success: boolean;
-    message: string;
-}
+export interface IModelDeleteResponse extends IBaseResponse {}
+
+export interface IModelMeatdataDeleteResponse extends IBaseResponse {}
 
 export interface IModelMetadataFindResponse {
     age: string;
