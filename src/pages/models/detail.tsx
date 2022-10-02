@@ -5,13 +5,12 @@ import { useParams } from 'react-router-dom';
 import { getModelMetadataById } from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
-import { IModelMetadataFindResponse } from '../../interfaces/pages/models';
+import { IModelMetadatum } from '../../interfaces/pages/models';
+import { convertStatusToIcon } from '../../utils/pages/models';
 
 const ModelDetail: React.FC = () => {
     const [models] = useAtom(modelsAtom);
-    const [modelMetadata, setModelMetadata] = useState<
-        IModelMetadataFindResponse[]
-    >([]);
+    const [modelMetadata, setModelMetadata] = useState<IModelMetadatum[]>([]);
 
     const params = useParams();
 
@@ -31,8 +30,9 @@ const ModelDetail: React.FC = () => {
                     (datum) =>
                         ({
                             ...datum,
+                            status: convertStatusToIcon(datum.status),
                             age: new Date(datum.age).toLocaleString(),
-                        } as IModelMetadataFindResponse)
+                        } as IModelMetadatum)
                 )
             );
         })();
@@ -42,6 +42,7 @@ const ModelDetail: React.FC = () => {
         <div>
             <ListTable
                 title={`${modelName} Metadata`}
+                entity="Metadata"
                 items={modelMetadata}
                 hasDetail
                 editable

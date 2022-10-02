@@ -17,7 +17,14 @@ export interface IModelDeleteResponse {
 export interface IModelMetadataFindResponse {
     age: string;
     version: string;
-    status: string;
+    status: Status;
+    url: string;
+}
+
+export interface IModelMetadatum {
+    age: string;
+    version: string;
+    status: JSX.Element;
     url: string;
 }
 
