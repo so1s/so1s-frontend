@@ -11,10 +11,8 @@ import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useCallback, useState } from 'react';
-import { useAtom } from 'jotai';
-import currentPage from '../atoms/current-page';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
 
@@ -25,9 +23,10 @@ export const ListTable = <T extends {}>({
     downloadable,
     deletable,
 }: IListTableProps<T>) => {
-    const [pageInfo] = useAtom(currentPage);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
+
+    const { pathname } = useLocation();
 
     const heads = items.length
         ? Object.keys(items[0]).map(
@@ -59,7 +58,7 @@ export const ListTable = <T extends {}>({
             <div className="flex justify-between mx-5 py-5">
                 <div className="font-serif text-2xl text-body">Models</div>
                 <Link
-                    to={`${pageInfo?.uri}/create`}
+                    to={`${pathname}/create`}
                     className="text-primary hover:cursor-pointer"
                 >
                     {' '}
@@ -104,28 +103,28 @@ export const ListTable = <T extends {}>({
                                     <TableCell align="center">
                                         {hasDetail ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/detail${nameWithSlash}`}
+                                                to={`${pathname}/detail${nameWithSlash}`}
                                             >
                                                 <ZoomInIcon />
                                             </Link>
                                         ) : null}
                                         {editable ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/update${nameWithSlash}`}
+                                                to={`${pathname}/update${nameWithSlash}`}
                                             >
                                                 <EditIcon />
                                             </Link>
                                         ) : null}
                                         {downloadable ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/download${nameWithSlash}`}
+                                                to={`${pathname}/download${nameWithSlash}`}
                                             >
                                                 <DownloadIcon />
                                             </Link>
                                         ) : null}
                                         {deletable ? (
                                             <Link
-                                                to={`${pageInfo?.uri}/delete${nameWithSlash}`}
+                                                to={`${pathname}/delete${nameWithSlash}`}
                                             >
                                                 <DeleteIcon />
                                             </Link>
