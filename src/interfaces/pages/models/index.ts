@@ -12,8 +12,6 @@ export interface IModelFindResponse {
 
 export interface IModelDeleteResponse extends IBaseResponse {}
 
-export interface IModelMeatdataDeleteResponse extends IBaseResponse {}
-
 export interface IModelMetadataFindResponse {
     age: string;
     version: string;

@@ -4,7 +4,7 @@ import ListTable from '../../components/table';
 import { useModelData } from '../../hooks/useModelData';
 
 const Models: React.FC = () => {
-    const [models, setModels] = useAtom(modelsAtom);
+    const [models] = useAtom(modelsAtom);
     useModelData();
 
     return (

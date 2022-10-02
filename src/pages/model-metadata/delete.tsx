@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { deleteModelMetadata } from '../../api/model-metadata';
 import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
-import { IModelMeatdataDeleteResponse } from '../../interfaces/pages/models';
+import { IModelMetadataDeleteResponse } from '../../interfaces/pages/model-metadata';
 
 export const DeleteModelMetadata = () => {
     const [models] = useAtom(modelsAtom);
@@ -39,7 +39,7 @@ export const DeleteModelMetadata = () => {
                 ));
             } catch (err) {
                 ({ success, message } = (
-                    err as AxiosError<IModelMeatdataDeleteResponse>
+                    err as AxiosError<IModelMetadataDeleteResponse>
                 ).response?.data ?? { success: false, message: '' });
             }
 
