@@ -17,6 +17,7 @@ import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
 
 export const ListTable = <T extends {}>({
+    title,
     items,
     hasDetail,
     editable,
@@ -56,13 +57,13 @@ export const ListTable = <T extends {}>({
     return (
         <Paper className="mx-10 font-sans">
             <div className="flex justify-between mx-5 py-5">
-                <div className="font-serif text-2xl text-body">Models</div>
+                <div className="font-serif text-2xl text-body">{title}</div>
                 <Link
                     to={`${pathname}/create`}
                     className="text-primary hover:cursor-pointer"
                 >
                     {' '}
-                    + New Models{' '}
+                    + New {title}{' '}
                 </Link>
             </div>
             <Table>
@@ -103,7 +104,7 @@ export const ListTable = <T extends {}>({
                                     <TableCell align="center">
                                         {hasDetail ? (
                                             <Link
-                                                to={`${pathname}/detail${nameWithSlash}`}
+                                                to={`${pathname}${nameWithSlash}`}
                                             >
                                                 <ZoomInIcon />
                                             </Link>
