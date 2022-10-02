@@ -11,6 +11,7 @@ import { getModelYaml } from '../api/models';
 import { IModelDatum } from '../interfaces/pages/models';
 
 export const sampleModelData: IListTableProps<IModelDatum> = {
+    title: 'Models',
     items: [
         {
             id: 1,
@@ -65,7 +66,7 @@ const Index: React.FC = () => {
 
     return (
         <div>
-            <ListTable {...{ ...sampleModelData, title: 'Models' }} />
+            <ListTable {...sampleModelData} />
             <ActionCard title="Models" mode="UPDATE" onClick={api}>
                 <Input title="hello" inputRef={inputT} />
             </ActionCard>
