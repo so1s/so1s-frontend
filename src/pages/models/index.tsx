@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import getModels from '../../api/models';
@@ -29,6 +28,7 @@ const Models: React.FC = () => {
     return (
         <div>
             <ListTable
+                title="Models"
                 items={models}
                 hasDetail
                 editable

@@ -65,7 +65,7 @@ const Index: React.FC = () => {
 
     return (
         <div>
-            <ListTable {...sampleModelData} />
+            <ListTable {...{ ...sampleModelData, title: 'Models' }} />
             <ActionCard title="Models" mode="UPDATE" onClick={api}>
                 <Input title="hello" inputRef={inputT} />
             </ActionCard>
