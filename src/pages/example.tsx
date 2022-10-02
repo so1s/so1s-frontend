@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import ActionCard from '../components/action-card';
@@ -14,6 +13,7 @@ import { IModelDatum } from '../interfaces/pages/models';
 export const sampleModelData: IListTableProps<IModelDatum> = {
     items: [
         {
+            id: 1,
             age: '1 minutes ago',
             name: 'iris',
             status: <CheckCircleIcon />,
@@ -21,6 +21,7 @@ export const sampleModelData: IListTableProps<IModelDatum> = {
             library: 'tensorflow',
         },
         {
+            id: 2,
             age: '2 minutes ago',
             name: 'iris',
             status: <CheckCircleIcon />,
@@ -28,6 +29,7 @@ export const sampleModelData: IListTableProps<IModelDatum> = {
             library: 'tensorflow',
         },
         {
+            id: 3,
             age: '3 minutes ago',
             name: 'iris',
             status: <CheckCircleIcon />,
