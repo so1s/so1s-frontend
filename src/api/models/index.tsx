@@ -15,7 +15,7 @@ export const getModels = async () => {
     return response.data as IModelFindResponse[];
 };
 
-export const getModelMetadataById = async (id: string | number) => {
+export const getModelMetadataById = async (id: number) => {
     const response = await axiosInstance.get(`${baseURL}/api/v1/models/${id}`);
 
     return response.data as IModelMetadataFindResponse[];
