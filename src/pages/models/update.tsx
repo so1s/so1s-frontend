@@ -8,6 +8,7 @@ import {
 import { useAtom } from 'jotai';
 import { ReactNode, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { createModelMetadata } from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
@@ -25,11 +26,11 @@ const UpdateModel: React.FC = () => {
 
     const [library, setLibrary] = useState(libraries[0]);
     const [file, setFile] = useState<File | null>(null);
-    const modelNameRef = useRef(null);
-    const inputShapeRef = useRef(null);
-    const inputDataTypeRef = useRef(null);
-    const outputShapeRef = useRef(null);
-    const outputDataTypeRef = useRef(null);
+    const modelNameRef = useRef<HTMLInputElement>(null);
+    const inputShapeRef = useRef<HTMLInputElement>(null);
+    const inputDataTypeRef = useRef<HTMLInputElement>(null);
+    const outputShapeRef = useRef<HTMLInputElement>(null);
+    const outputDataTypeRef = useRef<HTMLInputElement>(null);
 
     const handleChangeLibrary = (
         event: SelectChangeEvent<string>,
@@ -42,11 +43,62 @@ const UpdateModel: React.FC = () => {
         setFile(files?.length ? files[0] : null);
     };
 
-    const submit = () => {
-        // TODO: Implementation TODO
+    const setError = (message: string) => {
+        setSnackbarDatum({
+            severity: 'error',
+            message,
+        });
     };
 
     const { modelName } = params;
+
+    const submit = async () => {
+        const [inputShape, inputDataType, outputShape, outputDataType] = [
+            inputShapeRef,
+            inputDataTypeRef,
+            outputShapeRef,
+            outputDataTypeRef,
+        ].map((e) => e.current?.value);
+
+        const items = {
+            '모델 이름': modelName,
+            '사용 라이브러리': library,
+            '모델 파일': file,
+            'Input Shape': inputShape,
+            'Input Data Type': inputDataType,
+            'Output Shape': outputShape,
+            'Output Data Type': outputDataType,
+        };
+
+        const isCorrect = Object.entries(items).every(([name, value]) => {
+            if (!value) {
+                setError(`${name}이(가) 주어지지 않았습니다.`);
+                return false;
+            }
+            return true;
+        });
+
+        if (!isCorrect) {
+            return;
+        }
+
+        const data = await createModelMetadata({
+            name: modelName ?? '',
+            library,
+            modelFile: file!!,
+            inputShape: inputShape ?? '',
+            outputShape: outputShape ?? '',
+            inputDtype: inputDataType ?? '',
+            outputDtype: outputDataType ?? '',
+        });
+
+        console.log(data);
+
+        setSnackbarDatum({
+            severity: 'success',
+            message: JSON.stringify(data, null, 4),
+        });
+    };
 
     const model = models.find((model) => model.name === modelName);
 

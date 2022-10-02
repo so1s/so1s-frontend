@@ -33,6 +33,16 @@ export interface IModelYAMLFindResponse {
     yaml: string;
 }
 
+export interface ICreateModelMetadataRequest {
+    modelFile: File;
+    name: string;
+    library: string;
+    inputShape: string;
+    inputDtype: string;
+    outputShape: string;
+    outputDtype: string;
+}
+
 export interface IModelDatum {
     age: string;
     name: string;

@@ -1,5 +1,7 @@
 export default interface IListTableProps<T extends {}> {
     items: T[];
-    editable: boolean;
-    downloadable: boolean;
+    hasDetail?: boolean;
+    editable?: boolean;
+    downloadable?: boolean;
+    deletable?: boolean;
 }

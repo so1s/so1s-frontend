@@ -28,7 +28,13 @@ const Models: React.FC = () => {
 
     return (
         <div>
-            <ListTable items={models} editable downloadable />
+            <ListTable
+                items={models}
+                hasDetail
+                editable
+                downloadable
+                deletable
+            />
         </div>
     );
 };

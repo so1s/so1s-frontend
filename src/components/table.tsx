@@ -7,8 +7,10 @@ import {
     Table,
     TablePagination,
 } from '@mui/material';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
@@ -18,8 +20,10 @@ import { hasOwnProperty } from '../utils';
 
 export const ListTable = <T extends {}>({
     items,
+    hasDetail,
     editable,
     downloadable,
+    deletable,
 }: IListTableProps<T>) => {
     const [pageInfo] = useAtom(currentPage);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -98,6 +102,13 @@ export const ListTable = <T extends {}>({
                                         );
                                     })}
                                     <TableCell align="center">
+                                        {hasDetail ? (
+                                            <Link
+                                                to={`${pageInfo?.uri}/detail${nameWithSlash}`}
+                                            >
+                                                <ZoomInIcon />
+                                            </Link>
+                                        ) : null}
                                         {editable ? (
                                             <Link
                                                 to={`${pageInfo?.uri}/update${nameWithSlash}`}
@@ -110,6 +121,13 @@ export const ListTable = <T extends {}>({
                                                 to={`${pageInfo?.uri}/download${nameWithSlash}`}
                                             >
                                                 <DownloadIcon />
+                                            </Link>
+                                        ) : null}
+                                        {deletable ? (
+                                            <Link
+                                                to={`${pageInfo?.uri}/delete${nameWithSlash}`}
+                                            >
+                                                <DeleteIcon />
                                             </Link>
                                         ) : null}
                                     </TableCell>
