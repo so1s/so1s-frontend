@@ -1,7 +1,8 @@
 import { baseURL } from '../../constants';
 import { axiosInstance } from '../../hooks/useAuth';
 import {
-    ICreateModelMetadataRequest,
+    ICreateModelRequest,
+    ICreateModelResponse,
     IModelDeleteResponse,
     IModelFindResponse,
     IModelMetadataFindResponse,
@@ -32,8 +33,9 @@ export const getModelYaml = async ({
     return response.data as IModelYAMLFindResponse;
 };
 
-export const createModelMetadata = async (
-    payload: ICreateModelMetadataRequest
+export const createModelOrAddModelMetadata = async (
+    payload: ICreateModelRequest,
+    mode: 'post' | 'put'
 ) => {
     const formData = new FormData();
 
@@ -41,12 +43,12 @@ export const createModelMetadata = async (
         formData.append(name, value);
     });
 
-    const response = await axiosInstance.put(
+    const response = await axiosInstance[mode](
         `${baseURL}/api/v1/models`,
         formData
     );
 
-    return response.data as IModelMetadataFindResponse[];
+    return response.data as ICreateModelResponse;
 };
 
 export const deleteModel = async (id: number) => {

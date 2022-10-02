@@ -30,7 +30,7 @@ export interface IModelYAMLFindResponse {
     yaml: string;
 }
 
-export interface ICreateModelMetadataRequest {
+export interface ICreateModelRequest {
     modelFile: File;
     name: string;
     library: string;
@@ -40,6 +40,14 @@ export interface ICreateModelMetadataRequest {
     outputDtype: string;
 }
 
+export interface ICreateModelResponse {
+    success: boolean;
+    modelName: string;
+    fileName: string;
+    version: string;
+    savedUrl: string;
+}
+
 export interface IModelDatum {
     id: number;
     age: string;
@@ -47,4 +55,8 @@ export interface IModelDatum {
     status: JSX.Element;
     version: string;
     library: string;
+}
+
+export interface ICreateUpdateModelBaseParams {
+    type: 'create' | 'update';
 }
