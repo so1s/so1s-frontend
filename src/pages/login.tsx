@@ -52,7 +52,7 @@ const Login: React.FC = () => {
             tokenResponse = await signIn(username, password);
         } catch {
             setSnackbarDatum({
-                severity: 'success',
+                severity: 'error',
                 message: '로그인에 실패했습니다.',
             });
             return;
@@ -83,11 +83,16 @@ const Login: React.FC = () => {
                     <Typography align="center" variant="h6">
                         Sign in
                     </Typography>
-                    <Input title="Username" inputRef={usernameRef} />
+                    <Input
+                        title="Username"
+                        inputRef={usernameRef}
+                        sx={{ width: '100%' }}
+                    />
                     <Input
                         title="Password"
                         type="password"
                         inputRef={passwordRef}
+                        sx={{ width: '100%' }}
                     />
                     <Button variant="contained" onClick={login}>
                         Sign In
