@@ -1,14 +1,20 @@
+import { useAtom } from 'jotai';
 import { BrowserRouter, Routes as ReactRoutes, Route } from 'react-router-dom';
+import { accessTokenWithPersistence } from '../atoms/token';
 import routes from '../constants/routes';
+import LoginRedirect from '../pages/login-redirect';
 import Header from './header';
 import Navbar from './navbar';
 
 const Router: React.FC = () => {
+    const [accessToken] = useAtom(accessTokenWithPersistence);
+
     return (
         <BrowserRouter>
             <ReactRoutes>
                 {routes.map((e) => {
-                    const Page = e.page;
+                    const Page =
+                        e.authOnly && !accessToken ? LoginRedirect : e.page;
 
                     const Element = (
                         <div className="w-screen h-screen flex flex-grow overflow-y-hidden">

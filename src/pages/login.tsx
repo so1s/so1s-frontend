@@ -2,25 +2,29 @@ import { Button, Paper, Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import LockIcon from '@mui/icons-material/Lock';
 import { useAtom } from 'jotai';
-import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/input';
 import signIn from '../api/auth';
 import { ISignInResponse } from '../interfaces/pages/auth';
 import { accessTokenWithPersistence } from '../atoms/token';
+import { snackbarAtom } from '../atoms/snackbar';
 
 const Login: React.FC = () => {
     const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
-    useAuth();
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+
+    const [, setSnackbarDatum] = useAtom(snackbarAtom);
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log({ accessToken });
         if (!accessToken) {
             return;
         }
-        // eslint-disable-next-line no-restricted-globals
-        location.href = '/';
+        navigate('/', {
+            replace: true,
+        });
     }, [accessToken]);
 
     const login = async () => {
@@ -28,11 +32,17 @@ const Login: React.FC = () => {
         const password = passwordRef.current?.value ?? '';
 
         if (!username) {
-            console.log('Username이 주어지지 않았습니다.'); // snackbar TODO
+            setSnackbarDatum({
+                severity: 'error',
+                message: 'Username이 주어지지 않았습니다.',
+            });
             return;
         }
         if (!password) {
-            console.log('Password가 주어지지 않았습니다.');
+            setSnackbarDatum({
+                severity: 'error',
+                message: 'Password가 주어지지 않았습니다.',
+            });
             return;
         }
 
@@ -41,11 +51,17 @@ const Login: React.FC = () => {
         try {
             tokenResponse = await signIn(username, password);
         } catch {
-            console.log('로그인에 실패했습니다.');
+            setSnackbarDatum({
+                severity: 'error',
+                message: '로그인에 실패했습니다.',
+            });
             return;
         }
 
-        console.log('로그인에 성공했습니다.');
+        setSnackbarDatum({
+            severity: 'success',
+            message: '로그인에 성공했습니다.',
+        });
 
         setAccessToken(tokenResponse?.token ?? '');
     };
@@ -67,11 +83,16 @@ const Login: React.FC = () => {
                     <Typography align="center" variant="h6">
                         Sign in
                     </Typography>
-                    <Input title="Username" inputRef={usernameRef} />
+                    <Input
+                        title="Username"
+                        inputRef={usernameRef}
+                        sx={{ width: '100%' }}
+                    />
                     <Input
                         title="Password"
                         type="password"
                         inputRef={passwordRef}
+                        sx={{ width: '100%' }}
                     />
                     <Button variant="contained" onClick={login}>
                         Sign In

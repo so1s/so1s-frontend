@@ -11,6 +11,13 @@ import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
 import Logout from '../pages/logout';
+import Models from '../pages/models';
+import CreateModel from '../pages/models/create';
+import UpdateModel from '../pages/models/update';
+import DeleteModel from '../pages/models/delete';
+import ModelDetail from '../pages/models/detail';
+import { DeleteModelMetadata } from '../pages/model-metadata/delete';
+import { ModelMetadataDetail } from '../pages/model-metadata/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -40,46 +47,103 @@ const routes: IRouterDatum[] = [
         uri: '/models',
         name: 'Models',
         icon: <ModelTrainingIcon fontSize="large" />,
-        page: Index,
+        authOnly: true,
+        page: Models,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models',
+        uri: '/models/:modelName',
+        name: 'Model Detail',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: ModelDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/create',
+        name: 'Model Create',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: CreateModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/update/:modelName',
+        name: 'Create Model Metadata',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: UpdateModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/delete/:modelName',
+        name: 'Model Delete',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: DeleteModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/:modelName/delete/:version',
+        name: 'Model Metadata Delete',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: DeleteModelMetadata,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/:modelName/:version',
+        name: 'Model Metadata Detail',
+        icon: <></>,
+        authOnly: true,
+        hidden: true,
+        page: ModelMetadataDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/volumes',
         name: 'Volumes',
         icon: <StorageIcon fontSize="large" />,
+        authOnly: true,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models',
+        uri: '/monitoring',
         name: 'Monitoring',
         icon: <MonitorIcon fontSize="large" />,
+        authOnly: true,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models',
+        uri: '/tests',
         name: 'Tests',
         icon: <SpeedIcon fontSize="large" />,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models',
+        uri: '/deployments',
         name: 'Deployments',
         icon: <RocketLaunchIcon fontSize="large" />,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models',
+        uri: '/alerts',
         name: 'Alerts',
         icon: <NotificationImportantIcon fontSize="large" />,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models',
+        uri: '/resources',
         name: 'Resources',
         icon: <MemoryIcon fontSize="large" />,
         page: Index,

@@ -1,7 +1,7 @@
 import MonacoEditor from '@uiw/react-monacoeditor';
-import { IYAMLTABProps } from '../../interfaces/components/detail';
+import { IYamlTabProps } from '../../interfaces/components/detail';
 
-const YAMLTAB: React.FC<IYAMLTABProps> = ({ value }) => {
+const YamlTab: React.FC<IYamlTabProps> = ({ value }) => {
     return (
         <div className="h-96">
             <MonacoEditor
@@ -16,4 +16,4 @@ const YAMLTAB: React.FC<IYAMLTABProps> = ({ value }) => {
     );
 };
 
-export default YAMLTAB;
+export default YamlTab;

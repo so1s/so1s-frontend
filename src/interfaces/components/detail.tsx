@@ -18,6 +18,6 @@ export interface IOverViewTab {
     children: ReactNode[];
 }
 
-export interface IYAMLTABProps {
+export interface IYamlTabProps {
     value: string;
 }

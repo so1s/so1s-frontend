@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import ActionCard from '../components/action-card';
@@ -7,33 +6,43 @@ import Input from '../components/input';
 import OverViewTab from '../components/detail/overview-tab';
 import ListTable from '../components/table';
 import IListTableProps from '../interfaces/components/table';
-import YAMLTAB from '../components/detail/yaml-tab';
+import YamlTab from '../components/detail/yaml-tab';
 import { getModelYaml } from '../api/models';
+import { IModelDatum } from '../interfaces/pages/models';
+
+export const sampleModelData: IListTableProps<IModelDatum> = {
+    title: 'Models',
+    items: [
+        {
+            id: 1,
+            age: '1 minutes ago',
+            name: 'iris',
+            status: <CheckCircleIcon />,
+            version: 'v1',
+            library: 'tensorflow',
+        },
+        {
+            id: 2,
+            age: '2 minutes ago',
+            name: 'iris',
+            status: <CheckCircleIcon />,
+            version: 'v1',
+            library: 'tensorflow',
+        },
+        {
+            id: 3,
+            age: '3 minutes ago',
+            name: 'iris',
+            status: <CheckCircleIcon />,
+            version: 'v1',
+            library: 'tensorflow',
+        },
+    ],
+    editable: true,
+    downloadable: true,
+};
 
 const Index: React.FC = () => {
-    const ListTableProps: IListTableProps = {
-        headEl: ['Age', 'Name', 'Status', 'Version', 'Library'],
-        bodyEl: [
-            ['1 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['2 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['3 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['4 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['5 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['6 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['7 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['8 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            ['9 minutes ago', 'titan', <CheckCircleIcon />, 'v1', 'tensorflow'],
-            [
-                '10 minutes ago',
-                'titan',
-                <CheckCircleIcon />,
-                'v1',
-                'tensorflow',
-            ],
-        ],
-        isAddUpdateCol: true,
-    };
-
     const inputT = useRef<HTMLInputElement>(null);
 
     const api = () => {
@@ -57,11 +66,7 @@ const Index: React.FC = () => {
 
     return (
         <div>
-            <ListTable
-                bodyEl={ListTableProps.bodyEl}
-                headEl={ListTableProps.headEl}
-                isAddUpdateCol={ListTableProps.isAddUpdateCol}
-            />
+            <ListTable {...sampleModelData} />
             <ActionCard title="Models" mode="UPDATE" onClick={api}>
                 <Input title="hello" inputRef={inputT} />
             </ActionCard>
@@ -91,7 +96,7 @@ const Index: React.FC = () => {
                     <div>hi3</div>
                 </OverViewTab>
                 <div>hi3</div>
-                <YAMLTAB value={yaml} />
+                <YamlTab value={yaml} />
             </DetailCard>
         </div>
     );

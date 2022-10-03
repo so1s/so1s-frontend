@@ -1,13 +1,7 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { TextFieldProps } from '@mui/material';
 
-export default interface IInputProps {
-    title: string;
-    type?: HTMLInputTypeAttribute;
-    placholder?: string;
-    helperText?: string;
-    required?: boolean;
-    defaultValue?: string;
-    disabled?: boolean;
-    fullWidth?: boolean;
-    inputRef?: any;
-}
+type IInputProps = {
+    title?: string;
+} & TextFieldProps;
+
+export default IInputProps;
