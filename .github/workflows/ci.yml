@@ -1,8 +1,6 @@
 name: CI
-on:
-  pull_request: 
-    types:
-      - "opened"
+on: pull_request
+
 jobs:
   lint:
     name: lint
@@ -20,10 +18,7 @@ jobs:
           path: ./.yarn/cache
           key: yarn-${{ hashFiles('**/yarn.lock') }}
       - name: install dependency
-        run: |
-          npm i -g yarn
-          yarn set version stable
-          yarn install --immutable --immutable-cache
+        run: yarn install --immutable --immutable-cache
       - name: run lint
         run: yarn lint
         
