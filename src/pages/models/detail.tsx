@@ -21,7 +21,7 @@ const ModelDetail: React.FC = () => {
     const performDelete = useDelete(deleteModelMetadata);
 
     const deleteAction = async (id: number, version: string) => {
-        const success = await performDelete(id);
+        const success = await performDelete(id, version);
 
         refreshData();
 
