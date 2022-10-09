@@ -1,19 +1,32 @@
 /* eslint-disable react/jsx-key */
 import { useAtom } from 'jotai';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getModelMetadataById } from '../../api/models';
+import { deleteModelMetadata } from '../../api/model-metadata';
+import { modelMetadataAtom } from '../../atoms/model-metadata';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
+import { useDelete } from '../../hooks/useDelete';
+import { useModelMetadata } from '../../hooks/useModelMetadata';
 import { useModelsData } from '../../hooks/useModelsData';
-import { IModelMetadatum } from '../../interfaces/pages/models';
-import { convertStatusToIcon } from '../../utils/pages/models';
 
 const ModelDetail: React.FC = () => {
     const [models] = useAtom(modelsAtom);
-    const [modelMetadata, setModelMetadata] = useState<IModelMetadatum[]>([]);
+    const [modelMetadata] = useAtom(modelMetadataAtom);
 
     useModelsData();
+
+    const refreshData = useModelMetadata();
+
+    const performDelete = useDelete(deleteModelMetadata);
+
+    const deleteAction = async (id: number, version: string) => {
+        const success = await performDelete(id);
+
+        refreshData();
+
+        return success;
+    };
 
     const params = useParams();
 
@@ -22,23 +35,11 @@ const ModelDetail: React.FC = () => {
     const model = models.find((e) => e.name === modelName);
 
     useEffect(() => {
-        (async () => {
-            if (!model) {
-                return;
-            }
+        if (!model) {
+            return;
+        }
 
-            const responseData = await getModelMetadataById(model.id);
-            setModelMetadata(
-                responseData.map(
-                    (datum) =>
-                        ({
-                            ...datum,
-                            status: convertStatusToIcon(datum.status),
-                            age: new Date(datum.age).toLocaleString(),
-                        } as IModelMetadatum)
-                )
-            );
-        })();
+        refreshData(model.id);
     }, [model]);
 
     return (
@@ -51,6 +52,8 @@ const ModelDetail: React.FC = () => {
                 hasDetail
                 editable
                 deletable
+                deleteAction={deleteAction}
+                deleteParams={['version']}
             />
         </div>
     );
