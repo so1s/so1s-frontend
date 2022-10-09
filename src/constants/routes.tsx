@@ -31,7 +31,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/login',
         name: 'Login',
-        icon: <></>,
         page: Login,
         authOnly: false,
         hidden: true,
@@ -39,7 +38,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/logout',
         name: 'Logout',
-        icon: <></>,
         page: Logout,
         authOnly: false,
         hidden: true,
@@ -55,7 +53,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/:modelName',
         name: 'Model Detail',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: ModelDetail,
@@ -64,7 +61,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/create',
         name: 'Model Create',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: CreateModel,
@@ -73,7 +69,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/update/:modelName',
         name: 'Create Model Metadata',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: UpdateModel,
@@ -82,7 +77,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/delete/:modelName',
         name: 'Model Delete',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: DeleteModel,
@@ -91,7 +85,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/:modelName/delete/:version',
         name: 'Model Metadata Delete',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: DeleteModelMetadata,
@@ -100,7 +93,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/:modelName/:version',
         name: 'Model Metadata Detail',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: ModelMetadataDetail,
@@ -109,8 +101,17 @@ const routes: IRouterDatum[] = [
     {
         uri: '/deployments',
         name: 'Deployments',
+        authOnly: true,
         icon: <RocketLaunchIcon fontSize="large" />,
         page: Deployments,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/delete/:deploymentName',
+        name: 'Deployments Delete',
+        authOnly: true,
+        hidden: true,
+        // page: deleteDeployment,
         for: ['Owner', 'Admin', 'User'],
     },
     {
