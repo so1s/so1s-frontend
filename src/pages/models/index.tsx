@@ -1,11 +1,25 @@
 import { useAtom } from 'jotai';
+import { deleteModel } from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
-import { useModelData } from '../../hooks/useModelData';
+import { useDelete } from '../../hooks/useDelete';
+import { useModelsData } from '../../hooks/useModelsData';
 
 const Models: React.FC = () => {
     const [models] = useAtom(modelsAtom);
-    useModelData();
+    useModelsData();
+
+    const refreshData = useModelsData();
+
+    const performDelete = useDelete(deleteModel);
+
+    const deleteAction = async (id: number) => {
+        const success = await performDelete(id);
+
+        refreshData();
+
+        return success;
+    };
 
     return (
         <div>
@@ -16,6 +30,7 @@ const Models: React.FC = () => {
                 hasDetail
                 editable
                 deletable
+                deleteAction={deleteAction}
             />
         </div>
     );
