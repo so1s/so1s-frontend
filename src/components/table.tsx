@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
     Paper,
     TableBody,
@@ -15,8 +17,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
+import { IBaseResponse } from '../interfaces';
 
-export const ListTable = <T extends {}>({
+export const ListTable = <T extends {}, R extends IBaseResponse>({
     title,
     entity,
     items,
@@ -25,6 +28,7 @@ export const ListTable = <T extends {}>({
     editable,
     downloadable,
     deletable,
+    deleteAction,
 }: IListTableProps<T>) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
@@ -94,6 +98,15 @@ export const ListTable = <T extends {}>({
 
                             const nameWithSlash = name ? `/${name}` : '';
 
+                            const deleteItem = () => {
+                                if (
+                                    deleteAction &&
+                                    hasOwnProperty(item, 'id')
+                                ) {
+                                    deleteAction(item.id as number);
+                                }
+                            };
+
                             return (
                                 <TableRow key={idx}>
                                     {row.map((item: any, idx) => {
@@ -125,7 +138,15 @@ export const ListTable = <T extends {}>({
                                                 <DownloadIcon />
                                             </Link>
                                         ) : null}
-                                        {deletable ? (
+                                        {deletable && deleteAction ? (
+                                            <span
+                                                className="hover:cursor-pointer"
+                                                onClick={deleteItem}
+                                            >
+                                                <DeleteIcon />
+                                            </span>
+                                        ) : null}
+                                        {deletable && !deleteAction ? (
                                             <Link
                                                 to={`${pathname}/delete${nameWithSlash}`}
                                             >
