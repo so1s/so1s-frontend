@@ -5,7 +5,7 @@
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.tabSize": 4,
+        "editor.tabSize": 4
     },
     "[javascript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
