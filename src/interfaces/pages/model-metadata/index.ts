@@ -13,12 +13,12 @@ interface IModelMetadataDetailBase {
     outputDtype: string;
 }
 
-export interface IModelMetadataDetailResponse extends IModelMetadataDetailBase {
+export type IModelMetadataDetailResponse = IModelMetadataDetailBase & {
     status: Status;
-}
+};
 
-export interface IModelMetadataDetail extends IModelMetadataDetailBase {
+export type IModelMetadataDetail = IModelMetadataDetailBase & {
     status: JSX.Element;
-}
+};
 
 export interface IModelMetadataDeleteResponse extends IBaseResponse {}

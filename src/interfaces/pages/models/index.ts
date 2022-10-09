@@ -1,30 +1,37 @@
 import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
 
-export interface IModelFindResponse {
+export interface IModelBase {
     id: number;
     age: string;
     name: string;
-    status: Status;
     version: string;
     library: string;
 }
 
+export type IModelFindResponse = IModelBase & {
+    status: Status;
+};
+
+export type IModelDatum = IModelBase & {
+    status: JSX.Element;
+};
+
 export interface IModelDeleteResponse extends IBaseResponse {}
 
-export interface IModelMetadataFindResponse {
+export interface IModelMetadataBase {
     age: string;
     version: string;
-    status: Status;
     url: string;
 }
 
-export interface IModelMetadatum {
-    age: string;
-    version: string;
+export type IModelMetadataFindResponse = IModelMetadataBase & {
+    status: Status;
+};
+
+export type IModelMetadatum = IModelMetadataBase & {
     status: JSX.Element;
-    url: string;
-}
+};
 
 export interface IModelYAMLFindRequest {
     modelId: string | number;
@@ -51,15 +58,6 @@ export interface ICreateModelResponse {
     fileName: string;
     version: string;
     savedUrl: string;
-}
-
-export interface IModelDatum {
-    id: number;
-    age: string;
-    name: string;
-    status: JSX.Element;
-    version: string;
-    library: string;
 }
 
 export interface ICreateUpdateModelBaseParams {

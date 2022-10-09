@@ -1,6 +1,8 @@
+import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
 
 export interface IDeploymentBase {
+    id: number;
     age: string;
     deploymentName: string;
     endPoint: string;
@@ -16,10 +18,13 @@ export interface IDeploymentBase {
     memoryLimit: string;
     gpuLimit: string;
 }
-export interface IDeploymentFindResponse extends IDeploymentBase {
-    status: Status;
-}
 
-export interface IDeploymentDatum extends IDeploymentBase {
+export type IDeploymentFindResponse = IDeploymentBase & {
+    status: Status;
+};
+
+export type IDeploymentDatum = IDeploymentBase & {
     status: JSX.Element;
-}
+};
+
+export interface IDeploymentDeleteResponse extends IBaseResponse {}
