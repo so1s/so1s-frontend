@@ -4,24 +4,27 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import HelpIcon from '@mui/icons-material/Help';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
+import { pipe } from 'fp-ts/lib/function';
 import { Status } from '../../../types';
 import { CustomPopover } from '../../../components/custom-popover';
 
-export const convertStatusToIcon = (status: Status) => {
-    const mappings = Object.fromEntries(
-        Object.entries({
+export const convertStatusToIcon = (status: Status): JSX.Element =>
+    pipe(
+        {
             PENDING: <AutorenewIcon />,
             RUNNING: <ChangeCircleIcon />,
             SUCCEEDED: <CheckCircleIcon />,
             FAILED: <UnpublishedIcon />,
             UNKNOWN: <HelpIcon />,
-        }).map(([k, v]) => [
-            k,
-            <CustomPopover key={k} title={k}>
-                {v}
-            </CustomPopover>,
-        ])
+        },
+        Object.entries,
+        (arr) =>
+            arr.map(([k, v]) => [
+                k,
+                <CustomPopover key={k} title={k}>
+                    {v}
+                </CustomPopover>,
+            ]),
+        Object.fromEntries,
+        (obj) => obj[status] ?? <CancelIcon />
     );
-
-    return mappings[status] ?? <CancelIcon />;
-};
