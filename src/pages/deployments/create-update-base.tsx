@@ -161,14 +161,15 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
         >
             <div className="flex flex-col space-y-10 my-10 mx-auto">
                 <TextField
-                    label={
-                        type === 'create'
-                            ? 'Deployment Name'
-                            : `${deploymentName ?? ''} (Disabled)`
-                    }
+                    label={`Deployment Name${
+                        type === 'create' ? '' : ' (Disabled)'
+                    }`}
+                    defaultValue={deployment ? deployment?.deploymentName : ''}
                     type="text"
                     disabled={type === 'update'}
-                    placeholder="Titanic"
+                    placeholder={
+                        deployment ? deployment?.deploymentName : 'Titanic'
+                    }
                     inputRef={deploymentNameRef}
                 />
                 <Select
