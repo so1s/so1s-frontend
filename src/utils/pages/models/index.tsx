@@ -5,15 +5,23 @@ import HelpIcon from '@mui/icons-material/Help';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import { Status } from '../../../types';
+import { CustomPopover } from '../../../components/custom-popover';
 
 export const convertStatusToIcon = (status: Status) => {
-    return (
-        {
+    const mappings = Object.fromEntries(
+        Object.entries({
             PENDING: <AutorenewIcon />,
             RUNNING: <ChangeCircleIcon />,
             SUCCEEDED: <CheckCircleIcon />,
             FAILED: <UnpublishedIcon />,
             UNKNOWN: <HelpIcon />,
-        }[status] ?? <CancelIcon />
+        }).map(([k, v]) => [
+            k,
+            <CustomPopover key={k} title={k}>
+                {v}
+            </CustomPopover>,
+        ])
     );
+
+    return mappings[status] ?? <CancelIcon />;
 };
