@@ -59,7 +59,3 @@ export interface ICreateModelResponse {
     version: string;
     savedUrl: string;
 }
-
-export interface ICreateUpdateModelBaseParams {
-    type: 'create' | 'update';
-}
