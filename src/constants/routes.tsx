@@ -17,6 +17,9 @@ import UpdateModel from '../pages/models/update';
 import ModelDetail from '../pages/models/detail';
 import { ModelMetadataDetail } from '../pages/model-metadata/detail';
 import { Deployments } from '../pages/deployments';
+import { CreateDeployment } from '../pages/deployments/create';
+import { UpdateDeployment } from '../pages/deployments/update';
+import { DeploymentDetail } from '../pages/deployments/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -86,6 +89,30 @@ const routes: IRouterDatum[] = [
         authOnly: true,
         icon: <RocketLaunchIcon fontSize="large" />,
         page: Deployments,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/:deploymentName',
+        name: 'Deployment Detail',
+        authOnly: true,
+        hidden: true,
+        page: DeploymentDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/create',
+        name: 'Create Deployment',
+        authOnly: true,
+        hidden: true,
+        page: CreateDeployment,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/update/:deploymentName',
+        name: 'Update Deployment',
+        authOnly: true,
+        hidden: true,
+        page: UpdateDeployment,
         for: ['Owner', 'Admin', 'User'],
     },
     {
