@@ -14,7 +14,6 @@ import Logout from '../pages/logout';
 import Models from '../pages/models';
 import CreateModel from '../pages/models/create';
 import UpdateModel from '../pages/models/update';
-import DeleteModel from '../pages/models/delete';
 import ModelDetail from '../pages/models/detail';
 import { ModelMetadataDetail } from '../pages/model-metadata/detail';
 import { Deployments } from '../pages/deployments';
@@ -71,14 +70,6 @@ const routes: IRouterDatum[] = [
         authOnly: true,
         hidden: true,
         page: UpdateModel,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/models/delete/:modelName',
-        name: 'Model Delete',
-        authOnly: true,
-        hidden: true,
-        page: DeleteModel,
         for: ['Owner', 'Admin', 'User'],
     },
     {
