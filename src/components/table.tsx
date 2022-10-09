@@ -20,6 +20,7 @@ export const ListTable = <T extends {}>({
     title,
     entity,
     items,
+    itemKey,
     hasDetail,
     editable,
     downloadable,
@@ -87,10 +88,8 @@ export const ListTable = <T extends {}>({
 
                             const item = items[idx];
 
-                            if (hasOwnProperty(item, 'name')) {
-                                name = item.name as string;
-                            } else if (hasOwnProperty(item, 'version')) {
-                                name = item.version as string;
+                            if (hasOwnProperty(item, itemKey)) {
+                                name = item[itemKey] as unknown as string;
                             }
 
                             const nameWithSlash = name ? `/${name}` : '';
