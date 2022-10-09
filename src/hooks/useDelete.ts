@@ -4,16 +4,16 @@ import { snackbarAtom } from '../atoms/snackbar';
 import { IBaseResponse } from '../interfaces';
 
 export const useDelete = <R extends IBaseResponse>(
-    deleteApi: (id: number) => Promise<R>
+    deleteApi: (id: number, ...args: any[]) => Promise<R>
 ) => {
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
 
-    const perform = async (id: number) => {
+    const perform = async (id: number, ...args: any[]) => {
         let success: boolean;
         let message: string;
 
         try {
-            ({ success, message } = await deleteApi(id));
+            ({ success, message } = await deleteApi(id, ...args));
         } catch (err) {
             ({ success, message } = (err as AxiosError<IBaseResponse>).response
                 ?.data ?? { success: false, message: '' });
