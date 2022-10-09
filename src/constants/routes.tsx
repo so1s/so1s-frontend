@@ -16,7 +16,6 @@ import CreateModel from '../pages/models/create';
 import UpdateModel from '../pages/models/update';
 import DeleteModel from '../pages/models/delete';
 import ModelDetail from '../pages/models/detail';
-import { DeleteModelMetadata } from '../pages/model-metadata/delete';
 import { ModelMetadataDetail } from '../pages/model-metadata/detail';
 import { Deployments } from '../pages/deployments';
 
@@ -83,14 +82,6 @@ const routes: IRouterDatum[] = [
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models/:modelName/delete/:version',
-        name: 'Model Metadata Delete',
-        authOnly: true,
-        hidden: true,
-        page: DeleteModelMetadata,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
         uri: '/models/:modelName/:version',
         name: 'Model Metadata Detail',
         authOnly: true,
@@ -104,14 +95,6 @@ const routes: IRouterDatum[] = [
         authOnly: true,
         icon: <RocketLaunchIcon fontSize="large" />,
         page: Deployments,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/deployments/delete/:deploymentName',
-        name: 'Deployments Delete',
-        authOnly: true,
-        hidden: true,
-        // page: deleteDeployment,
         for: ['Owner', 'Admin', 'User'],
     },
     {
