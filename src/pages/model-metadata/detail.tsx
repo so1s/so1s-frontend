@@ -8,13 +8,13 @@ import { snackbarAtom } from '../../atoms/snackbar';
 import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
 import YamlTab from '../../components/detail/yaml-tab';
-import { useModelData } from '../../hooks/useModelData';
+import { useModelsData } from '../../hooks/useModelsData';
 import { IModelMetadataDetail } from '../../interfaces/pages/model-metadata';
 import { convertStatusToIcon } from '../../utils/pages/models';
 
 export const ModelMetadataDetail = () => {
     const [models] = useAtom(modelsAtom);
-    useModelData();
+    useModelsData();
 
     const navigate = useNavigate();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
