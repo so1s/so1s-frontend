@@ -4,11 +4,23 @@ import { useEffect, useState } from 'react';
 import { Status } from '../types';
 import { convertStatusToIcon } from '../utils/pages/models';
 
-export const useData = <IBase extends { age: string }>(
-    dataAtom: PrimitiveAtom<(IBase & { status: JSX.Element })[]>,
-    getApi: (...args: any[]) => Promise<(IBase & { status: Status })[]>
+export const useData = <
+    IBase extends UseRawType extends true ? {} : { age: string },
+    UseRawType extends boolean | undefined = undefined
+>(
+    dataAtom: PrimitiveAtom<
+        (UseRawType extends true ? IBase : IBase & { status: JSX.Element })[]
+    >,
+    getApi: (
+        ...args: any[]
+    ) => Promise<
+        (UseRawType extends true ? IBase : IBase & { status: Status })[]
+    >,
+    useRawType?: UseRawType
 ) => {
-    type IDatum = IBase & { status: JSX.Element };
+    type IDatum = UseRawType extends true
+        ? IBase
+        : IBase & { status: JSX.Element };
 
     const [, setData] = useAtom(dataAtom);
     const [needRefesh, setNeedRefresh] = useState<boolean>(true);
@@ -22,15 +34,21 @@ export const useData = <IBase extends { age: string }>(
 
     const getData = async () => {
         try {
-            const data = (await getApi(...args)).map(
-                (datum) =>
-                    ({
-                        ...datum,
-                        age: new Date(datum.age).toLocaleString(),
-                        status: convertStatusToIcon(datum.status),
-                    } as IDatum)
-            );
-            setData(data);
+            const data = (await getApi(...args)).map((datum) => {
+                if (useRawType) {
+                    return datum as IBase;
+                }
+                const narrowedDatum = datum as IBase & {
+                    age: string;
+                    status: Status;
+                };
+                return {
+                    ...narrowedDatum,
+                    age: new Date(narrowedDatum.age).toLocaleString(),
+                    status: convertStatusToIcon(narrowedDatum.status),
+                } as unknown as IDatum;
+            });
+            setData(data as IDatum[]);
         } catch (err) {
             if ((err as AxiosError).response?.status === 500) {
                 return;
