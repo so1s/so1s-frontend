@@ -17,9 +17,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
-import { IBaseResponse } from '../interfaces';
 
-export const ListTable = <T extends {}, R extends IBaseResponse>({
+export const ListTable = <T extends {}>({
     title,
     entity,
     items,
@@ -29,6 +28,7 @@ export const ListTable = <T extends {}, R extends IBaseResponse>({
     downloadable,
     deletable,
     deleteAction,
+    deleteParams,
 }: IListTableProps<T>) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
@@ -99,12 +99,24 @@ export const ListTable = <T extends {}, R extends IBaseResponse>({
                             const nameWithSlash = name ? `/${name}` : '';
 
                             const deleteItem = () => {
-                                if (
-                                    deleteAction &&
-                                    hasOwnProperty(item, 'id')
-                                ) {
-                                    deleteAction(item.id as number);
+                                if (!deleteAction) {
+                                    return;
                                 }
+
+                                const args = ['id'];
+
+                                if (deleteParams) {
+                                    args.push(...deleteParams);
+                                }
+
+                                const values = args.map((key) => {
+                                    if (hasOwnProperty(item, key)) {
+                                        return item[key] as any;
+                                    }
+                                    return null;
+                                });
+
+                                deleteAction(...values);
                             };
 
                             return (
