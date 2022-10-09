@@ -5,9 +5,13 @@
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.tabSize": 4
+        "editor.tabSize": 4,
     },
     "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.tabSize": 4
+    },
+    "[javascriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
         "editor.tabSize": 4
     },
@@ -25,11 +29,22 @@
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "eslint.format.enable": true,
+    "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "eslint.format.enable": true,
     "eslint.options": {
         "overrideConfigFile": ".eslintrc.json"
     },
