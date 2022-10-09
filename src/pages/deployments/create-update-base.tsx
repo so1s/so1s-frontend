@@ -1,7 +1,7 @@
 import { TextField, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import { useAtom } from 'jotai';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createDeploymentOrPut } from '../../api/deployments';
 import { deploymentStrategiesAtom } from '../../atoms/deployment-strategies';
@@ -63,7 +63,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const submit = async () => {
         const items = {
             'Deployment Name': deploymentNameRef,
-            'Model ID': modelRef,
+            'Model Name': modelRef,
             'Model Version': modelVersionRef,
             'Deployment Strategy': deploymentStrategyRef,
             'CPU Request': cpuRequestRef,
@@ -81,14 +81,18 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
             Object.fromEntries
         ) as { [k in keyof typeof items]: string | number };
 
-        const isCorrect = pipe(itemsWithValues, Object.entries, (arr) =>
-            arr.every(([name, value]) => {
-                if (!value) {
-                    setError(`${name}이(가) 주어지지 않았습니다.`);
-                    return false;
-                }
-                return true;
-            })
+        const isCorrect = pipe(
+            itemsWithValues,
+            Object.entries,
+
+            (arr) =>
+                arr.every(([name, value]) => {
+                    if (value !== 0 && !value) {
+                        setError(`${name}이(가) 주어지지 않았습니다.`);
+                        return false;
+                    }
+                    return true;
+                })
         );
 
         if (!isCorrect) {
@@ -100,7 +104,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
         const data = await createDeploymentOrPut(
             {
                 name: itemsWithValues['Deployment Name'] as string,
-                modelMetadataId: itemsWithValues['Model ID'] as number,
+                modelMetadataId: itemsWithValues['Model Version'] as number,
                 strategy: itemsWithValues['Deployment Strategy'] as string,
                 resources: {
                     cpu: itemsWithValues['CPU Request'] as string,
@@ -128,6 +132,17 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
         (deployment) => deployment.deploymentName === deploymentName
     );
 
+    useEffect(() => {
+        if (type === 'update' && deployment) {
+            const modelId = models.find(
+                (model) => model.name === deployment.modelName
+            )?.id;
+            if (modelId) {
+                modelMetadataRefresh(modelId);
+            }
+        }
+    }, [type, deployment]);
+
     if (type === 'update' && !deployment) {
         setSnackbarDatum({
             severity: 'error',
@@ -146,18 +161,26 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
         >
             <div className="flex flex-col space-y-10 my-10 mx-auto">
                 <TextField
-                    label="Deployment Name"
-                    disabled={type === 'update'}
-                    placeholder={
-                        type === 'update'
-                            ? `${deploymentName ?? ''} (Disabled)`
-                            : 'Titanic'
+                    label={
+                        type === 'create'
+                            ? 'Deployment Name'
+                            : `${deploymentName ?? ''} (Disabled)`
                     }
+                    type="text"
+                    disabled={type === 'update'}
+                    placeholder="Titanic"
                     inputRef={deploymentNameRef}
                 />
                 <Select
                     label="Model"
-                    ref={modelRef}
+                    defaultValue={
+                        deployment
+                            ? models.find(
+                                  (model) => model.name === deployment.modelName
+                              )?.id ?? models[0]?.id
+                            : models[0]?.id
+                    }
+                    inputRef={modelRef}
                     onChange={handleChangeModel}
                 >
                     {models.map((model) => (
@@ -166,14 +189,37 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                         </MenuItem>
                     ))}
                 </Select>
-                <Select label="Model Version" ref={modelVersionRef}>
+                <Select
+                    label="Model Version"
+                    defaultValue={
+                        deployment
+                            ? modelMetadata.find(
+                                  (metadata) =>
+                                      metadata.version ===
+                                      deployment.modelVersion
+                              )?.id ?? modelMetadata[0]?.id
+                            : modelMetadata[0]?.id
+                    }
+                    inputRef={modelVersionRef}
+                >
                     {modelMetadata.map((datum) => (
-                        <MenuItem key={datum.version} value={datum.version}>
+                        <MenuItem key={datum.id} value={datum.id}>
                             {datum.version}
                         </MenuItem>
                     ))}
                 </Select>
-                <Select label="Deployment Strategy" ref={deploymentStrategyRef}>
+                <Select
+                    label="Deployment Strategy"
+                    defaultValue={
+                        deployment
+                            ? deploymentStrategies.find(
+                                  (strategy) =>
+                                      strategy.name === deployment.strategy
+                              )?.name ?? deploymentStrategies[0]?.name
+                            : deploymentStrategies[0]?.name
+                    }
+                    inputRef={deploymentStrategyRef}
+                >
                     {deploymentStrategies.map((deploymentStrategy) => (
                         <MenuItem
                             key={deploymentStrategy.name}
@@ -186,26 +232,39 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                 <TextField
                     label="CPU Request"
                     type="text"
-                    ref={cpuRequestRef}
+                    defaultValue={deployment ? deployment.cpu : '100m'}
+                    inputRef={cpuRequestRef}
                 />
-                <TextField label="CPU Limit" type="text" ref={cpuLimitRef} />
-                <TextField label="CPU Limit" type="text" ref={cpuLimitRef} />
+                <TextField
+                    label="CPU Limit"
+                    type="text"
+                    defaultValue={deployment ? deployment.cpuLimit : '100m'}
+                    inputRef={cpuLimitRef}
+                />
                 <TextField
                     label="Memory Request"
                     type="text"
-                    ref={memoryRequestRef}
+                    defaultValue={deployment ? deployment.memory : '256Mi'}
+                    inputRef={memoryRequestRef}
                 />
                 <TextField
                     label="Memory Limit"
                     type="text"
-                    ref={memoryLimitRef}
+                    defaultValue={deployment ? deployment.memoryLimit : '256Mi'}
+                    inputRef={memoryLimitRef}
                 />
                 <TextField
                     label="GPU Request"
-                    type="text"
-                    ref={gpuRequestRef}
+                    type="number"
+                    defaultValue={deployment ? deployment.gpu : 0}
+                    inputRef={gpuRequestRef}
                 />
-                <TextField label="GPU Limit" type="text" ref={gpuLimitRef} />
+                <TextField
+                    label="GPU Limit"
+                    type="number"
+                    defaultValue={deployment ? deployment.gpuLimit : 0}
+                    inputRef={gpuLimitRef}
+                />
             </div>
         </ActionCard>
     );
