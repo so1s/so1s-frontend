@@ -109,6 +109,8 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
             severity: 'success',
             message: JSON.stringify(data, null, 4),
         });
+
+        navigate('/models');
     };
 
     const model = models.find((model) => model.name === modelName);
