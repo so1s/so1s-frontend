@@ -5,18 +5,23 @@ import { convertStatusToIcon } from '../utils/pages/models';
 
 export const useData = <IBase extends { age: string }>(
     dataAtom: PrimitiveAtom<(IBase & { status: JSX.Element })[]>,
-    getApi: () => Promise<(IBase & { status: Status })[]>
+    getApi: (...args: any[]) => Promise<(IBase & { status: Status })[]>
 ) => {
     type IDatum = IBase & { status: JSX.Element };
 
     const [, setData] = useAtom(dataAtom);
-    const [needRefesh, setNeedRefresh] = useState<Boolean>(true);
+    const [needRefesh, setNeedRefresh] = useState<boolean>(true);
 
-    const refresh = () => setNeedRefresh(true);
+    const [args, setArgs] = useState<any[]>([]);
+
+    const refresh = (...args: any[]) => {
+        setArgs(args);
+        setNeedRefresh(true);
+    };
 
     const getData = async () => {
         try {
-            const data = (await getApi()).map(
+            const data = (await getApi(...args)).map(
                 (datum) =>
                     ({
                         ...datum,
