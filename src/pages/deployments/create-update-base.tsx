@@ -188,11 +188,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     type="text"
                     ref={cpuRequestRef}
                 />
-                <TextField
-                    label="CPU Request"
-                    type="text"
-                    ref={cpuRequestRef}
-                />
+                <TextField label="CPU Limit" type="text" ref={cpuLimitRef} />
                 <TextField label="CPU Limit" type="text" ref={cpuLimitRef} />
                 <TextField
                     label="Memory Request"
