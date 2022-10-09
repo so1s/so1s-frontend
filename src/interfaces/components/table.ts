@@ -7,4 +7,5 @@ export default interface IListTableProps<T extends {}> {
     editable?: boolean;
     downloadable?: boolean;
     deletable?: boolean;
+    deleteAction?: (id: number) => Promise<Boolean>;
 }
