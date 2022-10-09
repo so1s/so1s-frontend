@@ -18,6 +18,7 @@ import DeleteModel from '../pages/models/delete';
 import ModelDetail from '../pages/models/detail';
 import { DeleteModelMetadata } from '../pages/model-metadata/delete';
 import { ModelMetadataDetail } from '../pages/model-metadata/detail';
+import { Deployments } from '../pages/deployments';
 
 const routes: IRouterDatum[] = [
     {
@@ -106,6 +107,13 @@ const routes: IRouterDatum[] = [
         for: ['Owner', 'Admin', 'User'],
     },
     {
+        uri: '/deployments',
+        name: 'Deployments',
+        icon: <RocketLaunchIcon fontSize="large" />,
+        page: Deployments,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
         uri: '/volumes',
         name: 'Volumes',
         icon: <StorageIcon fontSize="large" />,
@@ -125,13 +133,6 @@ const routes: IRouterDatum[] = [
         uri: '/tests',
         name: 'Tests',
         icon: <SpeedIcon fontSize="large" />,
-        page: Index,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/deployments',
-        name: 'Deployments',
-        icon: <RocketLaunchIcon fontSize="large" />,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
