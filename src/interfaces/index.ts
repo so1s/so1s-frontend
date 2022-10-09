@@ -6,3 +6,7 @@ export interface IBaseResponse {
 export interface ICreateUpdateBaseParams {
     type: 'create' | 'update';
 }
+
+export interface IYamlFindResponse {
+    yaml: string;
+}

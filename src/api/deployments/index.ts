@@ -1,5 +1,6 @@
 import { baseURL } from '../../constants';
 import { axiosInstance } from '../../hooks/useAuth';
+import { IYamlFindResponse } from '../../interfaces';
 import {
     IDeploymentCreateRequest,
     IDeploymentCreateResponse,
@@ -13,12 +14,20 @@ export const getDeployments = async () => {
     return response.data as IDeploymentFindResponse[];
 };
 
+export const getDeploymentYaml = async (id: number) => {
+    const response = await axiosInstance.get(
+        `${baseURL}/api/v1/deployments/${id}/yaml`
+    );
+
+    return response.data as IYamlFindResponse;
+};
+
 export const createDeploymentOrPut = async (
     payload: IDeploymentCreateRequest,
     mode: 'post' | 'put'
 ) => {
     const response = await axiosInstance[mode](
-        `${baseURL}/api/v1/models`,
+        `${baseURL}/api/v1/deployments`,
         payload
     );
 

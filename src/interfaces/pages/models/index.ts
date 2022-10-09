@@ -20,6 +20,7 @@ export type IModelDatum = IModelBase & {
 export interface IModelDeleteResponse extends IBaseResponse {}
 
 export interface IModelMetadataBase {
+    id: number;
     age: string;
     version: string;
     url: string;
@@ -33,13 +34,9 @@ export type IModelMetadatum = IModelMetadataBase & {
     status: JSX.Element;
 };
 
-export interface IModelYAMLFindRequest {
+export interface IModelYamlFindRequest {
     modelId: string | number;
     version: string | number;
-}
-
-export interface IModelYAMLFindResponse {
-    yaml: string;
 }
 
 export interface ICreateModelRequest {
