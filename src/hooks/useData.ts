@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { Status } from '../types';
@@ -31,6 +32,10 @@ export const useData = <IBase extends { age: string }>(
             );
             setData(data);
         } catch (err) {
+            if ((err as AxiosError).response?.status === 500) {
+                return;
+            }
+
             setTimeout(getData, 200);
         }
     };
