@@ -12,6 +12,7 @@ export const Deployments = () => {
             <ListTable
                 title="Deployments"
                 items={deployments}
+                itemKey="deploymentName"
                 hasDetail
                 editable
                 deletable

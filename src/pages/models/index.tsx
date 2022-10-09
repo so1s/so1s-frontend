@@ -12,6 +12,7 @@ const Models: React.FC = () => {
             <ListTable
                 title="Models"
                 items={models}
+                itemKey="name"
                 hasDetail
                 editable
                 deletable

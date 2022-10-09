@@ -47,6 +47,7 @@ const ModelDetail: React.FC = () => {
                 title={`${modelName} Metadata`}
                 entity="Metadata"
                 items={modelMetadata}
+                itemKey="version"
                 hasDetail
                 editable
                 deletable
