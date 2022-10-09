@@ -1,9 +1,8 @@
 import { Status } from '../../../types';
 
-export interface IDeploymentFindResponse {
+export interface IDeploymentBase {
     age: string;
     deploymentName: string;
-    status: Status;
     endPoint: string;
     strategy: string;
 
@@ -16,4 +15,11 @@ export interface IDeploymentFindResponse {
     cpuLimit: string;
     memoryLimit: string;
     gpuLimit: string;
+}
+export interface IDeploymentFindResponse extends IDeploymentBase {
+    status: Status;
+}
+
+export interface IDeploymentDatum extends IDeploymentBase {
+    status: JSX.Element;
 }
