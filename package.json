@@ -24,6 +24,7 @@
         "@uiw/react-monacoeditor": "^3.5.7",
         "autoprefixer": "^10.4.7",
         "axios": "^0.27.2",
+        "fp-ts": "^2.12.3",
         "jotai": "^1.7.5",
         "postcss": "^8.4.14",
         "react": "^18.2.0",
