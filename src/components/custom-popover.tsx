@@ -3,11 +3,7 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-
-interface ICustomPopoverProps {
-    children?: React.ReactNode;
-    title?: string;
-}
+import { ICustomPopoverProps } from '../interfaces/components/custom-popover';
 
 export const CustomPopover: React.FC<ICustomPopoverProps> = ({
     children,
