@@ -103,8 +103,6 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
             submitMode
         );
 
-        console.log(data);
-
         setSnackbarDatum({
             severity: 'success',
             message: JSON.stringify(data, null, 4),

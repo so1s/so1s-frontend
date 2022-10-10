@@ -81,8 +81,6 @@ export const ModelMetadataDetail = () => {
         (async () => {
             const data = await getModelMetadataDetail(model.id, version ?? '');
 
-            console.log(data);
-
             setModelMetadata({
                 ...data,
                 age: new Date(data.age).toLocaleString(),
