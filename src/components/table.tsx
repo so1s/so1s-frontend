@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
     Paper,
     TableBody,
@@ -20,10 +22,13 @@ export const ListTable = <T extends {}>({
     title,
     entity,
     items,
+    itemKey,
     hasDetail,
     editable,
     downloadable,
     deletable,
+    deleteAction,
+    deleteParams,
 }: IListTableProps<T>) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
@@ -87,13 +92,32 @@ export const ListTable = <T extends {}>({
 
                             const item = items[idx];
 
-                            if (hasOwnProperty(item, 'name')) {
-                                name = item.name as string;
-                            } else if (hasOwnProperty(item, 'version')) {
-                                name = item.version as string;
+                            if (hasOwnProperty(item, itemKey)) {
+                                name = item[itemKey] as unknown as string;
                             }
 
                             const nameWithSlash = name ? `/${name}` : '';
+
+                            const deleteItem = () => {
+                                if (!deleteAction) {
+                                    return;
+                                }
+
+                                const args = ['id'];
+
+                                if (deleteParams) {
+                                    args.push(...deleteParams);
+                                }
+
+                                const values = args.map((key) => {
+                                    if (hasOwnProperty(item, key)) {
+                                        return item[key] as any;
+                                    }
+                                    return null;
+                                });
+
+                                deleteAction(...values);
+                            };
 
                             return (
                                 <TableRow key={idx}>
@@ -126,7 +150,15 @@ export const ListTable = <T extends {}>({
                                                 <DownloadIcon />
                                             </Link>
                                         ) : null}
-                                        {deletable ? (
+                                        {deletable && deleteAction ? (
+                                            <span
+                                                className="hover:cursor-pointer"
+                                                onClick={deleteItem}
+                                            >
+                                                <DeleteIcon />
+                                            </span>
+                                        ) : null}
+                                        {deletable && !deleteAction ? (
                                             <Link
                                                 to={`${pathname}/delete${nameWithSlash}`}
                                             >

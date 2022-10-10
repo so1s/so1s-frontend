@@ -1,17 +1,15 @@
 import { useAtom } from 'jotai';
-import { deleteModel } from '../../api/models';
-import { modelsAtom } from '../../atoms/models';
+import { deleteDeployment } from '../../api/deployments';
+import { deploymentsAtom } from '../../atoms/deployments';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
-import { useModelsData } from '../../hooks/useModelsData';
+import { useDeploymentsData } from '../../hooks/useDeploymentsData';
 
-const Models: React.FC = () => {
-    const [models] = useAtom(modelsAtom);
-    useModelsData();
+export const Deployments = () => {
+    const [deployments] = useAtom(deploymentsAtom);
+    const refreshData = useDeploymentsData();
 
-    const refreshData = useModelsData();
-
-    const performDelete = useDelete(deleteModel);
+    const performDelete = useDelete(deleteDeployment);
 
     const deleteAction = async (id: number) => {
         const success = await performDelete(id);
@@ -24,9 +22,9 @@ const Models: React.FC = () => {
     return (
         <div>
             <ListTable
-                title="Models"
-                items={models}
-                itemKey="name"
+                title="Deployments"
+                items={deployments}
+                itemKey="deploymentName"
                 hasDetail
                 editable
                 deletable
@@ -35,5 +33,3 @@ const Models: React.FC = () => {
         </div>
     );
 };
-
-export default Models;

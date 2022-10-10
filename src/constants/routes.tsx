@@ -14,10 +14,12 @@ import Logout from '../pages/logout';
 import Models from '../pages/models';
 import CreateModel from '../pages/models/create';
 import UpdateModel from '../pages/models/update';
-import DeleteModel from '../pages/models/delete';
 import ModelDetail from '../pages/models/detail';
-import { DeleteModelMetadata } from '../pages/model-metadata/delete';
 import { ModelMetadataDetail } from '../pages/model-metadata/detail';
+import { Deployments } from '../pages/deployments';
+import { CreateDeployment } from '../pages/deployments/create';
+import { UpdateDeployment } from '../pages/deployments/update';
+import { DeploymentDetail } from '../pages/deployments/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -30,7 +32,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/login',
         name: 'Login',
-        icon: <></>,
         page: Login,
         authOnly: false,
         hidden: true,
@@ -38,7 +39,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/logout',
         name: 'Logout',
-        icon: <></>,
         page: Logout,
         authOnly: false,
         hidden: true,
@@ -54,7 +54,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/:modelName',
         name: 'Model Detail',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: ModelDetail,
@@ -63,7 +62,6 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/create',
         name: 'Model Create',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: CreateModel,
@@ -72,37 +70,49 @@ const routes: IRouterDatum[] = [
     {
         uri: '/models/update/:modelName',
         name: 'Create Model Metadata',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: UpdateModel,
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/models/delete/:modelName',
-        name: 'Model Delete',
-        icon: <></>,
-        authOnly: true,
-        hidden: true,
-        page: DeleteModel,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/models/:modelName/delete/:version',
-        name: 'Model Metadata Delete',
-        icon: <></>,
-        authOnly: true,
-        hidden: true,
-        page: DeleteModelMetadata,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
         uri: '/models/:modelName/:version',
         name: 'Model Metadata Detail',
-        icon: <></>,
         authOnly: true,
         hidden: true,
         page: ModelMetadataDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments',
+        name: 'Deployments',
+        authOnly: true,
+        icon: <RocketLaunchIcon fontSize="large" />,
+        page: Deployments,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/:deploymentName',
+        name: 'Deployment Detail',
+        authOnly: true,
+        hidden: true,
+        page: DeploymentDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/create',
+        name: 'Create Deployment',
+        authOnly: true,
+        hidden: true,
+        page: CreateDeployment,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/deployments/update/:deploymentName',
+        name: 'Update Deployment',
+        authOnly: true,
+        hidden: true,
+        page: UpdateDeployment,
         for: ['Owner', 'Admin', 'User'],
     },
     {
@@ -125,13 +135,6 @@ const routes: IRouterDatum[] = [
         uri: '/tests',
         name: 'Tests',
         icon: <SpeedIcon fontSize="large" />,
-        page: Index,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/deployments',
-        name: 'Deployments',
-        icon: <RocketLaunchIcon fontSize="large" />,
         page: Index,
         for: ['Owner', 'Admin', 'User'],
     },

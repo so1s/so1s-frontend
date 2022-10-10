@@ -12,6 +12,7 @@ import { IModelDatum } from '../interfaces/pages/models';
 
 export const sampleModelData: IListTableProps<IModelDatum> = {
     title: 'Models',
+    itemKey: 'name',
     items: [
         {
             id: 1,

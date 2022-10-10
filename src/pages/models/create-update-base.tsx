@@ -13,11 +13,11 @@ import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
 import { libraries } from '../../constants/libraries';
-import { ICreateUpdateModelBaseParams } from '../../interfaces/pages/models';
+import { ICreateUpdateBaseParams } from '../../interfaces';
 
-const CreateUpdateModelBase: React.FC<ICreateUpdateModelBaseParams> = ({
+const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
-}: ICreateUpdateModelBaseParams) => {
+}: ICreateUpdateBaseParams) => {
     const [models] = useAtom(modelsAtom);
     const params = useParams();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
@@ -103,12 +103,12 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateModelBaseParams> = ({
             submitMode
         );
 
-        console.log(data);
-
         setSnackbarDatum({
             severity: 'success',
             message: JSON.stringify(data, null, 4),
         });
+
+        navigate('/models');
     };
 
     const model = models.find((model) => model.name === modelName);

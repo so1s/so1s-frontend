@@ -1667,6 +1667,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js-pure@npm:^3.25.5":
+  version: 3.25.5
+  resolution: "core-js-pure@npm:3.25.5"
+  checksum: e48799a8ab28f00ef3db18377142ff2c578574ab2b18ebddde6cbf12823e0181a57c80e3caa6046ce2a2e439d603a252be767583ddc54248e3d1060bc5012127
+  languageName: node
+  linkType: hard
+
 "cosmiconfig@npm:^6.0.0":
   version: 6.0.0
   resolution: "cosmiconfig@npm:6.0.0"
@@ -2728,6 +2735,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fp-ts@npm:^2.12.3":
+  version: 2.12.3
+  resolution: "fp-ts@npm:2.12.3"
+  checksum: 398acad3d8c5fbd4b0ee420bbb57a45cd98f54e22d6240fc3ee88a7c9967536cba9285c858d37251f9dea137d767a0ff2354203046ba9a149c064fd8de9fe0e3
+  languageName: node
+  linkType: hard
+
 "fraction.js@npm:^4.2.0":
   version: 4.2.0
   resolution: "fraction.js@npm:4.2.0"
@@ -2752,6 +2766,7 @@ __metadata:
     "@vitejs/plugin-react": ^2.0.0
     autoprefixer: ^10.4.7
     axios: ^0.27.2
+    core-js-pure: ^3.25.5
     eslint: latest
     eslint-config-airbnb: ^19.0.2
     eslint-config-airbnb-typescript: ^16.1.0
@@ -2767,6 +2782,7 @@ __metadata:
     eslint-plugin-react: ^7.27.1
     eslint-plugin-unused-imports: ^2.0.0
     eslint-webpack-plugin: ^3.1.1
+    fp-ts: ^2.12.3
     jotai: ^1.7.5
     postcss: ^8.4.14
     prettier: ^2.7.1

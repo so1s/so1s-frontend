@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:2.0.0"],\
             ["autoprefixer", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:10.4.7"],\
             ["axios", "npm:0.27.2"],\
+            ["core-js-pure", "npm:3.25.5"],\
             ["eslint", "npm:8.23.1"],\
             ["eslint-config-airbnb", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:19.0.4"],\
             ["eslint-config-airbnb-typescript", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:16.2.0"],\
@@ -61,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:7.31.8"],\
             ["eslint-plugin-unused-imports", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:2.0.0"],\
             ["eslint-webpack-plugin", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:3.2.0"],\
+            ["fp-ts", "npm:2.12.3"],\
             ["jotai", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:1.7.5"],\
             ["postcss", "npm:8.4.14"],\
             ["prettier", "npm:2.7.1"],\
@@ -2250,6 +2252,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["core-js-pure", "npm:3.25.2"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:3.25.5", {\
+          "packageLocation": "./.yarn/unplugged/core-js-pure-npm-3.25.5-aaaed61bed/node_modules/core-js-pure/",\
+          "packageDependencies": [\
+            ["core-js-pure", "npm:3.25.5"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["cosmiconfig", [\
@@ -3686,6 +3695,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["fp-ts", [\
+        ["npm:2.12.3", {\
+          "packageLocation": "./.yarn/cache/fp-ts-npm-2.12.3-d126f7fb51-398acad3d8.zip/node_modules/fp-ts/",\
+          "packageDependencies": [\
+            ["fp-ts", "npm:2.12.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["fraction.js", [\
         ["npm:4.2.0", {\
           "packageLocation": "./.yarn/cache/fraction.js-npm-4.2.0-28efe4afc7-8c76a6e21d.zip/node_modules/fraction.js/",\
@@ -3713,6 +3731,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:2.0.0"],\
             ["autoprefixer", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:10.4.7"],\
             ["axios", "npm:0.27.2"],\
+            ["core-js-pure", "npm:3.25.5"],\
             ["eslint", "npm:8.23.1"],\
             ["eslint-config-airbnb", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:19.0.4"],\
             ["eslint-config-airbnb-typescript", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:16.2.0"],\
@@ -3728,6 +3747,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:7.31.8"],\
             ["eslint-plugin-unused-imports", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:2.0.0"],\
             ["eslint-webpack-plugin", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:3.2.0"],\
+            ["fp-ts", "npm:2.12.3"],\
             ["jotai", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:1.7.5"],\
             ["postcss", "npm:8.4.14"],\
             ["prettier", "npm:2.7.1"],\
