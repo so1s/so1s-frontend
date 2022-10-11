@@ -28,7 +28,7 @@ const ModelDetail: React.FC = () => {
 
     const deleteAction = async (id: number, version: string) => {
         if (!model) {
-            return;
+            return false;
         }
 
         const success = await performDelete(model.id, version);
