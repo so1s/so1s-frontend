@@ -20,19 +20,23 @@ const ModelDetail: React.FC = () => {
 
     const performDelete = useDelete(deleteModelMetadata);
 
-    const deleteAction = async (id: number, version: string) => {
-        const success = await performDelete(id, version);
-
-        refreshData();
-
-        return success;
-    };
-
     const params = useParams();
 
     const { modelName } = params;
 
     const model = models.find((e) => e.name === modelName);
+
+    const deleteAction = async (id: number, version: string) => {
+        if (!model) {
+            return;
+        }
+
+        const success = await performDelete(model.id, version);
+
+        refreshData();
+
+        return success;
+    };
 
     useEffect(() => {
         if (!model) {
