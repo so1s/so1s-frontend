@@ -119,14 +119,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                 name: itemsWithValues['Deployment Name'] as string,
                 modelMetadataId: itemsWithValues['Model Version'] as number,
                 strategy: itemsWithValues['Deployment Strategy'] as string,
-                resources: {
-                    cpu: resource.cpu,
-                    memory: resource.memory,
-                    gpu: resource.gpu,
-                    cpuLimit: resource.cpuLimit,
-                    memoryLimit: resource.memoryLimit,
-                    gpuLimit: resource.gpuLimit,
-                },
+                resourceId: resource.id,
             },
             submitMode
         );
