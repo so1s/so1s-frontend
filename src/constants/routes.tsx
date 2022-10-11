@@ -20,6 +20,10 @@ import { Deployments } from '../pages/deployments';
 import { CreateDeployment } from '../pages/deployments/create';
 import { UpdateDeployment } from '../pages/deployments/update';
 import { DeploymentDetail } from '../pages/deployments/detail';
+import ABTests from '../pages/tests/ab';
+import { ABTestDetail } from '../pages/tests/ab/detail';
+import { CreateABTest } from '../pages/tests/ab/create';
+import { UpdateABTest } from '../pages/tests/ab/update';
 
 const routes: IRouterDatum[] = [
     {
@@ -132,10 +136,34 @@ const routes: IRouterDatum[] = [
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/tests',
-        name: 'Tests',
+        uri: '/tests/ab',
+        name: 'AB Tests',
         icon: <SpeedIcon fontSize="large" />,
-        page: Index,
+        page: ABTests,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/ab/:abTestName',
+        name: 'AB Test Detail',
+        hidden: true,
+        authOnly: true,
+        page: ABTestDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/ab/create',
+        name: 'AB Test Create',
+        hidden: true,
+        authOnly: true,
+        page: CreateABTest,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/ab/update/:abTestName',
+        name: 'AB Test Update',
+        hidden: true,
+        authOnly: true,
+        page: UpdateABTest,
         for: ['Owner', 'Admin', 'User'],
     },
     {
