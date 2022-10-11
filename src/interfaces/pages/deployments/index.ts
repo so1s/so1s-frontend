@@ -20,6 +20,10 @@ export interface IDeploymentDetail extends IDeploymentBase {
     cpuLimit: string;
     memoryLimit: string;
     gpuLimit: string;
+    standard: Standard;
+    standardValue: number;
+    minReplicas: number;
+    maxReplicas: number;
 }
 
 export type IDeploymentFindResponse = IDeploymentDetail & {
