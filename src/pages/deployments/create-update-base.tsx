@@ -28,6 +28,7 @@ import { useDeploymentStrategiesData } from '../../hooks/useDeploymentStrategies
 import { useModelMetadata } from '../../hooks/useModelMetadata';
 import { useModelsData } from '../../hooks/useModelsData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
+import { IScalingBase } from '../../interfaces/pages/deployments';
 
 const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
@@ -56,9 +57,10 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const memoryLimitRef = useRef<HTMLInputElement>(null);
     const gpuRequestRef = useRef<HTMLInputElement>(null);
     const gpuLimitRef = useRef<HTMLInputElement>(null);
-    const scalingRef = useRef<HTMLButtonElement>(null);
+    const standardRef = useRef<HTMLInputElement>(null);
+    const standardValueRef = useRef<HTMLInputElement>(null);
     const [replicaRange, setReplicaRange] = useState<number[]>([1, 4]);
-    const [radioValue, setRadioValue] = useState('');
+    const [radioValue, setRadioValue] = useState('REPLICAS');
 
     const handleChangeModel = (
         event: SelectChangeEvent<number>,
@@ -87,12 +89,14 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
             'Memory Limit': memoryLimitRef,
             'GPU Request': gpuRequestRef,
             'GPU Limit': gpuLimitRef,
+            'Scaling Standard': standardRef,
+            'Scaling Standard Value': standardValueRef,
         };
 
         const itemsWithValues = pipe(
             items,
             Object.entries,
-            (arr) => arr.map(([k, v]) => [k, v.current?.value]),
+            (arr) => arr.map(([k, v]) => [k, v.current?.value || v]),
             Object.fromEntries
         ) as { [k in keyof typeof items]: string | number };
 
@@ -116,6 +120,16 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
 
         const submitMode = type === 'create' ? 'post' : 'put';
 
+        const scaleData = {
+            standard:
+                radioValue === 'REPLICAS'
+                    ? 'REPLICAS'
+                    : itemsWithValues['Scaling Standard'],
+            standardValue: itemsWithValues['Scaling Standard Value'],
+            minReplicas: replicaRange[0],
+            maxReplicas: replicaRange[1],
+        } as IScalingBase;
+
         const data = await createDeploymentOrPut(
             {
                 name: itemsWithValues['Deployment Name'] as string,
@@ -129,6 +143,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     memoryLimit: itemsWithValues['Memory Limit'] as string,
                     gpuLimit: itemsWithValues['GPU Limit'] as string,
                 },
+                scale: scaleData,
             },
             submitMode
         );
@@ -190,8 +205,6 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
 
         return <></>;
     }
-
-    console.dir(scalingRef);
 
     return (
         <ActionCard
@@ -327,24 +340,23 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                         row
                         aria-labelledby="scaling-radio-buttons"
                         name="radio-buttons-group"
-                        ref={scalingRef}
                         value={radioValue}
                         onChange={handleRadioChange}
                     >
                         <FormControlLabel
-                            value="hpa"
-                            control={<Radio />}
-                            label="Use Dynamic Scaling"
-                        />
-                        <FormControlLabel
-                            value="replicas"
+                            value="REPLICAS"
                             control={<Radio />}
                             label="Use Static Scaling"
+                        />
+                        <FormControlLabel
+                            value="HPA"
+                            control={<Radio />}
+                            label="Use Dynamic Scaling"
                         />
                     </RadioGroup>
                 </FormControl>
 
-                {radioValue === 'hpa' ? (
+                {radioValue === 'HPA' ? (
                     <FormControl fullWidth>
                         <InputLabel id="scaling-standard">
                             Scaling Standard
@@ -352,25 +364,28 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                         <Select
                             labelId="scaling-standard"
                             label="Scaling Standard"
+                            inputRef={standardRef}
                         >
-                            <MenuItem value="latency">Latency(ms)</MenuItem>
-                            <MenuItem value="gpu">GPU Utilization(%)</MenuItem>
+                            <MenuItem value="LATENCY">Latency(ms)</MenuItem>
+                            <MenuItem value="GPU">GPU Utilization(%)</MenuItem>
                         </Select>
                     </FormControl>
                 ) : (
                     ''
                 )}
 
-                {radioValue === 'hpa' ? (
+                {radioValue === 'HPA' ? (
                     <TextField
                         label="Standard Value"
                         type="number"
-                        defaultValue={0}
+                        defaultValue={1}
+                        inputRef={standardValueRef}
+                        inputProps={{ min: 1 }}
                     />
                 ) : (
                     ''
                 )}
-                {radioValue === 'hpa' ? (
+                {radioValue === 'HPA' ? (
                     <div>
                         <InputLabel id="scaling-standard">
                             Set Replica Range
@@ -389,11 +404,13 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     ''
                 )}
 
-                {radioValue === 'replicas' ? (
+                {radioValue === 'REPLICAS' ? (
                     <TextField
                         label="Replica Count"
                         type="number"
-                        defaultValue={0}
+                        defaultValue={1}
+                        inputProps={{ min: 1 }}
+                        inputRef={standardValueRef}
                     />
                 ) : (
                     ''

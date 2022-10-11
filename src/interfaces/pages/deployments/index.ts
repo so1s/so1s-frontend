@@ -1,5 +1,6 @@
 import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
+import { Standard } from '../../../types/pages';
 
 export interface IDeploymentBase {
     age: string;
@@ -41,6 +42,14 @@ export interface IDeploymentCreateRequest {
         memoryLimit: string;
         gpuLimit: string;
     };
+    scale: IScalingBase;
+}
+
+export interface IScalingBase {
+    standard: Standard;
+    standardValue: number;
+    minReplicas?: number;
+    maxReplicas?: number;
 }
 
 export interface IDeploymentCreateResponse {
