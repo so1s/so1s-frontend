@@ -126,7 +126,7 @@ export const ListTable = <T extends {}>({
                                     className="hover:cursor-pointer hover:bg-background"
                                     onClick={
                                         hasDetail
-                                            ? () =>
+                                            ? (e) =>
                                                   navigate(
                                                       `${pathname}${nameWithSlash}`
                                                   )
@@ -144,6 +144,9 @@ export const ListTable = <T extends {}>({
                                         {editable ? (
                                             <Link
                                                 to={`${pathname}/update${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <EditIcon />
                                             </Link>
