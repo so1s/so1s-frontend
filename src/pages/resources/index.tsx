@@ -25,6 +25,7 @@ export const Resources = () => {
                 title="Resources"
                 items={resources}
                 itemKey="name"
+                hasDetail
                 deletable
                 deleteAction={deleteAction}
             />
