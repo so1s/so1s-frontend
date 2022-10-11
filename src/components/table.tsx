@@ -9,11 +9,10 @@ import {
     Table,
     TablePagination,
 } from '@mui/material';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
@@ -34,6 +33,8 @@ export const ListTable = <T extends {}>({
     const [page, setPage] = useState(0);
 
     const { pathname } = useLocation();
+
+    const navigate = useNavigate();
 
     const heads = items.length
         ? Object.keys(items[0]).map(
@@ -120,7 +121,18 @@ export const ListTable = <T extends {}>({
                             };
 
                             return (
-                                <TableRow key={idx}>
+                                <TableRow
+                                    key={idx}
+                                    className="hover:cursor-pointer hover:bg-background"
+                                    onClick={
+                                        hasDetail
+                                            ? () =>
+                                                  navigate(
+                                                      `${pathname}${nameWithSlash}`
+                                                  )
+                                            : undefined
+                                    }
+                                >
                                     {row.map((item: any, idx) => {
                                         return (
                                             <TableCell key={idx} align="center">
@@ -129,13 +141,6 @@ export const ListTable = <T extends {}>({
                                         );
                                     })}
                                     <TableCell align="center">
-                                        {hasDetail ? (
-                                            <Link
-                                                to={`${pathname}${nameWithSlash}`}
-                                            >
-                                                <ZoomInIcon />
-                                            </Link>
-                                        ) : null}
                                         {editable ? (
                                             <Link
                                                 to={`${pathname}/update${nameWithSlash}`}

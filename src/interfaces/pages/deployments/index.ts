@@ -2,7 +2,6 @@ import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
 
 export interface IDeploymentBase {
-    id: number;
     age: string;
     deploymentName: string;
     endPoint: string;
@@ -10,7 +9,10 @@ export interface IDeploymentBase {
 
     modelName: string;
     modelVersion: string;
+}
 
+export interface IDeploymentDetail extends IDeploymentBase {
+    id: number;
     cpu: string;
     memory: string;
     gpu: string;
@@ -19,11 +21,11 @@ export interface IDeploymentBase {
     gpuLimit: string;
 }
 
-export type IDeploymentFindResponse = IDeploymentBase & {
+export type IDeploymentFindResponse = IDeploymentDetail & {
     status: Status;
 };
 
-export type IDeploymentDatum = IDeploymentBase & {
+export type IDeploymentDatum = IDeploymentDetail & {
     status: JSX.Element;
 };
 
