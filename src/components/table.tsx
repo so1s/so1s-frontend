@@ -154,21 +154,33 @@ export const ListTable = <T extends {}>({
                                         {downloadable ? (
                                             <Link
                                                 to={`${pathname}/download${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <DownloadIcon />
                                             </Link>
                                         ) : null}
                                         {deletable && deleteAction ? (
-                                            <span
-                                                className="hover:cursor-pointer"
-                                                onClick={deleteItem}
+                                            <div
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
-                                                <DeleteIcon />
-                                            </span>
+                                                <span
+                                                    className="hover:cursor-pointer"
+                                                    onClick={deleteItem}
+                                                >
+                                                    <DeleteIcon />
+                                                </span>
+                                            </div>
                                         ) : null}
                                         {deletable && !deleteAction ? (
                                             <Link
                                                 to={`${pathname}/delete${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <DeleteIcon />
                                             </Link>
