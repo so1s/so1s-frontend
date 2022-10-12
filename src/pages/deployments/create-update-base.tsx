@@ -234,76 +234,96 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     }
                     inputRef={deploymentNameRef}
                 />
-                <Select
-                    label="Model"
-                    defaultValue={
-                        deployment
-                            ? models.find(
-                                  (model) => model.name === deployment.modelName
-                              )?.id ?? models[0]?.id
-                            : models[0]?.id
-                    }
-                    inputRef={modelRef}
-                    onChange={handleChangeModel}
-                >
-                    {models.map((model) => (
-                        <MenuItem key={model.id} value={model.id}>
-                            {model.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <Select
-                    label="Model Version"
-                    defaultValue={
-                        deployment
-                            ? modelMetadata.find(
-                                  (metadata) =>
-                                      metadata.version ===
-                                      deployment.modelVersion
-                              )?.id ?? modelMetadata[0]?.id
-                            : modelMetadata[0]?.id
-                    }
-                    inputRef={modelVersionRef}
-                >
-                    {modelMetadata.map((datum) => (
-                        <MenuItem key={datum.id} value={datum.id}>
-                            {datum.version}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <Select
-                    label="Deployment Strategy"
-                    defaultValue={
-                        deployment
-                            ? deploymentStrategies.find(
-                                  (strategy) =>
-                                      strategy.name === deployment.strategy
-                              )?.name ?? deploymentStrategies[0]?.name
-                            : deploymentStrategies[0]?.name
-                    }
-                    inputRef={deploymentStrategyRef}
-                >
-                    {deploymentStrategies.map((deploymentStrategy) => (
-                        <MenuItem
-                            key={deploymentStrategy.name}
-                            value={deploymentStrategy.name}
-                        >
-                            {deploymentStrategy.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <Select
-                    label="Resource"
-                    defaultValue={resources[0]?.id.toString()}
-                    inputRef={resourceRef}
-                    onChange={handleChangeResource}
-                >
-                    {resources.map((resource) => (
-                        <MenuItem key={resource.id} value={resource.id}>
-                            {resource.name}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <FormControl fullWidth>
+                    <InputLabel id="model">Model</InputLabel>
+                    <Select
+                        labelId="model"
+                        label="Model"
+                        defaultValue={
+                            deployment
+                                ? models.find(
+                                      (model) =>
+                                          model.name === deployment.modelName
+                                  )?.id ?? models[0]?.id
+                                : models[0]?.id
+                        }
+                        inputRef={modelRef}
+                        onChange={handleChangeModel}
+                    >
+                        {models.map((model) => (
+                            <MenuItem key={model.id} value={model.id}>
+                                {model.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="model-version">Model Version</InputLabel>
+                    <Select
+                        labelId="model-version"
+                        label="Model Version"
+                        defaultValue={
+                            deployment
+                                ? modelMetadata.find(
+                                      (metadata) =>
+                                          metadata.version ===
+                                          deployment.modelVersion
+                                  )?.id ?? modelMetadata[0]?.id
+                                : modelMetadata[0]?.id
+                        }
+                        inputRef={modelVersionRef}
+                    >
+                        {modelMetadata.map((datum) => (
+                            <MenuItem key={datum.id} value={datum.id}>
+                                {datum.version}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                <FormControl fullWidth>
+                    <InputLabel id="deployment-strategy">
+                        Deployment Strategy
+                    </InputLabel>
+                    <Select
+                        labelId="deployment-strategy"
+                        label="Deployment Strategy"
+                        defaultValue={
+                            deployment
+                                ? deploymentStrategies.find(
+                                      (strategy) =>
+                                          strategy.name === deployment.strategy
+                                  )?.name ?? deploymentStrategies[0]?.name
+                                : deploymentStrategies[0]?.name
+                        }
+                        inputRef={deploymentStrategyRef}
+                    >
+                        {deploymentStrategies.map((deploymentStrategy) => (
+                            <MenuItem
+                                key={deploymentStrategy.name}
+                                value={deploymentStrategy.name}
+                            >
+                                {deploymentStrategy.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="resource">Resource</InputLabel>
+                    <Select
+                        labelId="resource"
+                        label="Resource"
+                        defaultValue={resources[0]?.id.toString()}
+                        inputRef={resourceRef}
+                        onChange={handleChangeResource}
+                    >
+                        {resources.map((resource) => (
+                            <MenuItem key={resource.id} value={resource.id}>
+                                {resource.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 <OverViewTab
                     headEl={[
                         'CPU Request',

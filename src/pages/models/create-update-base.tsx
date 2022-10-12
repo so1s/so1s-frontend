@@ -4,6 +4,8 @@ import {
     SelectChangeEvent,
     MenuItem,
     Button,
+    FormControl,
+    InputLabel,
 } from '@mui/material';
 import { useAtom } from 'jotai';
 import { ReactNode, useRef, useState } from 'react';
@@ -145,17 +147,21 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                     }
                     inputRef={modelNameRef}
                 />
-                <Select
-                    label="Library"
-                    defaultValue={model?.library ?? library}
-                    onChange={handleChangeLibrary}
-                >
-                    {libraries.map((e) => (
-                        <MenuItem key={e.name} value={e.name}>
-                            {e.name}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <FormControl fullWidth>
+                    <InputLabel id="library">Library</InputLabel>
+                    <Select
+                        labelId="library"
+                        label="Library"
+                        defaultValue={model?.library ?? library}
+                        onChange={handleChangeLibrary}
+                    >
+                        {libraries.map((e) => (
+                            <MenuItem key={e.name} value={e.name}>
+                                {e.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 <div className="flex flex-row">
                     <div className="text-large ml-2 mr-auto w-[10vw] text-lg">
                         Model Files
