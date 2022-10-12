@@ -24,6 +24,9 @@ import ABTests from '../pages/tests/ab';
 import { ABTestDetail } from '../pages/tests/ab/detail';
 import { CreateABTest } from '../pages/tests/ab/create';
 import { UpdateABTest } from '../pages/tests/ab/update';
+import { Resources } from '../pages/resources';
+import { CreateResource } from '../pages/resources/create';
+import { ResourceDetail } from '../pages/resources/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -177,7 +180,23 @@ const routes: IRouterDatum[] = [
         uri: '/resources',
         name: 'Resources',
         icon: <MemoryIcon fontSize="large" />,
-        page: Index,
+        page: Resources,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/resources/:resourceName',
+        name: 'Resource Detail',
+        hidden: true,
+        authOnly: true,
+        page: ResourceDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/resources/create',
+        name: 'Resource Create',
+        hidden: true,
+        authOnly: true,
+        page: CreateResource,
         for: ['Owner', 'Admin', 'User'],
     },
 ];

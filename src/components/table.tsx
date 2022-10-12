@@ -9,11 +9,10 @@ import {
     Table,
     TablePagination,
 } from '@mui/material';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
@@ -34,6 +33,8 @@ export const ListTable = <T extends {}>({
     const [page, setPage] = useState(0);
 
     const { pathname } = useLocation();
+
+    const navigate = useNavigate();
 
     const heads = items.length
         ? Object.keys(items[0]).map(
@@ -120,7 +121,18 @@ export const ListTable = <T extends {}>({
                             };
 
                             return (
-                                <TableRow key={idx}>
+                                <TableRow
+                                    key={idx}
+                                    className="hover:cursor-pointer hover:bg-background"
+                                    onClick={
+                                        hasDetail
+                                            ? (e) =>
+                                                  navigate(
+                                                      `${pathname}${nameWithSlash}`
+                                                  )
+                                            : undefined
+                                    }
+                                >
                                     {row.map((item: any, idx) => {
                                         return (
                                             <TableCell key={idx} align="center">
@@ -129,16 +141,12 @@ export const ListTable = <T extends {}>({
                                         );
                                     })}
                                     <TableCell align="center">
-                                        {hasDetail ? (
-                                            <Link
-                                                to={`${pathname}${nameWithSlash}`}
-                                            >
-                                                <ZoomInIcon />
-                                            </Link>
-                                        ) : null}
                                         {editable ? (
                                             <Link
                                                 to={`${pathname}/update${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <EditIcon />
                                             </Link>
@@ -146,21 +154,33 @@ export const ListTable = <T extends {}>({
                                         {downloadable ? (
                                             <Link
                                                 to={`${pathname}/download${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <DownloadIcon />
                                             </Link>
                                         ) : null}
                                         {deletable && deleteAction ? (
-                                            <span
-                                                className="hover:cursor-pointer"
-                                                onClick={deleteItem}
+                                            <div
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
-                                                <DeleteIcon />
-                                            </span>
+                                                <span
+                                                    className="hover:cursor-pointer"
+                                                    onClick={deleteItem}
+                                                >
+                                                    <DeleteIcon />
+                                                </span>
+                                            </div>
                                         ) : null}
                                         {deletable && !deleteAction ? (
                                             <Link
                                                 to={`${pathname}/delete${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <DeleteIcon />
                                             </Link>

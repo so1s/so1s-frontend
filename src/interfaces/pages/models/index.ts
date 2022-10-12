@@ -2,35 +2,40 @@ import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
 
 export interface IModelBase {
-    id: number;
     age: string;
     name: string;
     version: string;
     library: string;
 }
 
-export type IModelFindResponse = IModelBase & {
+export interface IModelDetail extends IModelBase {
+    id: number;
+}
+
+export type IModelFindResponse = IModelDetail & {
     status: Status;
 };
 
-export type IModelDatum = IModelBase & {
+export type IModelDatum = IModelDetail & {
     status: JSX.Element;
 };
 
 export interface IModelDeleteResponse extends IBaseResponse {}
 
 export interface IModelMetadataBase {
-    id: number;
     age: string;
     version: string;
     url: string;
 }
+export interface IModelMetadataDetail extends IModelMetadataBase {
+    id: number;
+}
 
-export type IModelMetadataFindResponse = IModelMetadataBase & {
+export type IModelMetadataFindResponse = IModelMetadataDetail & {
     status: Status;
 };
 
-export type IModelMetadatum = IModelMetadataBase & {
+export type IModelMetadatum = IModelMetadataDetail & {
     status: JSX.Element;
 };
 

@@ -9,10 +9,11 @@ import { useAtom } from 'jotai';
 import { ReactNode, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createModelOrAddModelMetadata } from '../../api/models';
+import { librariesAtom } from '../../atoms/library';
 import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
-import { libraries } from '../../constants/libraries';
+import { useLibrariesData } from '../../hooks/useLibrariesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 
 const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
@@ -23,7 +24,11 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
     const navigate = useNavigate();
 
-    const [library, setLibrary] = useState(libraries[0]);
+    useLibrariesData();
+
+    const [libraries] = useAtom(librariesAtom);
+
+    const [library, setLibrary] = useState<string>('tensorflow');
     const [file, setFile] = useState<File | null>(null);
     const modelNameRef = useRef<HTMLInputElement>(null);
     const inputShapeRef = useRef<HTMLInputElement>(null);
@@ -142,12 +147,12 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                 />
                 <Select
                     label="Library"
-                    value={model?.library ?? libraries[0]}
+                    defaultValue={model?.library ?? library}
                     onChange={handleChangeLibrary}
                 >
-                    {libraries.map((libraryName) => (
-                        <MenuItem key={libraryName} value={libraryName}>
-                            {libraryName}
+                    {libraries.map((e) => (
+                        <MenuItem key={e.name} value={e.name}>
+                            {e.name}
                         </MenuItem>
                     ))}
                 </Select>
