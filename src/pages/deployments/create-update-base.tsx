@@ -183,7 +183,9 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
         }
     };
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRadioValue((event.target as HTMLInputElement).value);
+        setRadioValue(
+            (event.target as HTMLInputElement).value as ScalingToggleMode
+        );
     };
 
     useEffect(() => {
