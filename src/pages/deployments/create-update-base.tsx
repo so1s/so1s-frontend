@@ -1,4 +1,16 @@
-import { TextField, Select, MenuItem, SelectChangeEvent } from '@mui/material';
+import {
+    TextField,
+    Select,
+    MenuItem,
+    SelectChangeEvent,
+    InputLabel,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    Slider,
+} from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import { useAtom } from 'jotai';
 import { ReactNode, useEffect, useRef, useState } from 'react';
@@ -20,6 +32,8 @@ import { useModelsData } from '../../hooks/useModelsData';
 import { useResourcesData } from '../../hooks/useResourcesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 import { IResourceFind } from '../../interfaces/pages/resources';
+import { IScalingBase } from '../../interfaces/pages/deployments';
+import { ScalingToggleMode, Standard } from '../../types/pages';
 
 const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
@@ -50,6 +64,10 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const modelVersionRef = useRef<HTMLInputElement>(null);
     const deploymentStrategyRef = useRef<HTMLInputElement>(null);
     const resourceRef = useRef<HTMLInputElement>(null);
+    const standardRef = useRef<HTMLInputElement>(null);
+    const standardValueRef = useRef<HTMLInputElement>(null);
+    const [replicaRange, setReplicaRange] = useState<number[]>([1, 4]);
+    const [radioValue, setRadioValue] = useState<ScalingToggleMode>('REPLICAS');
 
     const handleChangeModel = (
         event: SelectChangeEvent<number>,
@@ -81,12 +99,14 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
             'Model Version': modelVersionRef,
             'Deployment Strategy': deploymentStrategyRef,
             Resource: resourceRef,
+            'Scaling Standard': standardRef,
+            'Scaling Standard Value': standardValueRef,
         };
 
         const itemsWithValues = pipe(
             items,
             Object.entries,
-            (arr) => arr.map(([k, v]) => [k, v.current?.value]),
+            (arr) => arr.map(([k, v]) => [k, v.current?.value || v]),
             Object.fromEntries
         ) as { [k in keyof typeof items]: string | number };
 
@@ -114,12 +134,23 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
 
         const submitMode = type === 'create' ? 'post' : 'put';
 
+        const scaleData: IScalingBase = {
+            standard:
+                radioValue === 'REPLICAS'
+                    ? 'REPLICAS'
+                    : (itemsWithValues['Scaling Standard'] as Standard),
+            standardValue: itemsWithValues['Scaling Standard Value'] as number,
+            minReplicas: replicaRange[0],
+            maxReplicas: replicaRange[1],
+        };
+
         const data = await createDeploymentOrPut(
             {
                 name: itemsWithValues['Deployment Name'] as string,
                 modelMetadataId: itemsWithValues['Model Version'] as number,
                 strategy: itemsWithValues['Deployment Strategy'] as string,
                 resourceId: resource.id,
+                scale: scaleData,
             },
             submitMode
         );
@@ -135,6 +166,33 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const deployment = deployments.find(
         (deployment) => deployment.deploymentName === deploymentName
     );
+
+    const handleSliderChange = (
+        event: Event,
+        newValue: number | number[],
+        activeThumb: number
+    ) => {
+        if (!Array.isArray(newValue)) {
+            return;
+        }
+
+        if (activeThumb === 0) {
+            setReplicaRange([
+                Math.min(newValue[0], replicaRange[1] - 1),
+                replicaRange[1],
+            ]);
+        } else {
+            setReplicaRange([
+                replicaRange[0],
+                Math.max(newValue[1], replicaRange[0] + 1),
+            ]);
+        }
+    };
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRadioValue(
+            (event.target as HTMLInputElement).value as ScalingToggleMode
+        );
+    };
 
     useEffect(() => {
         if (type === 'update' && deployment) {
@@ -263,6 +321,80 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     <div>{resource?.gpu ?? 'Not given'}</div>
                     <div>{resource?.gpuLimit ?? 'Not given'}</div>
                 </OverViewTab>
+                <FormControl>
+                    <FormLabel id="scaling-radio-buttons">Scaling</FormLabel>
+                    <RadioGroup
+                        row
+                        aria-labelledby="scaling-radio-buttons"
+                        name="radio-buttons-group"
+                        value={radioValue}
+                        onChange={handleRadioChange}
+                    >
+                        <FormControlLabel
+                            value="REPLICAS"
+                            control={<Radio />}
+                            label="Use Static Scaling"
+                        />
+                        <FormControlLabel
+                            value="HPA"
+                            control={<Radio />}
+                            label="Use Dynamic Scaling"
+                        />
+                    </RadioGroup>
+                </FormControl>
+
+                {radioValue === 'HPA' && (
+                    <FormControl fullWidth>
+                        <InputLabel id="scaling-standard">
+                            Scaling Standard
+                        </InputLabel>
+                        <Select
+                            labelId="scaling-standard"
+                            label="Scaling Standard"
+                            inputRef={standardRef}
+                        >
+                            <MenuItem value="LATENCY">Latency(ms)</MenuItem>
+                            <MenuItem value="GPU">GPU Utilization(%)</MenuItem>
+                        </Select>
+                    </FormControl>
+                )}
+
+                {radioValue === 'HPA' && (
+                    <TextField
+                        label="Standard Value"
+                        type="number"
+                        defaultValue={1}
+                        inputRef={standardValueRef}
+                        inputProps={{ min: 1 }}
+                    />
+                )}
+
+                {radioValue === 'HPA' && (
+                    <div>
+                        <InputLabel id="scaling-standard">
+                            Set Replica Range
+                        </InputLabel>
+                        Min: {replicaRange[0]} Max: {replicaRange[1]}
+                        <Slider
+                            value={replicaRange}
+                            onChange={handleSliderChange}
+                            disableSwap
+                            valueLabelDisplay="auto"
+                            min={1}
+                            max={10}
+                        />
+                    </div>
+                )}
+
+                {radioValue === 'REPLICAS' && (
+                    <TextField
+                        label="Replica Count"
+                        type="number"
+                        defaultValue={1}
+                        inputProps={{ min: 1 }}
+                        inputRef={standardValueRef}
+                    />
+                )}
             </div>
         </ActionCard>
     );

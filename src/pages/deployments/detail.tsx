@@ -7,6 +7,7 @@ import { snackbarAtom } from '../../atoms/snackbar';
 import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
 import YamlTab from '../../components/detail/yaml-tab';
+import { UNIT } from '../../constants';
 import { useDelete } from '../../hooks/useDelete';
 import { useDeploymentsData } from '../../hooks/useDeploymentsData';
 
@@ -94,6 +95,10 @@ export const DeploymentDetail: React.FC = () => {
                         'Memory Limit',
                         'GPU Request',
                         'GPU Limit',
+                        'Standard',
+                        'Value',
+                        'Min Replicas',
+                        'Max Replicas',
                     ]}
                 >
                     <div>{deployment?.id}</div>
@@ -109,6 +114,13 @@ export const DeploymentDetail: React.FC = () => {
                     <div>{deployment?.memoryLimit}</div>
                     <div>{deployment?.gpu}</div>
                     <div>{deployment?.gpuLimit}</div>
+                    <div>{deployment?.standard}</div>
+                    <div>
+                        {deployment?.standardValue}
+                        {UNIT[deployment?.standard || 'REPLICAS']}
+                    </div>
+                    <div>{deployment?.minReplicas}</div>
+                    <div>{deployment?.maxReplicas}</div>
                 </OverViewTab>
                 <div>Not Implemented</div>
                 <YamlTab value={yaml} />

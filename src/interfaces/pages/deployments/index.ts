@@ -1,8 +1,8 @@
 import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
+import { Standard } from '../../../types/pages';
 
 export interface IDeploymentBase {
-    id: number;
     age: string;
     deploymentName: string;
     endPoint: string;
@@ -10,20 +10,27 @@ export interface IDeploymentBase {
 
     modelName: string;
     modelVersion: string;
+}
 
+export interface IDeploymentDetail extends IDeploymentBase {
+    id: number;
     cpu: string;
     memory: string;
     gpu: string;
     cpuLimit: string;
     memoryLimit: string;
     gpuLimit: string;
+    standard: Standard;
+    standardValue: number;
+    minReplicas: number;
+    maxReplicas: number;
 }
 
-export type IDeploymentFindResponse = IDeploymentBase & {
+export type IDeploymentFindResponse = IDeploymentDetail & {
     status: Status;
 };
 
-export type IDeploymentDatum = IDeploymentBase & {
+export type IDeploymentDatum = IDeploymentDetail & {
     status: JSX.Element;
 };
 
@@ -32,6 +39,14 @@ export interface IDeploymentCreateRequest {
     modelMetadataId: number;
     strategy: string;
     resourceId: number;
+    scale: IScalingBase;
+}
+
+export interface IScalingBase {
+    standard: Standard;
+    standardValue: number;
+    minReplicas?: number;
+    maxReplicas?: number;
 }
 
 export interface IDeploymentCreateResponse {
