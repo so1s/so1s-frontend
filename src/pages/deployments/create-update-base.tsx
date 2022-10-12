@@ -29,7 +29,7 @@ import { useModelMetadata } from '../../hooks/useModelMetadata';
 import { useModelsData } from '../../hooks/useModelsData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 import { IScalingBase } from '../../interfaces/pages/deployments';
-import { ScalingToggleMode } from '../../types/pages';
+import { ScalingToggleMode, Standard } from '../../types/pages';
 
 const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
@@ -121,15 +121,15 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
 
         const submitMode = type === 'create' ? 'post' : 'put';
 
-        const scaleData = {
+        const scaleData: IScalingBase = {
             standard:
                 radioValue === 'REPLICAS'
                     ? 'REPLICAS'
-                    : itemsWithValues['Scaling Standard'],
-            standardValue: itemsWithValues['Scaling Standard Value'],
+                    : (itemsWithValues['Scaling Standard'] as Standard),
+            standardValue: itemsWithValues['Scaling Standard Value'] as number,
             minReplicas: replicaRange[0],
             maxReplicas: replicaRange[1],
-        } as IScalingBase;
+        };
 
         const data = await createDeploymentOrPut(
             {
