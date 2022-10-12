@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
     Paper,
     TableBody,
@@ -7,11 +9,10 @@ import {
     Table,
     TablePagination,
 } from '@mui/material';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
@@ -20,15 +21,20 @@ export const ListTable = <T extends {}>({
     title,
     entity,
     items,
+    itemKey,
     hasDetail,
     editable,
     downloadable,
     deletable,
+    deleteAction,
+    deleteParams,
 }: IListTableProps<T>) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
 
     const { pathname } = useLocation();
+
+    const navigate = useNavigate();
 
     const heads = items.length
         ? Object.keys(items[0]).map(
@@ -87,16 +93,46 @@ export const ListTable = <T extends {}>({
 
                             const item = items[idx];
 
-                            if (hasOwnProperty(item, 'name')) {
-                                name = item.name as string;
-                            } else if (hasOwnProperty(item, 'version')) {
-                                name = item.version as string;
+                            if (hasOwnProperty(item, itemKey)) {
+                                name = item[itemKey] as unknown as string;
                             }
 
                             const nameWithSlash = name ? `/${name}` : '';
 
+                            const deleteItem = () => {
+                                if (!deleteAction) {
+                                    return;
+                                }
+
+                                const args = ['id'];
+
+                                if (deleteParams) {
+                                    args.push(...deleteParams);
+                                }
+
+                                const values = args.map((key) => {
+                                    if (hasOwnProperty(item, key)) {
+                                        return item[key] as any;
+                                    }
+                                    return null;
+                                });
+
+                                deleteAction(...values);
+                            };
+
                             return (
-                                <TableRow key={idx}>
+                                <TableRow
+                                    key={idx}
+                                    className="hover:cursor-pointer hover:bg-background"
+                                    onClick={
+                                        hasDetail
+                                            ? (e) =>
+                                                  navigate(
+                                                      `${pathname}${nameWithSlash}`
+                                                  )
+                                            : undefined
+                                    }
+                                >
                                     {row.map((item: any, idx) => {
                                         return (
                                             <TableCell key={idx} align="center">
@@ -105,16 +141,12 @@ export const ListTable = <T extends {}>({
                                         );
                                     })}
                                     <TableCell align="center">
-                                        {hasDetail ? (
-                                            <Link
-                                                to={`${pathname}${nameWithSlash}`}
-                                            >
-                                                <ZoomInIcon />
-                                            </Link>
-                                        ) : null}
                                         {editable ? (
                                             <Link
                                                 to={`${pathname}/update${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <EditIcon />
                                             </Link>
@@ -122,13 +154,33 @@ export const ListTable = <T extends {}>({
                                         {downloadable ? (
                                             <Link
                                                 to={`${pathname}/download${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <DownloadIcon />
                                             </Link>
                                         ) : null}
-                                        {deletable ? (
+                                        {deletable && deleteAction ? (
+                                            <div
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
+                                            >
+                                                <span
+                                                    className="hover:cursor-pointer"
+                                                    onClick={deleteItem}
+                                                >
+                                                    <DeleteIcon />
+                                                </span>
+                                            </div>
+                                        ) : null}
+                                        {deletable && !deleteAction ? (
                                             <Link
                                                 to={`${pathname}/delete${nameWithSlash}`}
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
                                             >
                                                 <DeleteIcon />
                                             </Link>

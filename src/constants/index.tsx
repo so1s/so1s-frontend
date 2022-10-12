@@ -6,10 +6,16 @@ const getBackendUrl = () => {
     }
 
     if (hostname.includes('so1s')) {
-        return 'https://www.so1s.io';
+        return 'https://backend.so1s.io';
     }
 
     return `http://${hostname}:8080`;
 };
 
 export const baseURL = getBackendUrl();
+
+export enum UNIT {
+    LATENCY = 'ms',
+    GPU = '%',
+    REPLICAS = '',
+}

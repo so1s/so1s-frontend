@@ -1,13 +1,13 @@
 import { baseURL } from '../../constants';
 import { axiosInstance } from '../../hooks/useAuth';
+import { IYamlFindResponse } from '../../interfaces';
 import {
     ICreateModelRequest,
     ICreateModelResponse,
     IModelDeleteResponse,
     IModelFindResponse,
     IModelMetadataFindResponse,
-    IModelYAMLFindRequest,
-    IModelYAMLFindResponse,
+    IModelYamlFindRequest,
 } from '../../interfaces/pages/models';
 
 export const getModels = async () => {
@@ -25,12 +25,12 @@ export const getModelMetadataById = async (id: number) => {
 export const getModelYaml = async ({
     modelId,
     version,
-}: IModelYAMLFindRequest) => {
+}: IModelYamlFindRequest) => {
     const response = await axiosInstance.get(
         `${baseURL}/api/v1/models/${modelId}/versions/${version}/yaml`
     );
 
-    return response.data as IModelYAMLFindResponse;
+    return response.data as IYamlFindResponse;
 };
 
 export const createModelOrAddModelMetadata = async (
