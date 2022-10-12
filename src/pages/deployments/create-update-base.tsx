@@ -29,6 +29,7 @@ import { useModelMetadata } from '../../hooks/useModelMetadata';
 import { useModelsData } from '../../hooks/useModelsData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 import { IScalingBase } from '../../interfaces/pages/deployments';
+import { ScalingToggleMode } from '../../types/pages';
 
 const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
@@ -60,7 +61,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const standardRef = useRef<HTMLInputElement>(null);
     const standardValueRef = useRef<HTMLInputElement>(null);
     const [replicaRange, setReplicaRange] = useState<number[]>([1, 4]);
-    const [radioValue, setRadioValue] = useState('REPLICAS');
+    const [radioValue, setRadioValue] = useState<ScalingToggleMode>('REPLICAS');
 
     const handleChangeModel = (
         event: SelectChangeEvent<number>,
