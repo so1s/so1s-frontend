@@ -8,7 +8,7 @@ const ActionCard: React.FC<IActionCardProps> = ({
     onClick,
 }) => {
     return (
-        <Paper className="min-w-fit mx-10 my-10">
+        <Paper className="w-6/12 mx-auto">
             <div className="font-serif text-2xl text-body mx-5 py-5">
                 {title}
             </div>
