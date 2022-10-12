@@ -14,8 +14,8 @@ const getBackendUrl = () => {
 
 export const baseURL = getBackendUrl();
 
-export const UNIT = {
-    LATENCY: 'ms',
-    GPU: '%',
-    REPLICAS: '',
-};
+export enum UNIT {
+    LATENCY = 'ms',
+    GPU = '%',
+    REPLICAS = '',
+}
