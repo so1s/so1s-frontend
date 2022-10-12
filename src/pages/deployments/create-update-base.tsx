@@ -357,7 +357,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     </RadioGroup>
                 </FormControl>
 
-                {radioValue === 'HPA' ? (
+                {radioValue === 'HPA' && (
                     <FormControl fullWidth>
                         <InputLabel id="scaling-standard">
                             Scaling Standard
@@ -371,11 +371,9 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                             <MenuItem value="GPU">GPU Utilization(%)</MenuItem>
                         </Select>
                     </FormControl>
-                ) : (
-                    ''
                 )}
 
-                {radioValue === 'HPA' ? (
+                {radioValue === 'HPA' && (
                     <TextField
                         label="Standard Value"
                         type="number"
@@ -383,10 +381,9 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                         inputRef={standardValueRef}
                         inputProps={{ min: 1 }}
                     />
-                ) : (
-                    ''
                 )}
-                {radioValue === 'HPA' ? (
+
+                {radioValue === 'HPA' && (
                     <div>
                         <InputLabel id="scaling-standard">
                             Set Replica Range
@@ -401,11 +398,9 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                             max={10}
                         />
                     </div>
-                ) : (
-                    ''
                 )}
 
-                {radioValue === 'REPLICAS' ? (
+                {radioValue === 'REPLICAS' && (
                     <TextField
                         label="Replica Count"
                         type="number"
@@ -413,8 +408,6 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                         inputProps={{ min: 1 }}
                         inputRef={standardValueRef}
                     />
-                ) : (
-                    ''
                 )}
             </div>
         </ActionCard>
