@@ -38,14 +38,7 @@ export interface IDeploymentCreateRequest {
     name: string;
     modelMetadataId: number;
     strategy: string;
-    resources: {
-        cpu: string;
-        memory: string;
-        gpu: string;
-        cpuLimit: string;
-        memoryLimit: string;
-        gpuLimit: string;
-    };
+    resourceId: number;
     scale: IScalingBase;
 }
 

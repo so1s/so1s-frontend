@@ -20,20 +20,25 @@ import { deploymentStrategiesAtom } from '../../atoms/deployment-strategies';
 import { deploymentsAtom } from '../../atoms/deployments';
 import { modelMetadataAtom } from '../../atoms/model-metadata';
 import { modelsAtom } from '../../atoms/models';
+import { resourcesAtom } from '../../atoms/resources';
 
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
+import OverViewTab from '../../components/detail/overview-tab';
 import { useDeploymentsData } from '../../hooks/useDeploymentsData';
 import { useDeploymentStrategiesData } from '../../hooks/useDeploymentStrategiesData';
 import { useModelMetadata } from '../../hooks/useModelMetadata';
 import { useModelsData } from '../../hooks/useModelsData';
+import { useResourcesData } from '../../hooks/useResourcesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
+import { IResourceFind } from '../../interfaces/pages/resources';
 import { IScalingBase } from '../../interfaces/pages/deployments';
 import { ScalingToggleMode, Standard } from '../../types/pages';
 
 const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
 }: ICreateUpdateBaseParams) => {
+    useResourcesData();
     useModelsData();
     const modelMetadataRefresh = useModelMetadata();
     useDeploymentsData();
@@ -43,6 +48,12 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const [modelMetadata] = useAtom(modelMetadataAtom);
     const [deployments] = useAtom(deploymentsAtom);
     const [deploymentStrategies] = useAtom(deploymentStrategiesAtom);
+
+    const [resources] = useAtom(resourcesAtom);
+    const [resource, setResource] = useState<IResourceFind | null>(
+        resources[0] ?? null
+    );
+
     const params = useParams();
     const { deploymentName } = params;
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
@@ -52,12 +63,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const modelRef = useRef<HTMLInputElement>(null);
     const modelVersionRef = useRef<HTMLInputElement>(null);
     const deploymentStrategyRef = useRef<HTMLInputElement>(null);
-    const cpuRequestRef = useRef<HTMLInputElement>(null);
-    const cpuLimitRef = useRef<HTMLInputElement>(null);
-    const memoryRequestRef = useRef<HTMLInputElement>(null);
-    const memoryLimitRef = useRef<HTMLInputElement>(null);
-    const gpuRequestRef = useRef<HTMLInputElement>(null);
-    const gpuLimitRef = useRef<HTMLInputElement>(null);
+    const resourceRef = useRef<HTMLInputElement>(null);
     const standardRef = useRef<HTMLInputElement>(null);
     const standardValueRef = useRef<HTMLInputElement>(null);
     const [replicaRange, setReplicaRange] = useState<number[]>([1, 4]);
@@ -69,6 +75,14 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     ) => {
         const modelId = event.target.value;
         modelMetadataRefresh(modelId);
+    };
+
+    const handleChangeResource = (
+        event: SelectChangeEvent<string>,
+        child?: ReactNode
+    ) => {
+        const resourceId = +event.target.value;
+        setResource(resources.find((e) => e.id === resourceId) ?? null);
     };
 
     const setError = (message: string) => {
@@ -84,12 +98,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
             'Model Name': modelRef,
             'Model Version': modelVersionRef,
             'Deployment Strategy': deploymentStrategyRef,
-            'CPU Request': cpuRequestRef,
-            'CPU Limit': cpuLimitRef,
-            'Memory Request': memoryRequestRef,
-            'Memory Limit': memoryLimitRef,
-            'GPU Request': gpuRequestRef,
-            'GPU Limit': gpuLimitRef,
+            Resource: resourceRef,
             'Scaling Standard': standardRef,
             'Scaling Standard Value': standardValueRef,
         };
@@ -119,6 +128,10 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
             return;
         }
 
+        if (!resource) {
+            return;
+        }
+
         const submitMode = type === 'create' ? 'post' : 'put';
 
         const scaleData: IScalingBase = {
@@ -136,14 +149,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                 name: itemsWithValues['Deployment Name'] as string,
                 modelMetadataId: itemsWithValues['Model Version'] as number,
                 strategy: itemsWithValues['Deployment Strategy'] as string,
-                resources: {
-                    cpu: itemsWithValues['CPU Request'] as string,
-                    memory: itemsWithValues['Memory Request'] as string,
-                    gpu: itemsWithValues['GPU Request'] as string,
-                    cpuLimit: itemsWithValues['CPU Limit'] as string,
-                    memoryLimit: itemsWithValues['Memory Limit'] as string,
-                    gpuLimit: itemsWithValues['GPU Limit'] as string,
-                },
+                resourceId: resource.id,
                 scale: scaleData,
             },
             submitMode
@@ -228,115 +234,93 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     }
                     inputRef={deploymentNameRef}
                 />
-                <FormControl fullWidth>
-                    <InputLabel id="model">Model</InputLabel>
-                    <Select
-                        labelId="model"
-                        label="Model"
-                        defaultValue={
-                            deployment
-                                ? models.find(
-                                      (model) =>
-                                          model.name === deployment.modelName
-                                  )?.id ?? models[0]?.id
-                                : models[0]?.id
-                        }
-                        inputRef={modelRef}
-                        onChange={handleChangeModel}
-                    >
-                        {models.map((model) => (
-                            <MenuItem key={model.id} value={model.id}>
-                                {model.name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                    <InputLabel id="model-version">Model Version</InputLabel>
-                    <Select
-                        labelId="model-version"
-                        label="Model Version"
-                        defaultValue={
-                            deployment
-                                ? modelMetadata.find(
-                                      (metadata) =>
-                                          metadata.version ===
-                                          deployment.modelVersion
-                                  )?.id ?? modelMetadata[0]?.id
-                                : modelMetadata[0]?.id
-                        }
-                        inputRef={modelVersionRef}
-                    >
-                        {modelMetadata.map((datum) => (
-                            <MenuItem key={datum.id} value={datum.id}>
-                                {datum.version}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                    <InputLabel id="deployment-strategy">
-                        Deployment Strategy
-                    </InputLabel>
-                    <Select
-                        labelId="deployment-strategy"
-                        label="Deployment Strategy"
-                        defaultValue={
-                            deployment
-                                ? deploymentStrategies.find(
-                                      (strategy) =>
-                                          strategy.name === deployment.strategy
-                                  )?.name ?? deploymentStrategies[0]?.name
-                                : deploymentStrategies[0]?.name
-                        }
-                        inputRef={deploymentStrategyRef}
-                    >
-                        {deploymentStrategies.map((deploymentStrategy) => (
-                            <MenuItem
-                                key={deploymentStrategy.name}
-                                value={deploymentStrategy.name}
-                            >
-                                {deploymentStrategy.name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-                <TextField
-                    label="CPU Request"
-                    type="text"
-                    defaultValue={deployment ? deployment.cpu : '100m'}
-                    inputRef={cpuRequestRef}
-                />
-                <TextField
-                    label="CPU Limit"
-                    type="text"
-                    defaultValue={deployment ? deployment.cpuLimit : '100m'}
-                    inputRef={cpuLimitRef}
-                />
-                <TextField
-                    label="Memory Request"
-                    type="text"
-                    defaultValue={deployment ? deployment.memory : '256Mi'}
-                    inputRef={memoryRequestRef}
-                />
-                <TextField
-                    label="Memory Limit"
-                    type="text"
-                    defaultValue={deployment ? deployment.memoryLimit : '256Mi'}
-                    inputRef={memoryLimitRef}
-                />
-                <TextField
-                    label="GPU Request"
-                    type="number"
-                    defaultValue={deployment ? deployment.gpu : 0}
-                    inputRef={gpuRequestRef}
-                />
-                <TextField
-                    label="GPU Limit"
-                    type="number"
-                    defaultValue={deployment ? deployment.gpuLimit : 0}
-                    inputRef={gpuLimitRef}
-                />
+                <Select
+                    label="Model"
+                    defaultValue={
+                        deployment
+                            ? models.find(
+                                  (model) => model.name === deployment.modelName
+                              )?.id ?? models[0]?.id
+                            : models[0]?.id
+                    }
+                    inputRef={modelRef}
+                    onChange={handleChangeModel}
+                >
+                    {models.map((model) => (
+                        <MenuItem key={model.id} value={model.id}>
+                            {model.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <Select
+                    label="Model Version"
+                    defaultValue={
+                        deployment
+                            ? modelMetadata.find(
+                                  (metadata) =>
+                                      metadata.version ===
+                                      deployment.modelVersion
+                              )?.id ?? modelMetadata[0]?.id
+                            : modelMetadata[0]?.id
+                    }
+                    inputRef={modelVersionRef}
+                >
+                    {modelMetadata.map((datum) => (
+                        <MenuItem key={datum.id} value={datum.id}>
+                            {datum.version}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <Select
+                    label="Deployment Strategy"
+                    defaultValue={
+                        deployment
+                            ? deploymentStrategies.find(
+                                  (strategy) =>
+                                      strategy.name === deployment.strategy
+                              )?.name ?? deploymentStrategies[0]?.name
+                            : deploymentStrategies[0]?.name
+                    }
+                    inputRef={deploymentStrategyRef}
+                >
+                    {deploymentStrategies.map((deploymentStrategy) => (
+                        <MenuItem
+                            key={deploymentStrategy.name}
+                            value={deploymentStrategy.name}
+                        >
+                            {deploymentStrategy.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <Select
+                    label="Resource"
+                    defaultValue={resources[0]?.id.toString()}
+                    inputRef={resourceRef}
+                    onChange={handleChangeResource}
+                >
+                    {resources.map((resource) => (
+                        <MenuItem key={resource.id} value={resource.id}>
+                            {resource.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <OverViewTab
+                    headEl={[
+                        'CPU Request',
+                        'CPU Limit',
+                        'Memory Request',
+                        'Memory Limit',
+                        'GPU Request',
+                        'GPU Limit',
+                    ]}
+                >
+                    <div>{resource?.cpu ?? 'Not given'}</div>
+                    <div>{resource?.cpuLimit ?? 'Not given'}</div>
+                    <div>{resource?.memory ?? 'Not given'}</div>
+                    <div>{resource?.memoryLimit ?? 'Not given'}</div>
+                    <div>{resource?.gpu ?? 'Not given'}</div>
+                    <div>{resource?.gpuLimit ?? 'Not given'}</div>
+                </OverViewTab>
                 <FormControl>
                     <FormLabel id="scaling-radio-buttons">Scaling</FormLabel>
                     <RadioGroup

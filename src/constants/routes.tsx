@@ -20,6 +20,9 @@ import { Deployments } from '../pages/deployments';
 import { CreateDeployment } from '../pages/deployments/create';
 import { UpdateDeployment } from '../pages/deployments/update';
 import { DeploymentDetail } from '../pages/deployments/detail';
+import { Resources } from '../pages/resources';
+import { CreateResource } from '../pages/resources/create';
+import { ResourceDetail } from '../pages/resources/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -149,7 +152,23 @@ const routes: IRouterDatum[] = [
         uri: '/resources',
         name: 'Resources',
         icon: <MemoryIcon fontSize="large" />,
-        page: Index,
+        page: Resources,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/resources/:resourceName',
+        name: 'Resource Detail',
+        hidden: true,
+        authOnly: true,
+        page: ResourceDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/resources/create',
+        name: 'Resource Create',
+        hidden: true,
+        authOnly: true,
+        page: CreateResource,
         for: ['Owner', 'Admin', 'User'],
     },
 ];
