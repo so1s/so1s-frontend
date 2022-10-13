@@ -85,6 +85,7 @@ export const DeploymentDetail: React.FC = () => {
                         'ID',
                         'Age',
                         'Name',
+                        'Status',
                         'Endpoint',
                         'Deployment Strategy',
                         'Model Name',
@@ -104,6 +105,7 @@ export const DeploymentDetail: React.FC = () => {
                     <div>{deployment?.id}</div>
                     <div>{deployment?.age}</div>
                     <div>{deployment?.deploymentName}</div>
+                    <div>{deployment?.status}</div>
                     <div>{deployment?.endPoint}</div>
                     <div>{deployment?.strategy}</div>
                     <div>{deployment?.modelName}</div>

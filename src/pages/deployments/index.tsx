@@ -6,17 +6,19 @@ import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
 import { useDeploymentsData } from '../../hooks/useDeploymentsData';
 import { IDeploymentBase } from '../../interfaces/pages/deployments';
+import { Status } from '../../types';
 import { filterColumns } from '../../utils';
 
 export const Deployments = () => {
     const [deployments] = useAtom(deploymentsAtom);
 
-    const deploymentsView: IDeploymentBase[] = useMemo(
+    const deploymentsView: (IDeploymentBase & { status: Status })[] = useMemo(
         () =>
             deployments.map((obj) =>
                 filterColumns(obj, [
                     'age',
                     'deploymentName',
+                    'status',
                     'endPoint',
                     'strategy',
                     'modelName',
