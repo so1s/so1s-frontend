@@ -36,12 +36,18 @@ const ModelDetail: React.FC = () => {
 
     const model = models.find((e) => e.name === modelName);
 
-    const deleteAction = async (id: number, version: string) => {
+    const deleteAction = async (_: number, version: string) => {
         if (!model) {
             return false;
         }
 
-        const success = await performDelete(model.id, version);
+        const selected = modelMetadata.find((e) => e.version === version);
+
+        if (!selected) {
+            return false;
+        }
+
+        const success = await performDelete(selected.id, selected.version);
 
         refreshData();
 
@@ -64,7 +70,6 @@ const ModelDetail: React.FC = () => {
                 items={modelMetadataView}
                 itemKey="version"
                 hasDetail
-                editable
                 deletable
                 deleteAction={deleteAction}
                 deleteParams={['version']}
