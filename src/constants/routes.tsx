@@ -27,6 +27,7 @@ import { UpdateABTest } from '../pages/tests/ab/update';
 import { Resources } from '../pages/resources';
 import { CreateResource } from '../pages/resources/create';
 import { ResourceDetail } from '../pages/resources/detail';
+import { CreateModelMetadata } from '../pages/model-metadata/create';
 
 const routes: IRouterDatum[] = [
     {
@@ -72,6 +73,14 @@ const routes: IRouterDatum[] = [
         authOnly: true,
         hidden: true,
         page: CreateModel,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/models/:modelName/create',
+        name: 'Create Model Metadata',
+        authOnly: true,
+        hidden: true,
+        page: CreateModelMetadata,
         for: ['Owner', 'Admin', 'User'],
     },
     {
