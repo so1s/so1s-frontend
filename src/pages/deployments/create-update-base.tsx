@@ -217,7 +217,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
 
     return (
         <ActionCard
-            title={`${type === 'create' ? 'Create' : 'Update'} New Deployment`}
+            title={`${type === 'create' ? 'Create New' : 'Update'} Deployment`}
             mode={type === 'create' ? 'CREATE' : 'UPDATE'}
             onClick={submit}
         >
