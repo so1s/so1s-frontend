@@ -9,7 +9,7 @@ import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
 import { useModelMetadata } from '../../hooks/useModelMetadata';
 import { useModelsData } from '../../hooks/useModelsData';
-import { IModelMetadataBase } from '../../interfaces/pages/models';
+import { IModelMetadataView } from '../../interfaces/pages/models';
 import { filterColumns } from '../../utils';
 
 const ModelDetail: React.FC = () => {
@@ -18,7 +18,7 @@ const ModelDetail: React.FC = () => {
 
     useModelsData();
 
-    const modelMetadataView: IModelMetadataBase[] = useMemo(
+    const modelMetadataView: IModelMetadataView[] = useMemo(
         () =>
             modelMetadata.map((obj) =>
                 filterColumns(obj, ['age', 'status', 'url', 'version'])

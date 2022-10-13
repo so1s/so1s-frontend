@@ -5,17 +5,23 @@ import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
 import { useModelsData } from '../../hooks/useModelsData';
-import { IModelBase } from '../../interfaces/pages/models';
+import { IModelView } from '../../interfaces/pages/models';
 import { filterColumns } from '../../utils';
 
 const Models: React.FC = () => {
     const [models] = useAtom(modelsAtom);
     useModelsData();
 
-    const modelsView: IModelBase[] = useMemo(
+    const modelsView: IModelView[] = useMemo(
         () =>
             models.map((obj) =>
-                filterColumns(obj, ['age', 'name', 'version', 'library'])
+                filterColumns(obj, [
+                    'age',
+                    'name',
+                    'status',
+                    'version',
+                    'library',
+                ])
             ),
         [models]
     );

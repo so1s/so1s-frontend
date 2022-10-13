@@ -8,6 +8,10 @@ export interface IModelBase {
     library: string;
 }
 
+export type IModelView = IModelBase & {
+    status: JSX.Element;
+};
+
 export interface IModelDetail extends IModelBase {
     id: number;
 }
@@ -27,6 +31,10 @@ export interface IModelMetadataBase {
     version: string;
     url: string;
 }
+
+export type IModelMetadataView = IModelMetadataBase & {
+    status: JSX.Element;
+};
 export interface IModelMetadataDetail extends IModelMetadataBase {
     id: number;
 }

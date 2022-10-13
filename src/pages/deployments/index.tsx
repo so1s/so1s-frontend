@@ -5,14 +5,13 @@ import { deploymentsAtom } from '../../atoms/deployments';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
 import { useDeploymentsData } from '../../hooks/useDeploymentsData';
-import { IDeploymentBase } from '../../interfaces/pages/deployments';
-import { Status } from '../../types';
+import { IDeploymentView } from '../../interfaces/pages/deployments';
 import { filterColumns } from '../../utils';
 
 export const Deployments = () => {
     const [deployments] = useAtom(deploymentsAtom);
 
-    const deploymentsView: (IDeploymentBase & { status: Status })[] = useMemo(
+    const deploymentsView: IDeploymentView[] = useMemo(
         () =>
             deployments.map((obj) =>
                 filterColumns(obj, [

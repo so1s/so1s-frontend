@@ -12,6 +12,10 @@ export interface IDeploymentBase {
     modelVersion: string;
 }
 
+export type IDeploymentView = IDeploymentBase & {
+    status: JSX.Element;
+};
+
 export interface IDeploymentDetail extends IDeploymentBase {
     id: number;
     cpu: string;
