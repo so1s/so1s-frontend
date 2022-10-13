@@ -4,7 +4,7 @@ import { deleteModel } from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
-import { useModelsData } from '../../hooks/useModelsData';
+import { useModelsData } from '../../hooks/data/useModelsData';
 import { IModelView } from '../../interfaces/pages/models';
 import { filterColumns } from '../../utils';
 

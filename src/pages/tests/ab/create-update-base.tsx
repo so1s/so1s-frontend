@@ -1,4 +1,10 @@
-import { MenuItem, Select, TextField } from '@mui/material';
+import {
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+} from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import { useAtom } from 'jotai';
 import { useRef } from 'react';
@@ -8,8 +14,8 @@ import { deploymentsAtom } from '../../../atoms/deployments';
 import { snackbarAtom } from '../../../atoms/snackbar';
 import { abTestsAtom } from '../../../atoms/tests';
 import ActionCard from '../../../components/action-card';
-import { useABTestsData } from '../../../hooks/useABTestsData';
-import { useDeploymentsData } from '../../../hooks/useDeploymentsData';
+import { useABTestsData } from '../../../hooks/data/useABTestsData';
+import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
 import { ICreateUpdateBaseParams } from '../../../interfaces';
 
 export const CreateUpdateABTestBase: React.FC<ICreateUpdateBaseParams> = ({
@@ -39,7 +45,7 @@ export const CreateUpdateABTestBase: React.FC<ICreateUpdateBaseParams> = ({
 
     const { abTestName } = useParams();
 
-    if (!abTestName) {
+    if (type === 'update' && !abTestName) {
         setError(`AB Test Name이 주어지지 않았습니다.`);
         navigate('/tests/ab', { replace: true });
         return <></>;
@@ -66,6 +72,10 @@ export const CreateUpdateABTestBase: React.FC<ICreateUpdateBaseParams> = ({
             (arr) => arr.map(([k, v]) => [k, v.current?.value]),
             Object.fromEntries
         ) as { [k in keyof typeof items]: string | number };
+
+        if (type === 'update') {
+            itemsWithValues.name = abTest?.name ?? '';
+        }
 
         const isCorrect = pipe(
             itemsWithValues,
@@ -109,34 +119,52 @@ export const CreateUpdateABTestBase: React.FC<ICreateUpdateBaseParams> = ({
 
     return (
         <ActionCard
-            title={`${type === 'create' ? 'Create' : 'Update New'} Model`}
+            title={`${type === 'create' ? 'Create New' : 'Update'} AB Test`}
             mode={type === 'create' ? 'CREATE' : 'UPDATE'}
             onClick={submit}
         >
             <div className="flex flex-col space-y-10 my-10 mx-auto">
                 <TextField
-                    label="AB Test Name"
+                    label={`AB Test Name${
+                        type === 'update' &&
+                        `: ${abTest?.name ?? 'Not Found'} (Disabled)`
+                    }`}
                     disabled={type === 'update'}
                     placeholder="AB Test"
                     inputRef={nameRef}
                 />
-                <Select label="Deployment A" inputRef={aIdRef}>
-                    {deployments.map((dep) => (
-                        <MenuItem key={dep.id} value={dep.id}>
-                            {dep.deploymentName}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <Select label="Deployment A" inputRef={bIdRef}>
-                    {deployments.map((dep) => (
-                        <MenuItem key={dep.id} value={dep.id}>
-                            {dep.deploymentName}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <FormControl fullWidth>
+                    <InputLabel id="deployment-a">Deployment A</InputLabel>
+                    <Select
+                        label="Deployment A"
+                        defaultValue={abTest?.aid}
+                        inputRef={aIdRef}
+                    >
+                        {deployments.map((dep) => (
+                            <MenuItem key={dep.id} value={dep.id}>
+                                {dep.deploymentName}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="deployment-b">Deployment B</InputLabel>
+                    <Select
+                        label="Deployment B"
+                        defaultValue={abTest?.bid}
+                        inputRef={bIdRef}
+                    >
+                        {deployments.map((dep) => (
+                            <MenuItem key={dep.id} value={dep.id}>
+                                {dep.deploymentName}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 <TextField
                     label="Domain"
-                    placeholder="https://so1s.io"
+                    defaultValue={abTest?.domain}
+                    placeholder="so1s.io"
                     inputRef={domainRef}
                 />
             </div>

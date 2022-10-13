@@ -12,7 +12,7 @@ import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
 import YamlTab from '../../components/detail/yaml-tab';
 import { useDelete } from '../../hooks/useDelete';
-import { useModelsData } from '../../hooks/useModelsData';
+import { useModelsData } from '../../hooks/data/useModelsData';
 import { IModelMetadataDetail } from '../../interfaces/pages/model-metadata';
 import { convertStatusToIcon } from '../../utils/pages/models';
 

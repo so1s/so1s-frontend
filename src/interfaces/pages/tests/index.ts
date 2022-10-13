@@ -8,8 +8,8 @@ export interface IABTestBaseResponse {
 
 export type IABTestReadResponse = {
     id: number;
-    aId: number;
-    bId: number;
+    aid: number;
+    bid: number;
 } & IABTestBaseResponse;
 
 export type IABTestCreateRequest = {
@@ -23,6 +23,11 @@ export type IABTestCreateResponse = {
 } & IBaseResponse;
 
 export type IABTestView = {
+    a: string;
+    b: string;
+} & IABTestBaseResponse;
+
+export type IABTestJoined = {
     id: number;
     a?: IDeploymentDatum;
     b?: IDeploymentDatum;

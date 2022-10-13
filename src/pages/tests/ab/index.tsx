@@ -3,9 +3,9 @@ import { deleteABTest } from '../../../api/tests';
 import { deploymentsAtom } from '../../../atoms/deployments';
 import { abTestsAtom } from '../../../atoms/tests';
 import ListTable from '../../../components/table';
-import { useABTestsData } from '../../../hooks/useABTestsData';
+import { useABTestsData } from '../../../hooks/data/useABTestsData';
 import { useDelete } from '../../../hooks/useDelete';
-import { useDeploymentsData } from '../../../hooks/useDeploymentsData';
+import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
 import { IABTestView } from '../../../interfaces/pages/tests';
 import { convertABTestToView } from '../../../utils/pages/tests/ab';
 

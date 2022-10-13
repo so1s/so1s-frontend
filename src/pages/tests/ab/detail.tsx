@@ -6,11 +6,11 @@ import { snackbarAtom } from '../../../atoms/snackbar';
 import { abTestsAtom } from '../../../atoms/tests';
 import { DetailCard } from '../../../components/detail/card';
 import OverViewTab from '../../../components/detail/overview-tab';
-import { useABTestsData } from '../../../hooks/useABTestsData';
+import { useABTestsData } from '../../../hooks/data/useABTestsData';
 import { useDelete } from '../../../hooks/useDelete';
-import { useDeploymentsData } from '../../../hooks/useDeploymentsData';
-import { IABTestView } from '../../../interfaces/pages/tests';
-import { convertABTestToView } from '../../../utils/pages/tests/ab';
+import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
+import { IABTestJoined } from '../../../interfaces/pages/tests';
+import { joinABTest } from '../../../utils/pages/tests/ab';
 
 export const ABTestDetail = () => {
     useABTestsData();
@@ -46,7 +46,7 @@ export const ABTestDetail = () => {
         return <></>;
     }
 
-    const abTestView: IABTestView = convertABTestToView(abTest, deployments);
+    const abTestJoined: IABTestJoined = joinABTest(abTest, deployments);
 
     const performDelete = useDelete(deleteABTest);
 
@@ -84,21 +84,21 @@ export const ABTestDetail = () => {
                         'Deployment B Deployment Strategy',
                     ]}
                 >
-                    <div>{abTestView.id}</div>
-                    <div>{abTestView.name}</div>
-                    <div>{abTestView.domain}</div>
+                    <div>{abTestJoined.id}</div>
+                    <div>{abTestJoined.name}</div>
+                    <div>{abTestJoined.domain}</div>
 
-                    <div>{abTestView.a?.deploymentName}</div>
-                    <div>{abTestView.a?.status}</div>
-                    <div>{abTestView.a?.modelName}</div>
-                    <div>{abTestView.a?.modelVersion}</div>
-                    <div>{abTestView.a?.strategy}</div>
+                    <div>{abTestJoined.a?.deploymentName}</div>
+                    <div>{abTestJoined.a?.status}</div>
+                    <div>{abTestJoined.a?.modelName}</div>
+                    <div>{abTestJoined.a?.modelVersion}</div>
+                    <div>{abTestJoined.a?.strategy}</div>
 
-                    <div>{abTestView.b?.deploymentName}</div>
-                    <div>{abTestView.b?.status}</div>
-                    <div>{abTestView.b?.modelName}</div>
-                    <div>{abTestView.b?.modelVersion}</div>
-                    <div>{abTestView.b?.strategy}</div>
+                    <div>{abTestJoined.b?.deploymentName}</div>
+                    <div>{abTestJoined.b?.status}</div>
+                    <div>{abTestJoined.b?.modelName}</div>
+                    <div>{abTestJoined.b?.modelVersion}</div>
+                    <div>{abTestJoined.b?.strategy}</div>
                 </OverViewTab>
                 <div>Not Implemented</div>
             </DetailCard>

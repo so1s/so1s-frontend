@@ -1,6 +1,5 @@
 import HomeIcon from '@mui/icons-material/Home';
 import MonitorIcon from '@mui/icons-material/Monitor';
-import StorageIcon from '@mui/icons-material/Storage';
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SpeedIcon from '@mui/icons-material/Speed';
@@ -28,6 +27,7 @@ import { Resources } from '../pages/resources';
 import { CreateResource } from '../pages/resources/create';
 import { ResourceDetail } from '../pages/resources/detail';
 import { CreateModelMetadata } from '../pages/model-metadata/create';
+import { Monitoring } from '../pages/monitoring';
 
 const routes: IRouterDatum[] = [
     {
@@ -132,19 +132,11 @@ const routes: IRouterDatum[] = [
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/volumes',
-        name: 'Volumes',
-        icon: <StorageIcon fontSize="large" />,
-        authOnly: true,
-        page: Index,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
         uri: '/monitoring',
         name: 'Monitoring',
         icon: <MonitorIcon fontSize="large" />,
         authOnly: true,
-        page: Index,
+        page: Monitoring,
         for: ['Owner', 'Admin', 'User'],
     },
     {

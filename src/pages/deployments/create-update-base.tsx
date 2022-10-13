@@ -25,11 +25,11 @@ import { resourcesAtom } from '../../atoms/resources';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
 import OverViewTab from '../../components/detail/overview-tab';
-import { useDeploymentsData } from '../../hooks/useDeploymentsData';
-import { useDeploymentStrategiesData } from '../../hooks/useDeploymentStrategiesData';
-import { useModelMetadata } from '../../hooks/useModelMetadata';
-import { useModelsData } from '../../hooks/useModelsData';
-import { useResourcesData } from '../../hooks/useResourcesData';
+import { useDeploymentsData } from '../../hooks/data/useDeploymentsData';
+import { useDeploymentStrategiesData } from '../../hooks/data/useDeploymentStrategiesData';
+import { useModelMetadata } from '../../hooks/data/useModelMetadata';
+import { useModelsData } from '../../hooks/data/useModelsData';
+import { useResourcesData } from '../../hooks/data/useResourcesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 import { IResourceFind } from '../../interfaces/pages/resources';
 import { IScalingBase } from '../../interfaces/pages/deployments';
@@ -217,7 +217,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
 
     return (
         <ActionCard
-            title={`${type === 'create' ? 'Create' : 'Update'} New Deployment`}
+            title={`${type === 'create' ? 'Create New' : 'Update'} Deployment`}
             mode={type === 'create' ? 'CREATE' : 'UPDATE'}
             onClick={submit}
         >

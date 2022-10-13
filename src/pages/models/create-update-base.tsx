@@ -15,7 +15,7 @@ import { librariesAtom } from '../../atoms/library';
 import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
-import { useLibrariesData } from '../../hooks/useLibrariesData';
+import { useLibrariesData } from '../../hooks/data/useLibrariesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 
 const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
