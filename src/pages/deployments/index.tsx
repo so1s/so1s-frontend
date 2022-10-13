@@ -31,8 +31,14 @@ export const Deployments = () => {
 
     const performDelete = useDelete(deleteDeployment);
 
-    const deleteAction = async (id: number) => {
-        const success = await performDelete(id);
+    const deleteAction = async (_: number, name: string) => {
+        const deployment = deployments.find((e) => e.deploymentName === name);
+
+        if (!deployment) {
+            return false;
+        }
+
+        const success = await performDelete(deployment.id);
 
         refreshData();
 
@@ -49,6 +55,7 @@ export const Deployments = () => {
                 editable
                 deletable
                 deleteAction={deleteAction}
+                deleteParams={['deploymentName']}
             />
         </div>
     );
