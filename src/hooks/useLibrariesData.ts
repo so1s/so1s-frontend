@@ -3,4 +3,4 @@ import { librariesAtom } from '../atoms/library';
 import { useData } from './useData';
 
 export const useLibrariesData = () =>
-    useData(librariesAtom, getLibraries, true);
+    useData(librariesAtom, getLibraries, { useRawType: true });

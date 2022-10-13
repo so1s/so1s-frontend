@@ -16,7 +16,9 @@ export const useData = <
     ) => Promise<
         (UseRawType extends true ? IBase : IBase & { status: Status })[]
     >,
-    useRawType?: UseRawType
+    params?: {
+        useRawType?: UseRawType;
+    }
 ) => {
     type IDatum = UseRawType extends true
         ? IBase
@@ -35,7 +37,7 @@ export const useData = <
     const getData = async () => {
         try {
             const data = (await getApi(...args)).map((datum) => {
-                if (useRawType) {
+                if (params?.useRawType) {
                     return datum as IBase;
                 }
                 const narrowedDatum = datum as IBase & {

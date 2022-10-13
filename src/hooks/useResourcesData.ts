@@ -3,4 +3,4 @@ import { resourcesAtom } from '../atoms/resources';
 import { useData } from './useData';
 
 export const useResourcesData = () =>
-    useData(resourcesAtom, getResources, true);
+    useData(resourcesAtom, getResources, { useRawType: true });

@@ -3,4 +3,6 @@ import { deploymentStrategiesAtom } from '../atoms/deployment-strategies';
 import { useData } from './useData';
 
 export const useDeploymentStrategiesData = () =>
-    useData(deploymentStrategiesAtom, getDeploymentStrategies, true);
+    useData(deploymentStrategiesAtom, getDeploymentStrategies, {
+        useRawType: true,
+    });
