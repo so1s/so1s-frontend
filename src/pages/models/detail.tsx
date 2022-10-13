@@ -7,8 +7,8 @@ import { modelMetadataAtom } from '../../atoms/model-metadata';
 import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
-import { useModelMetadata } from '../../hooks/useModelMetadata';
-import { useModelsData } from '../../hooks/useModelsData';
+import { useModelMetadata } from '../../hooks/data/useModelMetadata';
+import { useModelsData } from '../../hooks/data/useModelsData';
 import { IModelMetadataView } from '../../interfaces/pages/models';
 import { filterColumns } from '../../utils';
 

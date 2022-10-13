@@ -4,7 +4,7 @@ import { deleteDeployment } from '../../api/deployments';
 import { deploymentsAtom } from '../../atoms/deployments';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
-import { useDeploymentsData } from '../../hooks/useDeploymentsData';
+import { useDeploymentsData } from '../../hooks/data/useDeploymentsData';
 import { IDeploymentView } from '../../interfaces/pages/deployments';
 import { filterColumns } from '../../utils';
 

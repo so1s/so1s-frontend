@@ -6,9 +6,9 @@ import { snackbarAtom } from '../../../atoms/snackbar';
 import { abTestsAtom } from '../../../atoms/tests';
 import { DetailCard } from '../../../components/detail/card';
 import OverViewTab from '../../../components/detail/overview-tab';
-import { useABTestsData } from '../../../hooks/useABTestsData';
+import { useABTestsData } from '../../../hooks/data/useABTestsData';
 import { useDelete } from '../../../hooks/useDelete';
-import { useDeploymentsData } from '../../../hooks/useDeploymentsData';
+import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
 import { IABTestJoined } from '../../../interfaces/pages/tests';
 import { joinABTest } from '../../../utils/pages/tests/ab';
 

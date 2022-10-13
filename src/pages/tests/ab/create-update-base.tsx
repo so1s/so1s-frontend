@@ -14,8 +14,8 @@ import { deploymentsAtom } from '../../../atoms/deployments';
 import { snackbarAtom } from '../../../atoms/snackbar';
 import { abTestsAtom } from '../../../atoms/tests';
 import ActionCard from '../../../components/action-card';
-import { useABTestsData } from '../../../hooks/useABTestsData';
-import { useDeploymentsData } from '../../../hooks/useDeploymentsData';
+import { useABTestsData } from '../../../hooks/data/useABTestsData';
+import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
 import { ICreateUpdateBaseParams } from '../../../interfaces';
 
 export const CreateUpdateABTestBase: React.FC<ICreateUpdateBaseParams> = ({

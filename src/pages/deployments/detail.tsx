@@ -9,7 +9,7 @@ import OverViewTab from '../../components/detail/overview-tab';
 import YamlTab from '../../components/detail/yaml-tab';
 import { UNIT } from '../../constants';
 import { useDelete } from '../../hooks/useDelete';
-import { useDeploymentsData } from '../../hooks/useDeploymentsData';
+import { useDeploymentsData } from '../../hooks/data/useDeploymentsData';
 
 export const DeploymentDetail: React.FC = () => {
     const [deployments] = useAtom(deploymentsAtom);

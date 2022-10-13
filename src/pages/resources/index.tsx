@@ -3,7 +3,7 @@ import { deleteResource } from '../../api/resources';
 import { resourcesAtom } from '../../atoms/resources';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
-import { useResourcesData } from '../../hooks/useResourcesData';
+import { useResourcesData } from '../../hooks/data/useResourcesData';
 
 export const Resources = () => {
     const refreshData = useResourcesData();

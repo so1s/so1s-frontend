@@ -7,7 +7,7 @@ import { snackbarAtom } from '../../atoms/snackbar';
 import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
 import { useDelete } from '../../hooks/useDelete';
-import { useResourcesData } from '../../hooks/useResourcesData';
+import { useResourcesData } from '../../hooks/data/useResourcesData';
 
 export const ResourceDetail = () => {
     const refreshData = useResourcesData();
