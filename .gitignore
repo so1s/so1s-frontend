@@ -33,4 +33,4 @@ dist-ssr
 !.yarn/versions
 
 .eslintcache
-.env
+.env.*
