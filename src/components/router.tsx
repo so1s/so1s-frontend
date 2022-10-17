@@ -14,8 +14,9 @@ const Router: React.FC = () => {
             <ReactRoutes>
                 {routes.map((e) => {
                     const Page =
-                        e.authOnly && !accessToken ? LoginRedirect : e.page;
-
+                        (e.authOnly ?? true) && !accessToken
+                            ? LoginRedirect
+                            : e.page;
                     const Element = (
                         <div className="w-screen h-screen flex flex-grow overflow-y-hidden">
                             <div className="flex-1 flex-col flex-grow">
