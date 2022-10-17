@@ -21,7 +21,11 @@ const Header: React.FC = () => {
                     src={Logo}
                     className="my-auto h-8 cursor-pointer"
                     alt="So1s Logo"
-                    onClick={() => navigate('/')}
+                    onClick={() =>
+                        !accessToken
+                            ? navigate(page?.uri ?? '/login')
+                            : navigate('/')
+                    }
                 />
                 <div className="font-serif text-2xl">
                     {page?.name ?? 'Home'}
