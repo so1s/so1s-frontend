@@ -18,7 +18,6 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log({ accessToken });
         if (!accessToken) {
             return;
         }
