@@ -6,7 +6,6 @@ import {
     getModelMetadataDetail,
 } from '../../api/model-metadata';
 import { getModelYaml } from '../../api/models';
-import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
@@ -17,8 +16,7 @@ import { IModelMetadataDetail } from '../../interfaces/pages/model-metadata';
 import { convertStatusToIcon } from '../../utils/pages/models';
 
 export const ModelMetadataDetail = () => {
-    const [models] = useAtom(modelsAtom);
-    useModelsData();
+    const [models] = useModelsData();
 
     const navigate = useNavigate();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);

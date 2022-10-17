@@ -2,7 +2,6 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { deleteDeployment, getDeploymentYaml } from '../../api/deployments';
-import { deploymentsAtom } from '../../atoms/deployments';
 import { snackbarAtom } from '../../atoms/snackbar';
 import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
@@ -12,8 +11,7 @@ import { useDelete } from '../../hooks/useDelete';
 import { useDeploymentsData } from '../../hooks/data/useDeploymentsData';
 
 export const DeploymentDetail: React.FC = () => {
-    const [deployments] = useAtom(deploymentsAtom);
-    useDeploymentsData();
+    const [deployments] = useDeploymentsData();
 
     const navigate = useNavigate();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);

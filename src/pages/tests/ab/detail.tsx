@@ -1,9 +1,7 @@
 import { useAtom } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { deleteABTest } from '../../../api/tests';
-import { deploymentsAtom } from '../../../atoms/deployments';
 import { snackbarAtom } from '../../../atoms/snackbar';
-import { abTestsAtom } from '../../../atoms/tests';
 import { DetailCard } from '../../../components/detail/card';
 import OverViewTab from '../../../components/detail/overview-tab';
 import { useABTestsData } from '../../../hooks/data/useABTestsData';
@@ -13,11 +11,8 @@ import { IABTestJoined } from '../../../interfaces/pages/tests';
 import { joinABTest } from '../../../utils/pages/tests/ab';
 
 export const ABTestDetail = () => {
-    useABTestsData();
-    useDeploymentsData();
-
-    const [abTests] = useAtom(abTestsAtom);
-    const [deployments] = useAtom(deploymentsAtom);
+    const [abTests] = useABTestsData();
+    const [deployments] = useDeploymentsData();
 
     const navigate = useNavigate();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
