@@ -11,7 +11,6 @@ import { useAtom } from 'jotai';
 import { ReactNode, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createModelOrAddModelMetadata } from '../../api/models';
-import { librariesAtom } from '../../atoms/library';
 import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
@@ -26,9 +25,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
     const navigate = useNavigate();
 
-    useLibrariesData();
-
-    const [libraries] = useAtom(librariesAtom);
+    const [libraries] = useLibrariesData();
 
     const [library, setLibrary] = useState<string>('tensorflow');
     const [file, setFile] = useState<File | null>(null);

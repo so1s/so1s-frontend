@@ -35,7 +35,7 @@ export const useData = <
             ? defaultRefreshDelay
             : initialRefreshDelay;
 
-    const [, setData] = useAtom(dataAtom);
+    const [data, setData] = useAtom(dataAtom);
     const [needRefesh, setNeedRefresh] = useState<boolean>(true);
 
     const [args, setArgs] = useState<any[]>([]);
@@ -90,5 +90,5 @@ export const useData = <
         }
     }, [needRefesh, getData, setNeedRefresh]);
 
-    return refresh;
+    return [data, refresh] as const;
 };

@@ -2,7 +2,6 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { deleteResource } from '../../api/resources';
-import { resourcesAtom } from '../../atoms/resources';
 import { snackbarAtom } from '../../atoms/snackbar';
 import { DetailCard } from '../../components/detail/card';
 import OverViewTab from '../../components/detail/overview-tab';
@@ -10,8 +9,7 @@ import { useDelete } from '../../hooks/useDelete';
 import { useResourcesData } from '../../hooks/data/useResourcesData';
 
 export const ResourceDetail = () => {
-    const refreshData = useResourcesData();
-    const [resources] = useAtom(resourcesAtom);
+    const [resources, refreshData] = useResourcesData();
 
     const navigate = useNavigate();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
