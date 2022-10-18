@@ -7,12 +7,23 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/So1s.png';
 import currentPage from '../atoms/current-page';
 import { accessTokenWithPersistence } from '../atoms/token';
+import { snackbarAtom } from '../atoms/snackbar';
 
 const Header: React.FC = () => {
     const [page] = useAtom(currentPage);
     const [accessToken] = useAtom(accessTokenWithPersistence);
-
+    const [, setSnackbarDatum] = useAtom(snackbarAtom);
     const navigate = useNavigate();
+    const logoClickHandler = () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        accessToken
+            ? navigate('/')
+            : (setSnackbarDatum({
+                  severity: 'error',
+                  message: '로그인 된 사용자만 이용 가능합니다.',
+              }),
+              navigate('/login'));
+    };
 
     return (
         <header className="sticky top-0 w-full flex justify-between z-30">
@@ -21,11 +32,7 @@ const Header: React.FC = () => {
                     src={Logo}
                     className="my-auto h-8 cursor-pointer"
                     alt="So1s Logo"
-                    onClick={() =>
-                        !accessToken
-                            ? navigate(page?.uri ?? '/login')
-                            : navigate('/')
-                    }
+                    onClick={logoClickHandler}
                 />
                 <div className="font-serif text-2xl">
                     {page?.name ?? 'Home'}
