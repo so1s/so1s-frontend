@@ -16,11 +16,6 @@ import { useAtom } from 'jotai';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createDeploymentOrPut } from '../../api/deployments';
-import { deploymentStrategiesAtom } from '../../atoms/deployment-strategies';
-import { deploymentsAtom } from '../../atoms/deployments';
-import { modelMetadataAtom } from '../../atoms/model-metadata';
-import { modelsAtom } from '../../atoms/models';
-import { resourcesAtom } from '../../atoms/resources';
 
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
@@ -38,21 +33,15 @@ import { ScalingToggleMode, Standard } from '../../types/pages';
 const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
 }: ICreateUpdateBaseParams) => {
-    useResourcesData();
-    useModelsData();
-    const modelMetadataRefresh = useModelMetadata();
-    useDeploymentsData();
-    useDeploymentStrategiesData();
-
-    const [models] = useAtom(modelsAtom);
-    const [modelMetadata] = useAtom(modelMetadataAtom);
-    const [deployments] = useAtom(deploymentsAtom);
-    const [deploymentStrategies] = useAtom(deploymentStrategiesAtom);
-
-    const [resources] = useAtom(resourcesAtom);
+    const [resources] = useResourcesData();
     const [resource, setResource] = useState<IResourceFind | null>(
         resources[0] ?? null
     );
+
+    const [models] = useModelsData();
+    const [modelMetadata, modelMetadataRefresh] = useModelMetadata();
+    const [deployments] = useDeploymentsData();
+    const [deploymentStrategies] = useDeploymentStrategiesData();
 
     const params = useParams();
     const { deploymentName } = params;

@@ -24,7 +24,7 @@ export const useData = <
         ? IBase
         : IBase & { status: JSX.Element };
 
-    const [, setData] = useAtom(dataAtom);
+    const [data, setData] = useAtom(dataAtom);
     const [needRefesh, setNeedRefresh] = useState<boolean>(true);
 
     const [args, setArgs] = useState<any[]>([]);
@@ -67,5 +67,5 @@ export const useData = <
         }
     }, [needRefesh, getData, setNeedRefresh]);
 
-    return refresh;
+    return [data, refresh] as const;
 };

@@ -1,10 +1,7 @@
 /* eslint-disable react/jsx-key */
-import { useAtom } from 'jotai';
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { deleteModelMetadata } from '../../api/model-metadata';
-import { modelMetadataAtom } from '../../atoms/model-metadata';
-import { modelsAtom } from '../../atoms/models';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
 import { useModelMetadata } from '../../hooks/data/useModelMetadata';
@@ -13,10 +10,8 @@ import { IModelMetadataView } from '../../interfaces/pages/models';
 import { filterColumns } from '../../utils';
 
 const ModelDetail: React.FC = () => {
-    const [models] = useAtom(modelsAtom);
-    const [modelMetadata] = useAtom(modelMetadataAtom);
-
-    useModelsData();
+    const [models] = useModelsData();
+    const [modelMetadata, refreshData] = useModelMetadata();
 
     const modelMetadataView: IModelMetadataView[] = useMemo(
         () =>
@@ -25,8 +20,6 @@ const ModelDetail: React.FC = () => {
             ),
         [modelMetadata]
     );
-
-    const refreshData = useModelMetadata();
 
     const performDelete = useDelete(deleteModelMetadata);
 

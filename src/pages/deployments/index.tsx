@@ -1,7 +1,5 @@
-import { useAtom } from 'jotai';
 import { useMemo } from 'react';
 import { deleteDeployment } from '../../api/deployments';
-import { deploymentsAtom } from '../../atoms/deployments';
 import ListTable from '../../components/table';
 import { useDelete } from '../../hooks/useDelete';
 import { useDeploymentsData } from '../../hooks/data/useDeploymentsData';
@@ -9,7 +7,7 @@ import { IDeploymentView } from '../../interfaces/pages/deployments';
 import { filterColumns } from '../../utils';
 
 export const Deployments = () => {
-    const [deployments] = useAtom(deploymentsAtom);
+    const [deployments, refreshData] = useDeploymentsData();
 
     const deploymentsView: IDeploymentView[] = useMemo(
         () =>
@@ -26,8 +24,6 @@ export const Deployments = () => {
             ),
         [deployments]
     );
-
-    const refreshData = useDeploymentsData();
 
     const performDelete = useDelete(deleteDeployment);
 
