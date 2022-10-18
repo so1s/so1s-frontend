@@ -7,6 +7,7 @@ import {
     IDetailCardProps,
     ITabPanelProps,
 } from '../../interfaces/components/detail';
+import { useNavigator } from '../../hooks/useNavigator';
 
 const TabPanel: React.FC<ITabPanelProps> = ({ children, index, value }) => {
     return (
@@ -40,7 +41,7 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
                     <div className="my-auto mr-3 hover:cursor-pointer">
                         <KeyboardBackspaceIcon
                             fontSize="large"
-                            onClick={() => navigate(-1)}
+                            onClick={useNavigator(-1)}
                         />
                     </div>
                     <div>{title}</div>

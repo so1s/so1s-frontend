@@ -8,6 +8,7 @@ import Logo from '../assets/So1s.png';
 import currentPage from '../atoms/current-page';
 import { accessTokenWithPersistence } from '../atoms/token';
 import { snackbarAtom } from '../atoms/snackbar';
+import { useNavigator } from '../hooks/useNavigator';
 
 const Header: React.FC = () => {
     const [page] = useAtom(currentPage);
@@ -41,13 +42,13 @@ const Header: React.FC = () => {
                     <LogoutIcon
                         className="my-auto cursor-pointer"
                         fontSize="large"
-                        onClick={() => navigate('/login')}
+                        onClick={useNavigator('/login')}
                     />
                 ) : (
                     <ExitToAppIcon
                         className="my-auto cursor-pointer"
                         fontSize="large"
-                        onClick={() => navigate('/logout')}
+                        onClick={useNavigator('/logout')}
                     />
                 )}
             </div>
