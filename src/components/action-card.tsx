@@ -1,5 +1,6 @@
 import { Button, Paper } from '@mui/material';
 import IActionCardProps from '../interfaces/components/action-card';
+import { Backspace } from './backspace';
 
 const ActionCard: React.FC<IActionCardProps> = ({
     children,
@@ -10,7 +11,8 @@ const ActionCard: React.FC<IActionCardProps> = ({
     return (
         <Paper className="w-6/12 mx-auto">
             <div className="font-serif text-2xl text-body mx-5 py-5">
-                {title}
+                <Backspace />
+                <span>{title}</span>
             </div>
             <div className="mx-5 py-5 font-sans">{children}</div>
             <div className="flex flex-row-reverse mx-5 py-5">
