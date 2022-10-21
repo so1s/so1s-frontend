@@ -14,6 +14,7 @@ import { createModelOrAddModelMetadata } from '../../api/models';
 import { modelsAtom } from '../../atoms/models';
 import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
+import { useDataTypesData } from '../../hooks/data/useDataTypesData';
 import { useLibrariesData } from '../../hooks/data/useLibrariesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 
@@ -24,6 +25,8 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     const params = useParams();
     const [, setSnackbarDatum] = useAtom(snackbarAtom);
     const navigate = useNavigate();
+
+    const [dataTypes] = useDataTypesData();
 
     const [libraries] = useLibrariesData();
 
@@ -185,21 +188,46 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                     placeholder="(10,)"
                     inputRef={inputShapeRef}
                 />
-                <TextField
-                    label="Input Data Type"
-                    placeholder="float32"
-                    inputRef={inputDataTypeRef}
-                />
+                <FormControl fullWidth>
+                    <InputLabel id="input-data-type">
+                        Input Data Type
+                    </InputLabel>
+                    <Select
+                        labelId="input-data-type"
+                        label="Input Data Type"
+                        defaultValue={dataTypes[0]?.name}
+                        inputRef={inputDataTypeRef}
+                    >
+                        {dataTypes.map((dataType) => (
+                            <MenuItem key={dataType.name} value={dataType.name}>
+                                {dataType.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
                 <TextField
                     label="Output Shape"
                     placeholder="(1,)"
                     inputRef={outputShapeRef}
                 />
-                <TextField
-                    label="Output Data Type"
-                    placeholder="string"
-                    inputRef={outputDataTypeRef}
-                />
+                <FormControl fullWidth>
+                    <InputLabel id="output-data-type">
+                        Output Data Type
+                    </InputLabel>
+                    <Select
+                        labelId="output-data-type"
+                        label="Output Data Type"
+                        defaultValue={dataTypes[0]?.name}
+                        inputRef={outputDataTypeRef}
+                    >
+                        {dataTypes.map((dataType) => (
+                            <MenuItem key={dataType.name} value={dataType.name}>
+                                {dataType.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
             </div>
         </ActionCard>
     );
