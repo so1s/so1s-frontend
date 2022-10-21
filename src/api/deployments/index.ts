@@ -1,5 +1,5 @@
 import { baseURL } from '../../constants';
-import { axiosInstance } from '../../hooks/useAuth';
+import { axiosInstanceRef } from '../../hooks/useAuth';
 import { IYamlFindResponse } from '../../interfaces';
 import {
     IDeploymentCreateRequest,
@@ -9,12 +9,14 @@ import {
 } from '../../interfaces/pages/deployments';
 
 export const getDeployments = async () => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.get(`${baseURL}/api/v1/deployments`);
 
     return response.data as IDeploymentFindResponse[];
 };
 
 export const getDeploymentYaml = async (id: number) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.get(
         `${baseURL}/api/v1/deployments/${id}/yaml`
     );
@@ -26,6 +28,7 @@ export const createDeploymentOrPut = async (
     payload: IDeploymentCreateRequest,
     mode: 'post' | 'put'
 ) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance[mode](
         `${baseURL}/api/v1/deployments`,
         payload
@@ -35,6 +38,7 @@ export const createDeploymentOrPut = async (
 };
 
 export const deleteDeployment = async (id: number) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.delete(
         `${baseURL}/api/v1/deployments/${id}`
     );

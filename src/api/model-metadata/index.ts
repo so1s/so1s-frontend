@@ -1,11 +1,12 @@
 import { baseURL } from '../../constants';
-import { axiosInstance } from '../../hooks/useAuth';
+import { axiosInstanceRef } from '../../hooks/useAuth';
 import {
     IModelMetadataDetailResponse,
     IModelMetadataDeleteResponse,
 } from '../../interfaces/pages/model-metadata';
 
 export const getModelMetadataDetail = async (id: number, version: string) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.get(
         `${baseURL}/api/v1/models/${id}/versions/${version}`
     );
@@ -14,6 +15,7 @@ export const getModelMetadataDetail = async (id: number, version: string) => {
 };
 
 export const deleteModelMetadata = async (id: number, version: string) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.delete(
         `${baseURL}/api/v1/models/${id}/versions/${version}`
     );

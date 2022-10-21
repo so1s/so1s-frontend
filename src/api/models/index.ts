@@ -1,5 +1,5 @@
 import { baseURL } from '../../constants';
-import { axiosInstance } from '../../hooks/useAuth';
+import { axiosInstanceRef } from '../../hooks/useAuth';
 import { IYamlFindResponse } from '../../interfaces';
 import {
     ICreateModelRequest,
@@ -11,12 +11,14 @@ import {
 } from '../../interfaces/pages/models';
 
 export const getModels = async () => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.get(`${baseURL}/api/v1/models`);
 
     return response.data as IModelFindResponse[];
 };
 
 export const getModelMetadataById = async (id: number) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.get(`${baseURL}/api/v1/models/${id}`);
 
     return response.data as IModelMetadataFindResponse[];
@@ -26,6 +28,7 @@ export const getModelYaml = async ({
     modelId,
     version,
 }: IModelYamlFindRequest) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.get(
         `${baseURL}/api/v1/models/${modelId}/versions/${version}/yaml`
     );
@@ -37,6 +40,7 @@ export const createModelOrAddModelMetadata = async (
     payload: ICreateModelRequest,
     mode: 'post' | 'put'
 ) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const formData = new FormData();
 
     Object.entries(payload).forEach(([name, value]) => {
@@ -52,6 +56,7 @@ export const createModelOrAddModelMetadata = async (
 };
 
 export const deleteModel = async (id: number) => {
+    const { current: axiosInstance } = axiosInstanceRef;
     const response = await axiosInstance.delete(
         `${baseURL}/api/v1/models/${id}`
     );

@@ -1,29 +1,24 @@
 import { useAtom } from 'jotai';
 import axios from 'axios';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { accessTokenWithPersistence } from '../atoms/token';
 import { baseURL } from '../constants';
 
-export const axiosInstance = axios.create({ baseURL });
+const axiosInstance = axios.create({ baseURL });
+export const axiosInstanceRef = new Proxy({ current: axiosInstance }, {});
 
 const useAuth = () => {
-    const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
-    const axiosRef = useRef(axiosInstance);
+    const [accessToken] = useAtom(accessTokenWithPersistence);
 
     useEffect(() => {
-        axiosInstance.interceptors.request.use(
-            (config) => {
-                config.headers = config.headers ?? {};
-                config.headers.Authorization = `Bearer ${accessToken}`;
-                return config;
+        axiosInstanceRef.current = axios.create({
+            baseURL,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
             },
-            (error) => {
-                return Promise.reject(error);
-            }
-        );
+        });
     }, [accessToken]);
-
-    return [axiosRef];
 };
 
 export default useAuth;
