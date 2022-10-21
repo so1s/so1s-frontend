@@ -7,7 +7,7 @@ const NavBar: React.FC = () => {
     const [, setPage] = useAtom(currentPage);
     const navigate = useNavigate();
     return (
-        <nav className="w-[15vw] h-[95vh] bg-white divide-y divide-[#e5e7eb]">
+        <nav className="w-[15rem] h-[95vh] bg-white divide-y divide-[#e5e7eb]">
             {routes
                 .map((e) => {
                     if (e.hidden) {
