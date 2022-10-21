@@ -8,7 +8,7 @@ const axiosInstance = axios.create({ baseURL });
 export const axiosInstanceRef = new Proxy({ current: axiosInstance }, {});
 
 const useAuth = () => {
-    const [accessToken] = useAtom(accessTokenWithPersistence);
+    const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
 
     useEffect(() => {
         axiosInstanceRef.current = axios.create({
@@ -18,7 +18,18 @@ const useAuth = () => {
                 Authorization: `Bearer ${accessToken}`,
             },
         });
-    }, [accessToken]);
+
+        axiosInstanceRef.current.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response.status === 401) {
+                    setAccessToken('');
+                }
+
+                return Promise.reject(error);
+            }
+        );
+    }, [accessToken, setAccessToken]);
 };
 
 export default useAuth;
