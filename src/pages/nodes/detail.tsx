@@ -83,21 +83,9 @@ export const NodeDetail = () => {
                 >
                     <div>{nodeView.apiVersion}</div>
                     <div>{nodeView.kind}</div>
-                    <div>
-                        {
-                            nodeView.metadata.labels[
-                                'eks.amazonaws.com/nodegroup'
-                            ]
-                        }
-                    </div>
+                    <div>{nodeView.nodeGroup}</div>
                     <div>{nodeView.name}</div>
-                    <div>
-                        {
-                            nodeView.metadata.labels[
-                                'node.kubernetes.io/instance-type'
-                            ]
-                        }
-                    </div>
+                    <div>{nodeView.instanceType}</div>
                     <div>{nodeView.cpuAllocatable}</div>
                     <div>{nodeView.memoryAllocatable}</div>
                     <div>{nodeView.ephemeralStorageAllocatable}</div>

@@ -4,6 +4,10 @@ export const convertNodeToView = (node: INodeResponse): INodeView => {
     return {
         ...node,
         name: node.metadata.name,
+
+        nodeGroup: node.metadata.labels['eks.amazonaws.com/nodegroup'],
+        instanceType: node.metadata.labels['node.kubernetes.io/instance-type'],
+
         cpuAllocatable: node.status.allocatable.cpu,
         memoryAllocatable: node.status.allocatable.memory,
         ephemeralStorageAllocatable:

@@ -5,6 +5,9 @@ export type INodeResponse = RootObject;
 export type INodeView = INodeResponse & {
     name: string;
 
+    nodeGroup: string;
+    instanceType: string;
+
     cpuAllocatable: string;
     memoryAllocatable: string;
     ephemeralStorageAllocatable: string;
