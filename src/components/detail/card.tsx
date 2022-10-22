@@ -40,9 +40,11 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
                     <Backspace className="mt-1" />
                     <div>{title}</div>
                 </div>
-                <div className="my-auto mx-5 hover:cursor-pointer">
-                    <DeleteIcon fontSize="large" onClick={deleteHandler} />
-                </div>
+                {deleteHandler && (
+                    <div className="my-auto mx-5 hover:cursor-pointer">
+                        <DeleteIcon fontSize="large" onClick={deleteHandler} />
+                    </div>
+                )}
             </div>
 
             <Tabs
