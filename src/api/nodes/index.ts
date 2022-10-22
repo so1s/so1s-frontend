@@ -1,6 +1,6 @@
 import { baseURL } from '../../constants';
 import { axiosInstanceRef } from '../../hooks/useAuth';
-import { INodeResponse } from '../../interfaces/nodes';
+import { INodeResponse } from '../../interfaces/pages/nodes';
 
 export const getNodes = async () => {
     const { current: axiosInstance } = axiosInstanceRef;

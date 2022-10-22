@@ -1,4 +1,4 @@
 import { atom } from 'jotai';
-import { INodeResponse } from '../interfaces/nodes';
+import { INodeResponse } from '../interfaces/pages/nodes';
 
 export const nodesAtom = atom<INodeResponse[]>([]);
