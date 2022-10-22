@@ -140,9 +140,7 @@ export const ListTable = <T extends {}>({
                                     }
                                 >
                                     {row.map((item: any, idx) => {
-                                        const itemType = typeof item;
-
-                                        if (itemType === 'object') {
+                                        if (typeof item === 'object') {
                                             return null;
                                         }
 
