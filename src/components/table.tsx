@@ -41,9 +41,7 @@ export const ListTable = <T extends {}>({
         ? Object.keys(items[0])
               .filter((key) => {
                   const value = items[0][key as keyof T];
-                  const valueType = typeof value;
-
-                  return !(valueType === 'object');
+                  return typeof value !== 'object';
               })
               .map((key) => key[0].toUpperCase() + key.slice(1))
         : [];
