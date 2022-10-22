@@ -23,6 +23,7 @@ export const ListTable = <T extends {}>({
     items,
     itemKey,
     hasDetail,
+    creatable,
     editable,
     downloadable,
     deletable,
@@ -70,13 +71,15 @@ export const ListTable = <T extends {}>({
         <Paper className="mx-10 font-sans">
             <div className="flex justify-between mx-5 py-5">
                 <div className="font-serif text-2xl text-body">{title}</div>
-                <Link
-                    to={`${pathname}/create`}
-                    className="text-primary hover:cursor-pointer"
-                >
-                    {' '}
-                    + New {entity ?? title}{' '}
-                </Link>
+                {creatable && (
+                    <Link
+                        to={`${pathname}/create`}
+                        className="text-primary hover:cursor-pointer"
+                    >
+                        {' '}
+                        + New {entity ?? title}{' '}
+                    </Link>
+                )}
             </div>
             <Table>
                 <TableHead>
