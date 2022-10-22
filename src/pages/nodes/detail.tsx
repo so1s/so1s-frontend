@@ -22,7 +22,7 @@ export const NodeDetail = () => {
         if (!nodeName) {
             setSnackbarDatum({
                 severity: 'error',
-                message: `노드명이 주어지지 않았습니다..`,
+                message: `노드명이 주어지지 않았습니다.`,
             });
             navigate('/nodes');
         }
