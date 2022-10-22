@@ -8,3 +8,12 @@ export const getNodes = async () => {
 
     return response.data as INodeResponse[];
 };
+
+export const getNodeYaml = async (name: string) => {
+    const { current: axiosInstance } = axiosInstanceRef;
+    const response = await axiosInstance.get(
+        `${baseURL}/api/v1/nodes/${name}/yaml`
+    );
+
+    return response.data as string;
+};

@@ -30,6 +30,7 @@ import { ResourceDetail } from '../pages/resources/detail';
 import { CreateModelMetadata } from '../pages/model-metadata/create';
 import { Monitoring } from '../pages/monitoring';
 import { Nodes } from '../pages/nodes';
+import { NodeDetail } from '../pages/nodes/detail';
 
 const routes: IRouterDatum[] = [
     {
@@ -190,6 +191,13 @@ const routes: IRouterDatum[] = [
         name: 'Nodes',
         icon: <DnsIcon fontSize="large" />,
         page: Nodes,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/nodes/:nodeName',
+        name: 'Node Detail',
+        hidden: true,
+        page: NodeDetail,
         for: ['Owner', 'Admin', 'User'],
     },
 ];
