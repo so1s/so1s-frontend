@@ -31,6 +31,7 @@ const ABTests: React.FC = () => {
                 items={abTestsView}
                 itemKey="name"
                 hasDetail
+                creatable
                 editable
                 deletable
                 deleteAction={deleteAction}

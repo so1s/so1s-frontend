@@ -23,6 +23,7 @@ export const Resources = () => {
                 items={resources}
                 itemKey="name"
                 hasDetail
+                creatable
                 deletable
                 deleteAction={deleteAction}
             />
