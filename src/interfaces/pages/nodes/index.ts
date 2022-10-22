@@ -7,13 +7,13 @@ export type INodeView = INodeResponse & {
 
     cpuAllocatable: string;
     memoryAllocatable: string;
-    EphemeralStrageAllocatable: string;
-    gpuAllocatable: string;
+    ephemeralStorageAllocatable: string;
+    gpuAllocatable?: string;
     podsAllocatable: string;
 
     cpuCapacity: string;
     memoryCapacity: string;
-    ephemeralStrorageCapacity: string;
-    gpuCapacity: string;
+    ephemeralStorageCapacity: string;
+    gpuCapacity?: string;
     podsCapacity: string;
 };
