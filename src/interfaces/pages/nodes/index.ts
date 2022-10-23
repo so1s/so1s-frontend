@@ -2,6 +2,10 @@ import { RootObject } from './generated';
 
 export type INodeResponse = RootObject;
 
+export interface INodeYamlResponse {
+    yaml: string;
+}
+
 export type INodeView = INodeResponse & {
     name: string;
 

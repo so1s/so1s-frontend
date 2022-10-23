@@ -15,5 +15,7 @@ export const getNodeYaml = async (name: string) => {
         `${baseURL}/api/v1/nodes/${name}/yaml`
     );
 
-    return response.data as string;
+    const { data } = response;
+
+    return data.yaml;
 };
