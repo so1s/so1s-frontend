@@ -11,7 +11,7 @@ const ActionCard: React.FC<IActionCardProps> = ({
     return (
         <Paper className="w-6/12 mx-auto">
             <div className="font-serif text-2xl text-body mx-5 py-5">
-                <Backspace />
+                <Backspace className="mb-1" />
                 <span>{title}</span>
             </div>
             <div className="mx-5 py-5 font-sans">{children}</div>

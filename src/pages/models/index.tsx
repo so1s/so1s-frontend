@@ -40,6 +40,7 @@ const Models: React.FC = () => {
                 items={modelsView}
                 itemKey="name"
                 hasDetail
+                creatable
                 editable
                 deletable
                 deleteAction={deleteAction}

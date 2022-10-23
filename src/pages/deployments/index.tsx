@@ -48,6 +48,7 @@ export const Deployments = () => {
                 items={deploymentsView}
                 itemKey="deploymentName"
                 hasDetail
+                creatable
                 editable
                 deletable
                 deleteAction={deleteAction}

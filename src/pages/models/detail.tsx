@@ -63,6 +63,7 @@ const ModelDetail: React.FC = () => {
                 items={modelMetadataView}
                 itemKey="version"
                 hasDetail
+                creatable
                 deletable
                 deleteAction={deleteAction}
                 deleteParams={['version']}

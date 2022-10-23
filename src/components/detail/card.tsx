@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Box, Paper, Tab, Tabs } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useNavigate } from 'react-router-dom';
 import {
     IDetailCardProps,
     ITabPanelProps,
 } from '../../interfaces/components/detail';
-import { useNavigator } from '../../hooks/useNavigator';
+import { Backspace } from '../backspace';
 
 const TabPanel: React.FC<ITabPanelProps> = ({ children, index, value }) => {
     return (
@@ -38,17 +37,14 @@ export const DetailCard: React.FC<IDetailCardProps> = ({
         <Paper className="min-w-fit mx-10 my-10">
             <div className="flex justify-between">
                 <div className="flex font-serif text-2xl text-body mx-5 py-5">
-                    <div className="my-auto mr-3 hover:cursor-pointer">
-                        <KeyboardBackspaceIcon
-                            fontSize="large"
-                            onClick={useNavigator(-1)}
-                        />
-                    </div>
+                    <Backspace className="mt-1" />
                     <div>{title}</div>
                 </div>
-                <div className="my-auto mx-5 hover:cursor-pointer">
-                    <DeleteIcon fontSize="large" onClick={deleteHandler} />
-                </div>
+                {deleteHandler && (
+                    <div className="my-auto mx-5 hover:cursor-pointer">
+                        <DeleteIcon fontSize="large" onClick={deleteHandler} />
+                    </div>
+                )}
             </div>
 
             <Tabs

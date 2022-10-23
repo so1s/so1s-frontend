@@ -1,4 +1,4 @@
 import { atom } from 'jotai';
-import { IDataTypeResponse } from '../interfaces/data-types';
+import { IDataTypeResponse } from '../interfaces/atoms';
 
 export const dataTypesAtom = atom<IDataTypeResponse[]>([]);

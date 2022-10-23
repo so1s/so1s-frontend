@@ -1,6 +1,6 @@
 import { baseURL } from '../../constants';
 import { axiosInstanceRef } from '../../hooks/useAuth';
-import { IDataTypeResponse } from '../../interfaces/data-types';
+import { IDataTypeResponse } from '../../interfaces/atoms';
 
 export const getDataTypes = async () => {
     const { current: axiosInstance } = axiosInstanceRef;

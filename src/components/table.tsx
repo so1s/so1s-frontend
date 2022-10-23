@@ -23,6 +23,7 @@ export const ListTable = <T extends {}>({
     items,
     itemKey,
     hasDetail,
+    creatable,
     editable,
     downloadable,
     deletable,
@@ -37,9 +38,12 @@ export const ListTable = <T extends {}>({
     const navigate = useNavigate();
 
     const heads = items.length
-        ? Object.keys(items[0]).map(
-              (key) => key[0].toUpperCase() + key.slice(1)
-          )
+        ? Object.keys(items[0])
+              .filter((key) => {
+                  const value = items[0][key as keyof T];
+                  return typeof value !== 'object';
+              })
+              .map((key) => key[0].toUpperCase() + key.slice(1))
         : [];
     const bodies = items.map((e) => Object.values(e)) as unknown as any[][];
 
@@ -65,13 +69,15 @@ export const ListTable = <T extends {}>({
         <Paper className="mx-10 font-sans">
             <div className="flex justify-between mx-5 py-5">
                 <div className="font-serif text-2xl text-body">{title}</div>
-                <Link
-                    to={`${pathname}/create`}
-                    className="text-primary hover:cursor-pointer"
-                >
-                    {' '}
-                    + New {entity ?? title}{' '}
-                </Link>
+                {creatable && (
+                    <Link
+                        to={`${pathname}/create`}
+                        className="text-primary hover:cursor-pointer"
+                    >
+                        {' '}
+                        + New {entity ?? title}{' '}
+                    </Link>
+                )}
             </div>
             <Table>
                 <TableHead>
@@ -134,9 +140,13 @@ export const ListTable = <T extends {}>({
                                     }
                                 >
                                     {row.map((item: any, idx) => {
+                                        if (typeof item === 'object') {
+                                            return null;
+                                        }
+
                                         return (
                                             <TableCell key={idx} align="center">
-                                                {item}
+                                                {item ?? 'None'}
                                             </TableCell>
                                         );
                                     })}
@@ -188,7 +198,8 @@ export const ListTable = <T extends {}>({
                                     </TableCell>
                                 </TableRow>
                             );
-                        })}
+                        })
+                        .filter((e) => !!e)}
                 </TableBody>
             </Table>
             <TablePagination
