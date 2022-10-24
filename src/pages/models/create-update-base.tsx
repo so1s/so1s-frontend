@@ -89,7 +89,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
             '모델 이름': type === 'update' ? modelName : modelNameVal,
             '사용 라이브러리': library,
             '모델 파일': file,
-            'Model Type': deviceType,
+            'Model Device Type': deviceType,
             'Input Shape': inputShape,
             'Input Data Type': inputDataType,
             'Output Shape': outputShape,
