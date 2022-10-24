@@ -6,6 +6,10 @@ import {
     Button,
     FormControl,
     InputLabel,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
 } from '@mui/material';
 import { useAtom } from 'jotai';
 import { ReactNode, useRef, useState } from 'react';
@@ -17,6 +21,7 @@ import ActionCard from '../../components/action-card';
 import { useDataTypesData } from '../../hooks/data/useDataTypesData';
 import { useLibrariesData } from '../../hooks/data/useLibrariesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
+import { ModelType } from '../../types/pages';
 
 const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
@@ -32,6 +37,8 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
 
     const [library, setLibrary] = useState<string>('tensorflow');
     const [file, setFile] = useState<File | null>(null);
+    const [deviceType, setDeviceType] = useState<ModelType>('cpu');
+
     const modelNameRef = useRef<HTMLInputElement>(null);
     const inputShapeRef = useRef<HTMLInputElement>(null);
     const inputDataTypeRef = useRef<HTMLInputElement>(null);
@@ -47,6 +54,11 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     const handleFileInput = (e: React.ChangeEvent) => {
         const { files } = e.target as HTMLInputElement;
         setFile(files?.length ? files[0] : null);
+    };
+    const handleDeviceTypeChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setDeviceType((event.target as HTMLInputElement).value as ModelType);
     };
 
     const setError = (message: string) => {
@@ -77,6 +89,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
             '모델 이름': type === 'update' ? modelName : modelNameVal,
             '사용 라이브러리': library,
             '모델 파일': file,
+            'Model Type': deviceType,
             'Input Shape': inputShape,
             'Input Data Type': inputDataType,
             'Output Shape': outputShape,
@@ -102,6 +115,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                 name: items['모델 이름'] ?? '',
                 library,
                 modelFile: file!!,
+                deviceType,
                 inputShape: inputShape ?? '',
                 outputShape: outputShape ?? '',
                 inputDtype: inputDataType ?? '',
@@ -182,6 +196,29 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                         <input type="file" hidden onChange={handleFileInput} />
                     </Button>
                 </div>
+                <FormControl>
+                    <FormLabel id="model-type-radio-buttons">
+                        Model Device Type
+                    </FormLabel>
+                    <RadioGroup
+                        row
+                        aria-labelledby="model-type-radio-buttons"
+                        name="radio-buttons-group"
+                        value={deviceType}
+                        onChange={handleDeviceTypeChange}
+                    >
+                        <FormControlLabel
+                            value="cpu"
+                            control={<Radio />}
+                            label="CPU"
+                        />
+                        <FormControlLabel
+                            value="gpu"
+                            control={<Radio />}
+                            label="GPU"
+                        />
+                    </RadioGroup>
+                </FormControl>
 
                 <TextField
                     label="Input Shape"
