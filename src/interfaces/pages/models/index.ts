@@ -1,5 +1,6 @@
 import { IBaseResponse } from '../..';
 import { Status } from '../../../types';
+import { ModelType } from '../../../types/pages';
 
 export interface IModelBase {
     age: string;
@@ -56,6 +57,7 @@ export interface ICreateModelRequest {
     modelFile: File;
     name: string;
     library: string;
+    deviceType: ModelType;
     inputShape: string;
     inputDtype: string;
     outputShape: string;
