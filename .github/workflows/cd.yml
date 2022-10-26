@@ -29,13 +29,13 @@ jobs:
         id: replace_version
         with:
           source: ${{ github.ref_name }}
-          find: 'release/v'
+          find: 'v'
           replace: ''
       - name: Check Release
         uses: haya14busa/action-cond@v1.0.0
         id: version
         with:
-          cond: ${{ startsWith(github.ref_name, 'release')  }}
+          cond: ${{ startsWith(github.ref_name, 'v')  }}
           if_true: ${{ steps.replace_version.outputs.value }}
           if_false: "latest"
       - name: Build and push
