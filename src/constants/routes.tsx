@@ -3,10 +3,8 @@ import MonitorIcon from '@mui/icons-material/Monitor';
 import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SpeedIcon from '@mui/icons-material/Speed';
-import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import MemoryIcon from '@mui/icons-material/Memory';
 import DnsIcon from '@mui/icons-material/Dns';
-import Index from '../pages/example';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
@@ -156,13 +154,6 @@ const routes: IRouterDatum[] = [
         name: 'AB Test Update',
         hidden: true,
         page: UpdateABTest,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/alerts',
-        name: 'Alerts',
-        icon: <NotificationImportantIcon fontSize="large" />,
-        page: Index,
         for: ['Owner', 'Admin', 'User'],
     },
     {
