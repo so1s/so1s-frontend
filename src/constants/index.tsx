@@ -5,3 +5,5 @@ export enum UNIT {
     GPU = '%',
     REPLICAS = '',
 }
+
+export const { locale } = new Intl.NumberFormat().resolvedOptions();
