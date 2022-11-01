@@ -14,6 +14,7 @@ import { useDelete } from '../../hooks/useDelete';
 import { useModelsData } from '../../hooks/data/useModelsData';
 import { IModelMetadataDetail } from '../../interfaces/pages/model-metadata';
 import { convertStatusToIcon } from '../../utils/pages/models';
+import { locale } from '../../constants';
 
 export const ModelMetadataDetail = () => {
     const [models] = useModelsData();
@@ -81,7 +82,7 @@ export const ModelMetadataDetail = () => {
 
             setModelMetadata({
                 ...data,
-                age: new Date(data.age).toLocaleString(),
+                age: new Date(data.age).toLocaleString(locale),
                 status: convertStatusToIcon(data.status),
             });
         })();

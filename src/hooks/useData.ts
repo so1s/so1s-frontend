@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
+import { locale } from '../constants';
 import { Status } from '../types';
 import { convertStatusToIcon } from '../utils/pages/models';
 
@@ -69,7 +70,7 @@ export const useData = <
                 };
                 return {
                     ...narrowedDatum,
-                    age: new Date(narrowedDatum.age).toLocaleString(),
+                    age: new Date(narrowedDatum.age).toLocaleString(locale),
                     status: convertStatusToIcon(narrowedDatum.status),
                 } as unknown as IDatum;
             });
