@@ -4,6 +4,7 @@ import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SpeedIcon from '@mui/icons-material/Speed';
 import MemoryIcon from '@mui/icons-material/Memory';
+import FlareIcon from '@mui/icons-material/Flare';
 import DnsIcon from '@mui/icons-material/Dns';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
@@ -29,6 +30,7 @@ import { CreateModelMetadata } from '../pages/model-metadata/create';
 import { Monitoring } from '../pages/monitoring';
 import { Nodes } from '../pages/nodes';
 import { NodeDetail } from '../pages/nodes/detail';
+import { Tracing } from '../pages/tracing';
 
 const routes: IRouterDatum[] = [
     {
@@ -126,6 +128,13 @@ const routes: IRouterDatum[] = [
         name: 'Monitoring',
         icon: <MonitorIcon fontSize="large" />,
         page: Monitoring,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tracing',
+        name: 'Tracing',
+        icon: <FlareIcon fontSize="large" />,
+        page: Tracing,
         for: ['Owner', 'Admin', 'User'],
     },
     {
