@@ -23,6 +23,7 @@ export type IABTestCreateResponse = {
 } & IBaseResponse;
 
 export type IABTestView = {
+    id: number;
     a: string;
     b: string;
 } & IABTestBaseResponse;

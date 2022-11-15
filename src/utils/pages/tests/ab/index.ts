@@ -24,6 +24,7 @@ export const convertABTestToView = (
 ): IABTestView => {
     const joined = joinABTest(abTest, deployments);
     return {
+        id: joined.id,
         name: joined.name,
         a: joined.a?.deploymentName ?? '',
         b: joined.b?.deploymentName ?? '',
