@@ -13,6 +13,7 @@ const Models: React.FC = () => {
         () =>
             models.map((obj) =>
                 filterColumns(obj, [
+                    'id',
                     'age',
                     'name',
                     'status',

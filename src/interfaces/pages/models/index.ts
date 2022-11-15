@@ -3,6 +3,7 @@ import { Status } from '../../../types';
 import { ModelType } from '../../../types/pages';
 
 export interface IModelBase {
+    id: number;
     age: string;
     name: string;
     version: string;
@@ -13,9 +14,7 @@ export type IModelView = IModelBase & {
     status: JSX.Element;
 };
 
-export interface IModelDetail extends IModelBase {
-    id: number;
-}
+export interface IModelDetail extends IModelBase {}
 
 export type IModelFindResponse = IModelDetail & {
     status: Status;
