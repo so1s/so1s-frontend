@@ -10,6 +10,7 @@ import {
     RadioGroup,
     FormControlLabel,
     Radio,
+    LinearProgress,
 } from '@mui/material';
 import { useAtom } from 'jotai';
 import { ReactNode, useRef, useState } from 'react';
@@ -38,6 +39,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     const [library, setLibrary] = useState<string>('tensorflow');
     const [file, setFile] = useState<File | null>(null);
     const [deviceType, setDeviceType] = useState<ModelType>('cpu');
+    const [isUploading, setIsUploading] = useState(false);
 
     const modelNameRef = useRef<HTMLInputElement>(null);
     const inputShapeRef = useRef<HTMLInputElement>(null);
@@ -109,6 +111,8 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
         }
 
         const submitMode = type === 'create' ? 'post' : 'put';
+
+        setIsUploading(true);
 
         const data = await createModelOrAddModelMetadata(
             {
@@ -265,6 +269,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                         ))}
                     </Select>
                 </FormControl>
+                {isUploading && <LinearProgress color="primary" />}
             </div>
         </ActionCard>
     );
