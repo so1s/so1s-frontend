@@ -57,7 +57,7 @@ export const ABTestDetail = () => {
         <div>
             <DetailCard
                 title="AB Test Details"
-                tabs={['OverView', 'Logs']}
+                tabs={['OverView']}
                 deleteHandler={() => {
                     deleteAction(abTest.id);
                 }}
@@ -95,7 +95,7 @@ export const ABTestDetail = () => {
                     <div>{abTestJoined.b?.modelVersion}</div>
                     <div>{abTestJoined.b?.strategy}</div>
                 </OverViewTab>
-                <div>Not Implemented</div>
+                <></>
             </DetailCard>
         </div>
     );

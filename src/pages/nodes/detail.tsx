@@ -58,10 +58,7 @@ export const NodeDetail = () => {
 
     return (
         <div>
-            <DetailCard
-                title="Node Details"
-                tabs={['OverView', 'Logs', 'Yaml']}
-            >
+            <DetailCard title="Node Details" tabs={['OverView', 'Yaml']}>
                 <OverViewTab
                     headEl={[
                         'Api Version',
@@ -97,7 +94,6 @@ export const NodeDetail = () => {
                     <div>{nodeView.gpuCapacity ?? 'None'}</div>
                     <div>{nodeView.podsCapacity}</div>
                 </OverViewTab>
-                <div>Not Implemented</div>
                 <YamlTab value={yaml} />
             </DetailCard>
         </div>
