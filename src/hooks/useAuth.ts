@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { accessTokenWithPersistence } from '../atoms/token';
 import { baseURL } from '../constants';
 
@@ -9,6 +10,15 @@ export const axiosInstanceRef = new Proxy({ current: axiosInstance }, {});
 
 const useAuth = () => {
     const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!accessToken && location.pathname !== '/login') {
+            navigate('/login');
+        }
+    }, [accessToken]);
 
     useEffect(() => {
         axiosInstanceRef.current = axios.create({
