@@ -10,6 +10,7 @@ import {
     FormControlLabel,
     Radio,
     Slider,
+    LinearProgress,
 } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import { useAtom } from 'jotai';
@@ -57,6 +58,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     const standardValueRef = useRef<HTMLInputElement>(null);
     const [replicaRange, setReplicaRange] = useState<number[]>([1, 4]);
     const [radioValue, setRadioValue] = useState<ScalingToggleMode>('REPLICAS');
+    const [isUploading, setIsUploading] = useState(false);
 
     const handleChangeModel = (
         event: SelectChangeEvent<number>,
@@ -132,6 +134,8 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
             minReplicas: replicaRange[0],
             maxReplicas: replicaRange[1],
         };
+
+        setIsUploading(true);
 
         const data = await createDeploymentOrPut(
             {
@@ -405,6 +409,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
                     />
                 )}
             </div>
+            {isUploading && <LinearProgress color="primary" />}
         </ActionCard>
     );
 };
