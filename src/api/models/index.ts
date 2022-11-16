@@ -19,6 +19,7 @@ export const getModels = async () => {
 
 export const getModelMetadataById = async (id?: number) => {
     if (id === undefined) {
+        // eslint-disable-next-line no-promise-executor-return
         await new Promise((res) => setTimeout(res, 100));
         return [];
     }
