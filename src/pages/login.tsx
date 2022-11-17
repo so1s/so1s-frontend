@@ -11,6 +11,7 @@ import { snackbarAtom } from '../atoms/snackbar';
 
 const Login: React.FC = () => {
     const [accessToken, setAccessToken] = useAtom(accessTokenWithPersistence);
+
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 

@@ -19,7 +19,6 @@ const NavBar: React.FC = () => {
                             key={e.name}
                             className="h-20 flex flex-grow cursor-pointer"
                             onClick={() => {
-                                setPage(e);
                                 navigate(e.uri);
                             }}
                         >
