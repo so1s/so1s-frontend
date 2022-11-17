@@ -35,10 +35,7 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     type,
 }: ICreateUpdateBaseParams) => {
     const [resources] = useResourcesData();
-    const [resource, setResource] = useState<IResourceFind | null>(
-        resources[0] ?? null
-    );
-
+    const [resource, setResource] = useState<IResourceFind | null>(null);
     const [models] = useModelsData();
     const [modelMetadata, modelMetadataRefresh] = useModelMetadata();
     const [deployments] = useDeploymentsData();
@@ -188,15 +185,15 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
     };
 
     useEffect(() => {
-        if (type === 'update' && deployment) {
+        if (deployment) {
             const modelId = models.find(
                 (model) => model.name === deployment.modelName
             )?.id;
-            if (modelId) {
+            if (modelId !== undefined) {
                 modelMetadataRefresh(modelId);
             }
         }
-    }, [type, deployment]);
+    }, [deployment]);
 
     if (type === 'update' && !deployment) {
         setSnackbarDatum({

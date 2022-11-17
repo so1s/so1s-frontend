@@ -91,5 +91,7 @@ export const useData = <
         }
     }, [needRefesh, getData, setNeedRefresh]);
 
+    useEffect(() => () => setData([]), []);
+
     return [data, refresh] as const;
 };
