@@ -6,6 +6,7 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import MemoryIcon from '@mui/icons-material/Memory';
 import FlareIcon from '@mui/icons-material/Flare';
 import DnsIcon from '@mui/icons-material/Dns';
+import SearchIcon from '@mui/icons-material/Search';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
@@ -31,6 +32,7 @@ import { Monitoring } from '../pages/monitoring';
 import { Nodes } from '../pages/nodes';
 import { NodeDetail } from '../pages/nodes/detail';
 import { Tracing } from '../pages/tracing';
+import { Logging } from '../pages/logging';
 
 const routes: IRouterDatum[] = [
     {
@@ -121,6 +123,13 @@ const routes: IRouterDatum[] = [
         name: 'Update Deployment',
         hidden: true,
         page: UpdateDeployment,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/logging',
+        name: 'Logging',
+        icon: <SearchIcon fontSize="large" />,
+        page: Logging,
         for: ['Owner', 'Admin', 'User'],
     },
     {

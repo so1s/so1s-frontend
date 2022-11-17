@@ -92,7 +92,7 @@ export const ModelMetadataDetail = () => {
         <div>
             <DetailCard
                 title="Model Metadata Details"
-                tabs={['OverView', 'Logs', 'Yaml']}
+                tabs={['OverView', 'Yaml']}
                 deleteHandler={() => {
                     if (!model || !version) {
                         return;
@@ -125,7 +125,6 @@ export const ModelMetadataDetail = () => {
                     <div>{modelMetadata?.outputShape}</div>
                     <div>{modelMetadata?.outputDtype}</div>
                 </OverViewTab>
-                <div>Not Implemented</div>
                 <YamlTab value={yaml} />
             </DetailCard>
         </div>

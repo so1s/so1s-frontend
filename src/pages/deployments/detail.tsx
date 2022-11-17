@@ -70,7 +70,7 @@ export const DeploymentDetail: React.FC = () => {
         <div>
             <DetailCard
                 title="Deployment Details"
-                tabs={['OverView', 'Logs', 'Yaml']}
+                tabs={['OverView', 'Yaml']}
                 deleteHandler={() => {
                     if (!deployment) {
                         return;
@@ -122,7 +122,6 @@ export const DeploymentDetail: React.FC = () => {
                     <div>{deployment?.minReplicas}</div>
                     <div>{deployment?.maxReplicas}</div>
                 </OverViewTab>
-                <div>Not Implemented</div>
                 <YamlTab value={yaml} />
             </DetailCard>
         </div>
