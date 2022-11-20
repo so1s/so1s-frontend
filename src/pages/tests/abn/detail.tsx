@@ -50,7 +50,8 @@ export const ABNTestDetail = () => {
         return <></>;
     }
 
-    const abnTestJoined = joinABNTest(abnTest, deployments);
+    const abnTestJoined =
+        abnTest !== undefined ? joinABNTest(abnTest, deployments) : undefined;
 
     const headElements = ['ID', 'Name', 'Domain'].concat(
         abnTest?.elements
