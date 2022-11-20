@@ -24,7 +24,7 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
 }: ICreateUpdateBaseParams) => {
     const [abnTests] = useABNTestsData();
     const [deployments] = useDeploymentsData();
-    const [elementsSize, setElementsSize] = useState(1);
+    const [elementsSize, setElementsSize] = useState(0);
     const elements = useRef<IABNTestElement[]>([]);
 
     const navigate = useNavigate();
