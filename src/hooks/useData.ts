@@ -76,7 +76,13 @@ export const useData = <
             });
             setData(data as IDatum[]);
         } catch (err) {
-            if ((err as AxiosError).response?.status === 500) {
+            const error = err as AxiosError;
+
+            // handle err_connection_refused
+            if (!error.response) {
+                return;
+            }
+            if (error.response?.status === 500) {
                 return;
             }
 
