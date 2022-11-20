@@ -3,7 +3,7 @@ import {
     IABTestJoined,
     IABTestReadResponse,
     IABTestView,
-} from '../../../../interfaces/pages/tests';
+} from '../../../../interfaces/pages/tests/ab';
 
 export const joinABTest = (
     abTest: IABTestReadResponse,

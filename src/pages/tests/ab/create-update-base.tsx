@@ -9,7 +9,7 @@ import { pipe } from 'fp-ts/lib/function';
 import { useAtom } from 'jotai';
 import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createOrUpdateABTest } from '../../../api/tests';
+import { createOrUpdateABTest } from '../../../api/tests/ab';
 import { snackbarAtom } from '../../../atoms/snackbar';
 import ActionCard from '../../../components/action-card';
 import { useABTestsData } from '../../../hooks/data/useABTestsData';
@@ -121,8 +121,9 @@ export const CreateUpdateABTestBase: React.FC<ICreateUpdateBaseParams> = ({
             <div className="flex flex-col space-y-10 my-10 mx-auto">
                 <TextField
                     label={`AB Test Name${
-                        type === 'update' &&
-                        `: ${abTest?.name ?? 'Not Found'} (Disabled)`
+                        type === 'update'
+                            ? `: ${abTest?.name ?? 'Not Found'} (Disabled)`
+                            : ''
                     }`}
                     disabled={type === 'update'}
                     placeholder="AB Test"

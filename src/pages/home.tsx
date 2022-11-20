@@ -4,11 +4,11 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import { useEffect, useState, useMemo } from 'react';
 import getDeployments from '../api/deployments';
 import getModels from '../api/models';
-import getABTests from '../api/tests';
+import getABTests from '../api/tests/ab';
 import SummaryCard from '../components/summary-card';
 import { IDeploymentFindResponse } from '../interfaces/pages/deployments';
 import { IModelFindResponse } from '../interfaces/pages/models';
-import { IABTestReadResponse } from '../interfaces/pages/tests';
+import { IABTestReadResponse } from '../interfaces/pages/tests/ab';
 import ISummaries from '../interfaces/pages/home';
 
 const Home: React.FC = () => {

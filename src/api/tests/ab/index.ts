@@ -1,11 +1,11 @@
-import { baseURL } from '../../constants';
-import { axiosInstanceRef } from '../../hooks/useAuth';
+import { baseURL } from '../../../constants';
+import { axiosInstanceRef } from '../../../hooks/useAuth';
 import {
     IABTestCreateRequest,
     IABTestCreateResponse,
     IABTestDeleteResponse,
     IABTestReadResponse,
-} from '../../interfaces/pages/tests';
+} from '../../../interfaces/pages/tests/ab';
 
 export const getABTests = async () => {
     const { current: axiosInstance } = axiosInstanceRef;

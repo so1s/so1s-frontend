@@ -1,13 +1,13 @@
 import { useAtom } from 'jotai';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deleteABTest } from '../../../api/tests';
+import { deleteABTest } from '../../../api/tests/ab';
 import { snackbarAtom } from '../../../atoms/snackbar';
 import { DetailCard } from '../../../components/detail/card';
 import OverViewTab from '../../../components/detail/overview-tab';
 import { useABTestsData } from '../../../hooks/data/useABTestsData';
 import { useDelete } from '../../../hooks/useDelete';
 import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
-import { IABTestJoined } from '../../../interfaces/pages/tests';
+import { IABTestJoined } from '../../../interfaces/pages/tests/ab';
 import { joinABTest } from '../../../utils/pages/tests/ab';
 
 export const ABTestDetail = () => {

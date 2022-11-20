@@ -1,4 +1,4 @@
-import getABTests from '../../api/tests';
+import getABTests from '../../api/tests/ab';
 import { abTestsAtom } from '../../atoms/tests';
 import { useData } from '../useData';
 
