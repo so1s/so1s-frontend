@@ -24,7 +24,7 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
 }: ICreateUpdateBaseParams) => {
     const [abnTests] = useABNTestsData();
     const [deployments] = useDeploymentsData();
-    const [elementsSize, setElementsSize] = useState(0);
+    const [elementsSize, setElementsSize] = useState(1);
     const elements = useRef<IABNTestElement[]>([]);
 
     const navigate = useNavigate();
@@ -41,8 +41,8 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
     const nameRef = useRef<HTMLInputElement>(null);
     const domainRef = useRef<HTMLInputElement>(null);
 
-    const { abnTestName } = useParams();
-    const abnTest = abnTests.find((test) => test.name === abnTestName);
+    const { id } = useParams();
+    const abnTest = abnTests.find((test) => test.id === +id);
 
     useEffect(() => {
         if (type === 'update' && abnTest) {
@@ -63,14 +63,8 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
         }
     }, [elementsSize]);
 
-    if (type === 'update' && !abnTestName) {
-        setError(`AB Test Name이 주어지지 않았습니다.`);
-        navigate('/tests/abn', { replace: true });
-        return <></>;
-    }
-
-    if (type === 'update' && !abnTest) {
-        setError(`Name과 일치하는 AB Test 객체를 찾지 못했습니다.`);
+    if (type === 'update' && id == null) {
+        setError(`AB Test ID가 주어지지 않았습니다.`);
         navigate('/tests/abn', { replace: true });
         return <></>;
     }
@@ -193,7 +187,7 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
         }
 
         return result;
-    }, [elementsSize]);
+    }, [elementsSize, deployments]);
 
     return (
         <ActionCard

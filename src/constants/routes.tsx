@@ -200,7 +200,7 @@ const routes: IRouterDatum[] = [
         for: ['Owner', 'Admin', 'User'],
     },
     {
-        uri: '/tests/abn/update/:abnTestName',
+        uri: '/tests/abn/update/:id',
         name: 'ABN Test Update',
         hidden: true,
         page: UpdateABNTest,
