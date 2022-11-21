@@ -130,64 +130,62 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
         navigate('/tests/abn');
     };
 
-    const elementsForm = useMemo(() => {
-        const result = [];
+    const elementsForm = useMemo(
+        () =>
+            new Array(elementsSize).fill(null).map((_, idx) => {
+                const p1 = idx + 1;
 
-        for (let idx = 0; idx < elementsSize; idx++) {
-            const p1 = idx + 1;
+                const handleDeploymentChange = (
+                    event: SelectChangeEvent<number>
+                ) => {
+                    const {
+                        target: { value },
+                    } = event;
 
-            const handleDeploymentChange = (
-                event: SelectChangeEvent<number>
-            ) => {
-                const {
-                    target: { value },
-                } = event;
+                    elements.current[idx].deploymentId = +value;
+                };
 
-                elements.current[idx].deploymentId = +value;
-            };
+                const handleWeightChange = (
+                    event: React.ChangeEvent<HTMLInputElement>
+                ) => {
+                    const {
+                        target: { value },
+                    } = event;
 
-            const handleWeightChange = (
-                event: React.ChangeEvent<HTMLInputElement>
-            ) => {
-                const {
-                    target: { value },
-                } = event;
+                    elements.current[idx].weight = +value;
+                };
 
-                elements.current[idx].weight = +value;
-            };
-
-            result.push(
-                <div className="my-10">
-                    <FormControl key={idx} fullWidth>
-                        <InputLabel id={`deployment-${idx}`}>
-                            Deployment {p1}
-                        </InputLabel>
-                        <div className="space-y-10 flex flex-col">
-                            <Select
-                                label="Deployment"
-                                onChange={handleDeploymentChange}
-                            >
-                                {deployments.map((dep) => (
-                                    <MenuItem key={dep.id} value={dep.id}>
-                                        {dep.deploymentName}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                            <TextField
-                                label={`Deployment ${p1} Weight`}
-                                type="number"
-                                defaultValue={0}
-                                inputProps={{ min: 0 }}
-                                onChange={handleWeightChange}
-                            />
-                        </div>
-                    </FormControl>
-                </div>
-            );
-        }
-
-        return result;
-    }, [elementsSize, deployments]);
+                return (
+                    <div key={idx} className="my-10">
+                        <FormControl fullWidth>
+                            <InputLabel id={`deployment-${idx}`}>
+                                Deployment {p1}
+                            </InputLabel>
+                            <div className="space-y-10 flex flex-col">
+                                <Select
+                                    label="Deployment"
+                                    onChange={handleDeploymentChange}
+                                >
+                                    {deployments.map((dep) => (
+                                        <MenuItem key={dep.id} value={dep.id}>
+                                            {dep.deploymentName}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                                <TextField
+                                    label={`Deployment ${p1} Weight`}
+                                    type="number"
+                                    defaultValue={0}
+                                    inputProps={{ min: 0 }}
+                                    onChange={handleWeightChange}
+                                />
+                            </div>
+                        </FormControl>
+                    </div>
+                );
+            }),
+        [elementsSize, deployments]
+    );
 
     return (
         <ActionCard
