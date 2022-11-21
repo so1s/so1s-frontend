@@ -42,7 +42,9 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
     const domainRef = useRef<HTMLInputElement>(null);
 
     const { id } = useParams();
-    const abnTest = abnTests.find((test) => test.id === +id);
+    const abnTest = abnTests.find(
+        (test) => id !== undefined && test.id === +id
+    );
 
     useEffect(() => {
         if (type === 'update' && abnTest) {
