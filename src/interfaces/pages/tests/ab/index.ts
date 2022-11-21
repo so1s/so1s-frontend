@@ -1,5 +1,5 @@
-import { IBaseResponse } from '../..';
-import { IDeploymentDatum } from '../deployments';
+import { IBaseResponse } from '../../..';
+import { IDeploymentDatum } from '../../deployments';
 
 export interface IABTestBaseResponse {
     name: string;

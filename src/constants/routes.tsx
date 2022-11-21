@@ -33,6 +33,10 @@ import { Nodes } from '../pages/nodes';
 import { NodeDetail } from '../pages/nodes/detail';
 import { Tracing } from '../pages/tracing';
 import { Logging } from '../pages/logging';
+import ABNTests from '../pages/tests/abn';
+import { ABNTestDetail } from '../pages/tests/abn/detail';
+import { CreateABNTest } from '../pages/tests/abn/create';
+import { UpdateABNTest } from '../pages/tests/abn/update';
 
 const routes: IRouterDatum[] = [
     {
@@ -172,6 +176,34 @@ const routes: IRouterDatum[] = [
         name: 'AB Test Update',
         hidden: true,
         page: UpdateABTest,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/abn',
+        name: 'ABN Tests',
+        icon: <SpeedIcon fontSize="large" />,
+        page: ABNTests,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/abn/:id',
+        name: 'ABN Test Detail',
+        hidden: true,
+        page: ABNTestDetail,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/abn/create',
+        name: 'ABN Test Create',
+        hidden: true,
+        page: CreateABNTest,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/tests/abn/update/:id',
+        name: 'ABN Test Update',
+        hidden: true,
+        page: UpdateABNTest,
         for: ['Owner', 'Admin', 'User'],
     },
     {

@@ -1,9 +1,9 @@
-import { deleteABTest } from '../../../api/tests';
+import { deleteABTest } from '../../../api/tests/ab';
 import ListTable from '../../../components/table';
 import { useABTestsData } from '../../../hooks/data/useABTestsData';
 import { useDelete } from '../../../hooks/useDelete';
 import { useDeploymentsData } from '../../../hooks/data/useDeploymentsData';
-import { IABTestView } from '../../../interfaces/pages/tests';
+import { IABTestView } from '../../../interfaces/pages/tests/ab';
 import { convertABTestToView } from '../../../utils/pages/tests/ab';
 
 const ABTests: React.FC = () => {
