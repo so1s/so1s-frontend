@@ -53,7 +53,7 @@ export const ABNTestDetail = () => {
     const abnTestJoined =
         abnTest !== undefined ? joinABNTest(abnTest, deployments) : undefined;
 
-    const headElements = ['ID', 'Name', 'Domain'].concat(
+    const headElements = ['ID', 'Name', 'Domain', 'Endpoint'].concat(
         abnTest?.elements
             .map((e, idx) => {
                 const p1 = idx + 1;
@@ -102,6 +102,7 @@ export const ABNTestDetail = () => {
                         <div key="id">{abnTestJoined?.id}</div>,
                         <div key="name">{abnTestJoined?.name}</div>,
                         <div key="domain">{abnTestJoined?.domain}</div>,
+                        <div key="endPoint">{abnTestJoined?.endPoint}</div>,
                     ].concat(deploymentDivs)}
                 </OverViewTab>
                 <></>

@@ -12,6 +12,7 @@ export const convertABNTestToView = (
         id: abnTest.id,
         name: abnTest.name,
         domain: abnTest.domain,
+        endPoint: abnTest?.endPoint,
     };
 };
 
@@ -23,6 +24,7 @@ export const joinABNTest = (
         id: abnTest?.id,
         name: abnTest?.name,
         domain: abnTest?.domain,
+        endPoint: abnTest?.endPoint,
         elements: abnTest?.elements?.map((e) => ({
             deployment: deployments?.find((d) => d.id === e.deploymentId)!,
             weight: e.weight,

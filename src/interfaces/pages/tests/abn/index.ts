@@ -18,6 +18,7 @@ export interface IABNTestBaseResponse {
 
 export type IABNTestReadResponse = {
     id: number;
+    endPoint: string;
     elements: IABNTestElement[];
 } & IABNTestBaseResponse;
 
@@ -32,6 +33,7 @@ export type IABNTestCreateResponse = {
 
 export type IABNTestView = {
     id: number;
+    endPoint: string;
 } & IABNTestBaseResponse;
 
 export type IABNTestJoined = {

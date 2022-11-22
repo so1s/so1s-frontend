@@ -22,8 +22,6 @@ const ABNTests: React.FC = () => {
         return success;
     };
 
-    console.log({ abnTests });
-
     return (
         <div>
             <ListTable
