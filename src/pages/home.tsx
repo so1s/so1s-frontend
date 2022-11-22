@@ -4,12 +4,12 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import { useEffect, useState, useMemo } from 'react';
 import getDeployments from '../api/deployments';
 import getModels from '../api/models';
-import getABTests from '../api/tests/ab';
 import SummaryCard from '../components/summary-card';
 import { IDeploymentFindResponse } from '../interfaces/pages/deployments';
 import { IModelFindResponse } from '../interfaces/pages/models';
-import { IABTestReadResponse } from '../interfaces/pages/tests/ab';
 import ISummaries from '../interfaces/pages/home';
+import { IABNTestReadResponse } from '../interfaces/pages/tests/abn';
+import getABNTests from '../api/tests/abn';
 
 const Home: React.FC = () => {
     const [summaries, setSummaries] = useState<ISummaries>({
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
 
     const getTestData = useMemo(
         () => async () => {
-            const response: IABTestReadResponse[] = await getABTests();
+            const response: IABNTestReadResponse[] = await getABNTests();
 
             const result = response.map((item) => {
                 return {
@@ -99,7 +99,7 @@ const Home: React.FC = () => {
                 }
             />
             <SummaryCard
-                title="A/B Test Summary"
+                title="ABN Test Summary"
                 summaryList={summaries?.test ?? []}
                 icon={<SpeedIcon fontSize="medium" className="my-auto" />}
             />

@@ -20,10 +20,6 @@ import { Deployments } from '../pages/deployments';
 import { CreateDeployment } from '../pages/deployments/create';
 import { UpdateDeployment } from '../pages/deployments/update';
 import { DeploymentDetail } from '../pages/deployments/detail';
-import ABTests from '../pages/tests/ab';
-import { ABTestDetail } from '../pages/tests/ab/detail';
-import { CreateABTest } from '../pages/tests/ab/create';
-import { UpdateABTest } from '../pages/tests/ab/update';
 import { Resources } from '../pages/resources';
 import { CreateResource } from '../pages/resources/create';
 import { ResourceDetail } from '../pages/resources/detail';
@@ -148,34 +144,6 @@ const routes: IRouterDatum[] = [
         name: 'Tracing',
         icon: <FlareIcon fontSize="large" />,
         page: Tracing,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/tests/ab',
-        name: 'AB Tests',
-        icon: <SpeedIcon fontSize="large" />,
-        page: ABTests,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/tests/ab/:abTestName',
-        name: 'AB Test Detail',
-        hidden: true,
-        page: ABTestDetail,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/tests/ab/create',
-        name: 'AB Test Create',
-        hidden: true,
-        page: CreateABTest,
-        for: ['Owner', 'Admin', 'User'],
-    },
-    {
-        uri: '/tests/ab/update/:abTestName',
-        name: 'AB Test Update',
-        hidden: true,
-        page: UpdateABTest,
         for: ['Owner', 'Admin', 'User'],
     },
     {
