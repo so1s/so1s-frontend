@@ -3,6 +3,7 @@ export default interface IListTableProps<T extends {}> {
     entity?: string;
     items: T[];
     itemKey: keyof T;
+    enableBackspace?: boolean;
     hasDetail?: boolean;
     creatable?: boolean;
     editable?: boolean;

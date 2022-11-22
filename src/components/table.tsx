@@ -16,12 +16,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import IListTableProps from '../interfaces/components/table';
 import { hasOwnProperty } from '../utils';
+import { Backspace } from './backspace';
 
 export const ListTable = <T extends {}>({
     title,
     entity,
     items,
     itemKey,
+    enableBackspace,
     hasDetail,
     creatable,
     editable,
@@ -68,7 +70,10 @@ export const ListTable = <T extends {}>({
     return (
         <Paper className="mx-10 font-sans">
             <div className="flex justify-between mx-5 py-5">
-                <div className="font-serif text-2xl text-body">{title}</div>
+                <div className="font-serif text-2xl text-body">
+                    {enableBackspace && <Backspace className="mb-1" />}
+                    {title}
+                </div>
                 {creatable && (
                     <Link
                         to={`${pathname}/create`}

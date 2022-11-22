@@ -62,6 +62,7 @@ const ModelDetail: React.FC = () => {
                 entity="Metadata"
                 items={modelMetadataView}
                 itemKey="version"
+                enableBackspace
                 hasDetail
                 creatable
                 deletable
