@@ -166,6 +166,9 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
                             <div className="space-y-10 flex flex-col">
                                 <Select
                                     label="Deployment"
+                                    value={
+                                        elements.current[idx]?.deploymentId ?? 0
+                                    }
                                     onChange={handleDeploymentChange}
                                 >
                                     {deployments.map((dep) => (
@@ -177,7 +180,9 @@ export const CreateUpdateABNTestBase: React.FC<ICreateUpdateBaseParams> = ({
                                 <TextField
                                     label={`Deployment ${p1} Weight`}
                                     type="number"
-                                    defaultValue={0}
+                                    defaultValue={
+                                        elements.current[idx]?.weight ?? 0
+                                    }
                                     inputProps={{ min: 0 }}
                                     onChange={handleWeightChange}
                                 />
