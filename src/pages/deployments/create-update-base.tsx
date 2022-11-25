@@ -195,7 +195,12 @@ const CreateUpdateDeploymentBase: React.FC<ICreateUpdateBaseParams> = ({
         }
     }, [deployment]);
 
-    if (type === 'update' && !deployment) {
+    if (
+        type === 'update' &&
+        deployments.length &&
+        models.length &&
+        !deployment
+    ) {
         setSnackbarDatum({
             severity: 'error',
             message: '일치하는 Deployment 데이터가 없습니다.',

@@ -138,7 +138,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
 
     const model = models.find((model) => model.name === modelName);
 
-    if (type === 'update' && !model) {
+    if (type === 'update' && models.length && !model) {
         setSnackbarDatum({
             severity: 'error',
             message: '일치하는 모델 데이터가 없습니다.',
