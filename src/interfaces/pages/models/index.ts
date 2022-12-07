@@ -14,7 +14,9 @@ export type IModelView = IModelBase & {
     status: JSX.Element;
 };
 
-export interface IModelDetail extends IModelBase {}
+export interface IModelDetail extends IModelBase {
+    registryId: number;
+}
 
 export type IModelFindResponse = IModelDetail & {
     status: Status;
@@ -56,6 +58,7 @@ export interface ICreateModelRequest {
     modelFile: File;
     name: string;
     library: string;
+    registryId: number;
     deviceType: ModelType;
     inputShape: string;
     inputDtype: string;

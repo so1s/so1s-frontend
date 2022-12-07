@@ -7,6 +7,7 @@ import MemoryIcon from '@mui/icons-material/Memory';
 import FlareIcon from '@mui/icons-material/Flare';
 import DnsIcon from '@mui/icons-material/Dns';
 import SearchIcon from '@mui/icons-material/Search';
+import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
@@ -33,6 +34,8 @@ import ABNTests from '../pages/tests/abn';
 import { ABNTestDetail } from '../pages/tests/abn/detail';
 import { CreateABNTest } from '../pages/tests/abn/create';
 import { UpdateABNTest } from '../pages/tests/abn/update';
+import { Registries } from '../pages/registries';
+import { CreateRegistry } from '../pages/registries/create';
 
 const routes: IRouterDatum[] = [
     {
@@ -151,6 +154,20 @@ const routes: IRouterDatum[] = [
         name: 'ABN Test Update',
         hidden: true,
         page: UpdateABNTest,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/registries',
+        name: 'Registries',
+        icon: <CloudQueueIcon fontSize="large" />,
+        page: Registries,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/registries/create',
+        name: 'Registry Create',
+        hidden: true,
+        page: CreateRegistry,
         for: ['Owner', 'Admin', 'User'],
     },
     {
