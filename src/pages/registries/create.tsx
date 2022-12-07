@@ -63,11 +63,6 @@ export const CreateRegistry: React.FC = () => {
             password: itemsWithValues.password,
         });
 
-        setSnackbarDatum({
-            severity: response.success ? 'success' : 'error',
-            message: JSON.stringify(response.message, null, 4),
-        });
-
         navigate('/registries');
     };
 
