@@ -205,7 +205,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                     >
                         {registries.map((e) => (
                             <MenuItem key={e.id} value={e.id}>
-                                {e.name}
+                                {e.name} / {e.baseUrl} / {e.username}
                             </MenuItem>
                         ))}
                     </Select>

@@ -76,19 +76,19 @@ export const CreateRegistry: React.FC = () => {
                     inputRef={nameRef}
                 />
                 <TextField
-                    label="Registry url"
+                    label="Base URL"
                     type="text"
                     placeholder="ghcr.io"
                     inputRef={baseUrlRef}
                 />
                 <TextField
-                    label="Registry Username"
+                    label="Username / ID"
                     type="text"
                     placeholder="so1s"
                     inputRef={usernameRef}
                 />
                 <TextField
-                    label="Registry Password"
+                    label="Password / Token"
                     type="password"
                     inputRef={passwordRef}
                 />
