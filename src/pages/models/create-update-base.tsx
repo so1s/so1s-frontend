@@ -21,6 +21,7 @@ import { snackbarAtom } from '../../atoms/snackbar';
 import ActionCard from '../../components/action-card';
 import { useDataTypesData } from '../../hooks/data/useDataTypesData';
 import { useLibrariesData } from '../../hooks/data/useLibrariesData';
+import { useRegistriesData } from '../../hooks/data/useRegistriesData';
 import { ICreateUpdateBaseParams } from '../../interfaces';
 import { ModelType } from '../../types/pages';
 
@@ -35,8 +36,11 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     const [dataTypes] = useDataTypesData();
 
     const [libraries] = useLibrariesData();
-
     const [library, setLibrary] = useState<string>('tensorflow');
+
+    const [registries] = useRegistriesData();
+    const [registry, setRegistry] = useState<number>(registries[0]?.id ?? 0);
+
     const [file, setFile] = useState<File | null>(null);
     const [deviceType, setDeviceType] = useState<ModelType>('cpu');
     const [isUploading, setIsUploading] = useState(false);
@@ -53,10 +57,19 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
     ) => {
         setLibrary(event.target.value);
     };
+
+    const handleChangeRegistry = (
+        event: SelectChangeEvent<number>,
+        child?: ReactNode
+    ) => {
+        setRegistry(+event.target.value);
+    };
+
     const handleFileInput = (e: React.ChangeEvent) => {
         const { files } = e.target as HTMLInputElement;
         setFile(files?.length ? files[0] : null);
     };
+
     const handleDeviceTypeChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -91,6 +104,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
             '모델 이름': type === 'update' ? modelName : modelNameVal,
             '사용 라이브러리': library,
             '모델 파일': file,
+            'Model Registry': registry,
             'Model Device Type': deviceType,
             'Input Shape': inputShape,
             'Input Data Type': inputDataType,
@@ -99,7 +113,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
         };
 
         const isCorrect = Object.entries(items).every(([name, value]) => {
-            if (!value) {
+            if (!value && value !== 0) {
                 setError(`${name}이(가) 주어지지 않았습니다.`);
                 return false;
             }
@@ -119,6 +133,7 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                 name: items['모델 이름'] ?? '',
                 library,
                 modelFile: file!!,
+                registryId: registry,
                 deviceType,
                 inputShape: inputShape ?? '',
                 outputShape: outputShape ?? '',
@@ -175,6 +190,21 @@ const CreateUpdateModelBase: React.FC<ICreateUpdateBaseParams> = ({
                     >
                         {libraries.map((e) => (
                             <MenuItem key={e.name} value={e.name}>
+                                {e.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="registry">Registry</InputLabel>
+                    <Select
+                        labelId="registry"
+                        label="Registry"
+                        defaultValue={model?.registryId ?? registry}
+                        onChange={handleChangeRegistry}
+                    >
+                        {registries.map((e) => (
+                            <MenuItem key={e.id} value={e.id}>
                                 {e.name}
                             </MenuItem>
                         ))}
