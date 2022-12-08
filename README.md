@@ -28,3 +28,4 @@ React 기반 백오피스 프론트엔드
 - Jotai
 - React Router v6
 - Tailwind CSS
+- Axios
