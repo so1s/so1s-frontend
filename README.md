@@ -4,7 +4,7 @@
 
 # So1s Frontend
 
-React 기반 백오피스 프론트엔드
+React 기반 MLOps 관리 백오피스 프론트엔드
 
 [프로젝트 소개 페이지로 돌아가기](https://github.com/so1s)
 
