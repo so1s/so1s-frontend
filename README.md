@@ -14,4 +14,10 @@ React 기반 백오피스 프론트엔드
 
 ## 사용 기술
 
+- Typescript
+- React 18
+- Vite
+- Tailwind CSS
+- React Router v6
+
 ## 스크린샷
