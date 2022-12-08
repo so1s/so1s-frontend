@@ -1,19 +1,30 @@
+import { deleteRegistry } from '../../api/registries';
 import ListTable from '../../components/table';
 import { useRegistriesData } from '../../hooks/data/useRegistriesData';
-import { convertRegistryToView } from '../../utils/pages/registries';
+import { useDelete } from '../../hooks/useDelete';
 
 export const Registries = () => {
-    const [registries] = useRegistriesData();
+    const [registries, refreshData] = useRegistriesData();
 
-    const registriesView = registries.map((r) => convertRegistryToView(r));
+    const performDelete = useDelete(deleteRegistry);
+
+    const deleteAction = async (id: number) => {
+        const success = await performDelete(id);
+
+        refreshData();
+
+        return success;
+    };
 
     return (
         <div>
             <ListTable
                 title="Registries"
-                items={registriesView}
-                itemKey="name"
+                items={registries}
+                itemKey="id"
                 creatable
+                deletable
+                deleteAction={deleteAction}
             />
         </div>
     );
