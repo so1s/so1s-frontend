@@ -12,12 +12,12 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 
 ## 주요 기능
 
-- Model 생성 및 버전 관리, 상세 정보 확인 및 수정 / 삭제
-- Inference Server 배포 관리, Endpoint 확인, 수정 / 삭제
-- Model, Inference Server 서버 헬스 체크
-- Inference Server 생성을 위한 Container Resource Template 관리
-- ABN Test 생성 및 Endpoint 확인
-- Model, Inference Server, Node Yaml 확인
+- Model 생성 및 버전 관리, 상세 정보 확인 기능 지원
+- Inference Server 배포 관리 및 상세 정보 확인 기능 지원
+- Model, Inference Server 서버 헬스 체크 기능 지원
+- Inference Server 생성을 위한 Container Resource Template 관리 기능 지원
+- ABN Test 생성 및 Endpoint 확인 기능 지원
+- Model, Inference Server, Node Yaml 확인 기능 지원
 - Helm Chart로 배포된 Grafana, Kibana, Kiali등 다른 컴포넌트에 대한 리다이렉션 지원
 
 ## 사용 기술
