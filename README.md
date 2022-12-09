@@ -12,7 +12,7 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 
 ## 주요 기능
 
-- Model 생성 및 버전 관리, 상세 정보 확인 기능 지원
+- Model 빌드 및 버전 관리, 상세 정보 확인 기능 지원
 - Inference Server 배포 관리 및 상세 정보 확인 기능 지원
 - Model, Inference Server 서버 헬스 체크 기능 지원
 - Inference Server 생성을 위한 Container Resource Template 관리 기능 지원
