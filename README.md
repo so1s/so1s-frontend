@@ -24,8 +24,26 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 
 - Typescript
 - React 18
+- Yarn 3.3.0 stable /w PnP
 - Vite
 - Jotai
 - React Router v6
 - Tailwind CSS
 - Axios
+
+## 사용 방법
+
+.env.dev 파일을 프론트엔드 루트 디렉토리에 작성합니다.
+
+```
+# .env.dev
+
+# Local 환경에서는 http://localhost:8080
+VITE_API_URL=${BACKEND_ENDPOINT}
+```
+
+그 다음에 Yarn을 사용하셔서 실행하시면 됩니다.
+
+```bash
+yarn dev
+```
