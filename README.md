@@ -18,7 +18,7 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 - Inference Server 생성을 위한 Container Resource Template 관리 기능 지원
 - ABN Test 생성 및 Endpoint 확인 기능 지원
 - Model, Inference Server, Node Yaml 확인 기능 지원
-- Helm Chart로 배포된 Grafana, Kibana, Kiali등 다른 컴포넌트에 대한 리다이렉션 기능 지원
+- Kubernetes 클러스터 내부의 Grafana, Kibana, Kiali등 다른 대시보드에 대한 리다이렉션 기능 지원
 
 ## 사용 기술
 
