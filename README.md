@@ -28,8 +28,10 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 - Vite
 - Jotai
 - React Router v6
+- Material UI
 - Tailwind CSS
 - Axios
+- fp-ts
 
 ## 사용 방법
 
