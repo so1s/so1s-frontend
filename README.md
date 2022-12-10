@@ -24,7 +24,7 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 
 - Typescript
 - React 18
-- Yarn 3.3.0 stable /w PnP
+- Yarn 3.3.0 & PnP
 - Vite
 - Jotai
 - React Router v6
