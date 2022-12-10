@@ -36,8 +36,6 @@ React 기반 MLOps 관리 백오피스 프론트엔드
 .env.dev 파일을 프론트엔드 루트 디렉토리에 작성합니다.
 
 ```
-# .env.dev
-
 # Local 환경에서는 http://localhost:8080
 VITE_API_URL=${BACKEND_ENDPOINT}
 ```
