@@ -8,6 +8,8 @@ import FlareIcon from '@mui/icons-material/Flare';
 import DnsIcon from '@mui/icons-material/Dns';
 import SearchIcon from '@mui/icons-material/Search';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
@@ -36,6 +38,8 @@ import { CreateABNTest } from '../pages/tests/abn/create';
 import { UpdateABNTest } from '../pages/tests/abn/update';
 import { Registries } from '../pages/registries';
 import { CreateRegistry } from '../pages/registries/create';
+import { GitHub } from '../pages/github';
+import { ApiDocs } from '../pages/api-docs';
 
 const routes: IRouterDatum[] = [
     {
@@ -224,6 +228,20 @@ const routes: IRouterDatum[] = [
         name: 'Tracing',
         icon: <FlareIcon fontSize="large" />,
         page: Tracing,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/api-docs',
+        name: 'API Docs',
+        icon: <LibraryBooksIcon fontSize="large" />,
+        page: ApiDocs,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/github',
+        name: 'GitHub',
+        icon: <GitHubIcon fontSize="large" />,
+        page: GitHub,
         for: ['Owner', 'Admin', 'User'],
     },
 ];
