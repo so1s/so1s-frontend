@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export const Tracing = () => {
     useEffect(() => {
-        window.location.replace('https://kiali.so1s.io');
+        window.location.replace('kiali/');
     }, []);
 
     return <></>;
