@@ -17,4 +17,6 @@ jobs:
         run: yarn install --immutable --immutable-cache
       - name: run lint
         run: yarn lint
+      - name: run test
+        run: yarn test
         
