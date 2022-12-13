@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import CodeIcon from '@mui/icons-material/Code';
 import IRouterDatum from '../interfaces/router';
 import Home from '../pages/home';
 import Login from '../pages/login';
@@ -40,6 +41,7 @@ import { Registries } from '../pages/registries';
 import { CreateRegistry } from '../pages/registries/create';
 import { GitHub } from '../pages/github';
 import { ApiDocs } from '../pages/api-docs';
+import { ModelTemplate } from '../pages/model-template';
 
 const routes: IRouterDatum[] = [
     {
@@ -228,6 +230,13 @@ const routes: IRouterDatum[] = [
         name: 'Tracing',
         icon: <FlareIcon fontSize="large" />,
         page: Tracing,
+        for: ['Owner', 'Admin', 'User'],
+    },
+    {
+        uri: '/model-template',
+        name: 'Model Template',
+        icon: <CodeIcon fontSize="large" />,
+        page: ModelTemplate,
         for: ['Owner', 'Admin', 'User'],
     },
     {
